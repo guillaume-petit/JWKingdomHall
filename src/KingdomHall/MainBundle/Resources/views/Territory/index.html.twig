@@ -1,0 +1,53 @@
+{% extends 'KingdomHallMainBundle:Layout:layout.html.twig' %}
+
+{% block page_header %}
+    {% trans %}jwkh.territories.list.page_header{% endtrans %}
+{% endblock page_header %}
+
+{% block menu_left_content %}
+    {{ knp_menu_render('KingdomHallMainBundle:Builder:territoriesMenu', {'depth': 1, 'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_left.html.twig'}) }}
+{% endblock menu_left_content %}
+
+{% block content_left %}
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="{% if type == 'standard' %}active{% endif %}"><a href="{{ path('kingdom_hall_territories_list', {'congregationCode': congregation.code, 'type': 'standard'}) }}">{% trans %}jwkh.entity.territory.standard{% endtrans %}</a></li>
+        <li role="presentation" class="{% if type == 'campaign' %}active{% endif %}"><a href="{{ path('kingdom_hall_territories_list', {'congregationCode': congregation.code, 'type': 'campaign'}) }}">{% trans %}jwkh.entity.territory.campaign{% endtrans %}</a></li>
+    </ul>
+    <table id="territoryListTable"
+           data-toggle="table"
+           data-url="{{ path('get_congregation_territories', {'congregation': congregation.id, 'type': type}) }}"
+           data-flat="true" data-search="true"
+           data-classes="table table-hover table-no-bordered"
+           data-striped="true"
+           data-mobile-responsive="true">
+        <thead>
+            <tr>
+                <th data-visible="false" data-field="id">id</th>
+                <th data-sortable="true" data-field="number">{% trans %}jwkh.entity.territory.number{% endtrans %}</th>
+                <th data-sortable="true" data-field="name">{% trans %}jwkh.entity.territory.name{% endtrans %}</th>
+                <th data-sortable="true" data-field="area">{% trans %}jwkh.entity.territory.area{% endtrans %}</th>
+                <th data-sortable="true" data-field="borrow_date">{% trans %}jwkh.entity.territory.borrow_date{% endtrans %}</th>
+                <th data-sortable="true" data-field="publisher.first_name">{% trans %}jwkh.entity.publisher.firstName{% endtrans %}</th>
+                <th data-sortable="true" data-field="publisher.last_name">{% trans %}jwkh.entity.publisher.lastName{% endtrans %}</th>
+                <th data-sortable="true" data-field="return_date">{% trans %}jwkh.entity.territory.return_date{% endtrans %}</th>
+            </tr>
+        </thead>
+    </table>
+    <script>
+        $(document).ready(function () {
+            $('#territoryListTable').on('click-row.bs.table', function (e, row, $element) {
+                var url = '{{ path('kingdom_hall_territories_edit', {'congregationCode': congregation.code, 'territoryId': '{territoryId}'}) }}'.replace('%7BterritoryId%7D', row.id);
+                window.location = url;
+            });
+        });
+    </script>
+{% endblock content_left %}
+
+{% block content_right %}
+    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#newTerritoryModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"> {% trans %}jwkh.common.add{% endtrans %}</span></button>
+    <a href="#" class="btn btn-default btn-block"><span class="glyphicon glyphicon-import" aria-hidden="true"> {% trans %}jwkh.common.import{% endtrans %}</span></a>
+    <a href="#" class="btn btn-default btn-block"><span class="glyphicon glyphicon-export" aria-hidden="true"> {% trans %}jwkh.common.export{% endtrans %}</span></a>
+
+    {% include '@KingdomHallMain/Layout/basic-modal-form.html.twig' with { id: 'newTerritoryModal', title: 'jwkh.territories.new.modal_title'|trans, form: form } %}
+{% endblock content_right %}
+

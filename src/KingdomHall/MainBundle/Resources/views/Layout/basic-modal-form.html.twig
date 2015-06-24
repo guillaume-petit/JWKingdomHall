@@ -1,0 +1,25 @@
+{% extends '@KingdomHallMain/Layout/basic-modal.html.twig' %}
+{% form_theme form '@KingdomHallMain/Form/fields.html.twig' %}
+
+{% block modal_body %}
+    {{ form(form) }}
+{% endblock modal_body %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}jwkh.common.cancel{% endtrans %}</button>
+    <button type="button" class="btn btn-primary action-save">{% trans %}jwkh.common.save{% endtrans %}</button>
+{% endblock modal_footer %}
+
+{% block modal_js %}
+    <script>
+        $(document).ready(function () {
+            $('.action-save').on('click', function() {
+                $('form[name="{{ form.vars.id }}"]').submit();
+            });
+
+            if ($('#{{ id }} .form-errors').children().length > 0) {
+                $('#{{ id }}').modal();
+            }
+        });
+    </script>
+{% endblock modal_js %}

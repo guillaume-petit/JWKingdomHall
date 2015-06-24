@@ -1,0 +1,29 @@
+jwkh:
+    common:
+        add: Ajouter
+        import: Importer
+        export: Exporter
+        save: Sauver
+        cancel: Annuler
+    navbar:
+        territories: Territoires
+        administration: Administration
+
+    territories:
+        menu:
+            territories: Territoires
+        list:
+            page_header: Liste des territoires
+            tab:
+                standard: Standard
+                campaign: Campagne
+            table:
+                header:
+                    number: Numéro
+                    name: Nom
+                    area: Région
+                    publisher: Proclamateur
+                    borrow_date: Emprunté le
+                    return_date: Rendu le
+        new:
+            modal_title: Nouveau territoire

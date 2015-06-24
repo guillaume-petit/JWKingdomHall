@@ -1,0 +1,42 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block list %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+    {% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren %}
+        <ul{{ knp_menu.attributes(item.attributes) }}>
+            <li class="dropdown {% if item.isCurrent() and item.getExtra('activeParent') %}active{% endif %}">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {{ item.label|trans }}
+                    <b class="caret"></b>
+                </a>
+
+                <ul{{ knp_menu.attributes(listAttributes) }}>
+                    {{ block('children') }}
+                </ul>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block item %}
+    {% if item.getExtra('divider') %}
+        <li class="divider"></li>
+    {% elseif item.getExtra('title') %}
+        {% if not item.isFirst %}
+            <li class="divider"></li>
+        {% endif %}
+        <li class="dropdown-header">{{ block('spanElement') }}</li>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+    <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes) }}>
+        {% if item.current %}<span class="glyphicon-ok"></span>{% endif %}
+        {{ block('label') }}
+    </a>
+{% endblock %}
+
+{% block label %}{{ item.label|trans(item.getExtra('translation_params', {}), item.getExtra('translation_domain', 'messages')) }}{% endblock %}

@@ -1,0 +1,7 @@
+kingdom_hall_api:
+    resource: "@KingdomHallApiBundle/Resources/config/routing.yml"
+    prefix:   /
+
+kingdom_hall_main:
+    resource: "@KingdomHallMainBundle/Resources/config/routing.yml"
+    prefix:   /

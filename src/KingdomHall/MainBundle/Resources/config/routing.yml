@@ -1,0 +1,12 @@
+kingdom_hall_homepage:
+    path:     /{_locale}/{congregationCode}/home
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Home:index }
+
+kingdom_hall_territories_list:
+    path:     /{_locale}/{congregationCode}/territories
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:index }
+
+kingdom_hall_territories_edit:
+    path:     /{_locale}/{congregationCode}/territories/{territoryId}
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:edit }
+

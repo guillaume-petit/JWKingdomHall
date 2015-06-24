@@ -1,0 +1,42 @@
+jwkh:
+    common:
+        add: Ajouter
+        import: Importer
+        export: Exporter
+        save: Sauver
+        cancel: Annuler
+        borrow: Emprunter
+        return: Rendre
+        edit: Modifier
+    navbar:
+        territories: Territoires
+        administration: Administration
+
+    territories:
+        menu:
+            territories: Territoires
+        list:
+            page_header: Liste des territoires
+        new:
+            modal_title: Nouveau territoire
+        edit:
+            map: Carte du territoire
+            novisit: Personnes à ne pas visiter
+            history: Historique
+            edit_modal_title: Modifications
+    entity:
+        territory:
+            entity: Territoire
+            standard: Standard
+            campaign: Campagne
+            type: Type
+            number: Numéro
+            name: Nom
+            area: Région
+            borrow_date: Emprunté le
+            return_date: Rendu le
+
+        publisher:
+            entity: Proclamateur
+            firstName: Prénom
+            lastName: Nom
