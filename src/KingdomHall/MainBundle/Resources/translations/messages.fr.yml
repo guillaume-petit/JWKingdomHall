@@ -8,6 +8,7 @@ jwkh:
         borrow: Emprunter
         return: Rendre
         edit: Modifier
+        back: Retour
     navbar:
         territories: Territoires
         administration: Administration
@@ -35,6 +36,12 @@ jwkh:
             area: Région
             borrow_date: Emprunté le
             return_date: Rendu le
+            map: Carte
+
+        territory_history:
+            borrow_date: Emprunté le
+            return_date: Rendu le
+
 
         publisher:
             entity: Proclamateur

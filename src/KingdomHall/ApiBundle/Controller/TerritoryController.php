@@ -26,6 +26,7 @@ class TerritoryController extends FOSRestController
      */
     public function getCongregationTerritoriesAction($congregation, ParamFetcherInterface $paramFetcher)
     {
-        return $congregation->getTerritoriesByType($paramFetcher->get('type'));
+        return $congregation->getTerritoriesByType($paramFetcher->get('type'))->getValues();
     }
+
 }

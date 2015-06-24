@@ -6764,3 +6764,6 @@ button.close {
     display: none !important;
   }
 }
+.btn-block {
+  text-align: left;
+}

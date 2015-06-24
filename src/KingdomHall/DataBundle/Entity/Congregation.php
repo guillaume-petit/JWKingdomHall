@@ -184,7 +184,7 @@ class Congregation {
 
     /**
      * @param $type
-     * @return Territory[]
+     * @return ArrayCollection
      */
     public function getTerritoriesByType($type)
     {

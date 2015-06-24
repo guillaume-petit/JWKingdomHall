@@ -7,10 +7,14 @@
  */
 
 namespace KingdomHall\DataBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Type;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 /**
  * Class Territory
@@ -19,6 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity()
  * @ORM\Table(name="territory")
  * @UniqueEntity("number")
+ * @Uploadable()
  */
 class Territory {
 
@@ -41,9 +46,23 @@ class Territory {
     /**
      * @var Publisher
      * @ORM\ManyToOne(targetEntity="KingdomHall\DataBundle\Entity\Publisher", inversedBy="territories")
-     * @ORM\JoinColumn(name="publisher_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="publisher_id", referencedColumnName="id")
      */
     protected $publisher;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryHistory", mappedBy="territory")
+     * @ORM\OrderBy({"borrowDate" = "DESC"})
+     */
+    protected $histories;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryNoVisit", mappedBy="territory")
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    protected $noVisits;
 
     /**
      * @var integer
@@ -86,6 +105,34 @@ class Territory {
      * @Type("DateTime<'d/m/Y'>")
      */
     protected $returnDate;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $mapName;
+
+    /**
+     * @var UploadedFile
+     * @UploadableField(mapping="territory_map", fileNameProperty="mapName")
+     */
+    protected $mapFile;
+
+    /**
+     * @return UploadedFile
+     */
+    public function getMapFile()
+    {
+        return $this->mapFile;
+    }
+
+    /**
+     * @param UploadedFile $mapFile
+     */
+    public function setMapFile($mapFile)
+    {
+        $this->mapFile = $mapFile;
+    }
 
     /**
      * Get id
@@ -279,5 +326,102 @@ class Territory {
     public function getReturnDate()
     {
         return $this->returnDate;
+    }
+
+    /**
+     * Set mapName
+     *
+     * @param string $mapName
+     * @return Territory
+     */
+    public function setMapName($mapName)
+    {
+        $this->mapName = $mapName;
+
+        return $this;
+    }
+
+    /**
+     * Get mapName
+     *
+     * @return string 
+     */
+    public function getMapName()
+    {
+        return $this->mapName;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->histories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add histories
+     *
+     * @param \KingdomHall\DataBundle\Entity\TerritoryHistory $histories
+     * @return Territory
+     */
+    public function addHistory(\KingdomHall\DataBundle\Entity\TerritoryHistory $histories)
+    {
+        $this->histories[] = $histories;
+
+        return $this;
+    }
+
+    /**
+     * Remove histories
+     *
+     * @param \KingdomHall\DataBundle\Entity\TerritoryHistory $histories
+     */
+    public function removeHistory(\KingdomHall\DataBundle\Entity\TerritoryHistory $histories)
+    {
+        $this->histories->removeElement($histories);
+    }
+
+    /**
+     * Get histories
+     *
+     * @return TerritoryHistory[]
+     */
+    public function getHistories()
+    {
+        return $this->histories;
+    }
+
+    /**
+     * Add noVisits
+     *
+     * @param \KingdomHall\DataBundle\Entity\TerritoryNoVisit $noVisits
+     * @return Territory
+     */
+    public function addNoVisit(\KingdomHall\DataBundle\Entity\TerritoryNoVisit $noVisits)
+    {
+        $this->noVisits[] = $noVisits;
+
+        return $this;
+    }
+
+    /**
+     * Remove noVisits
+     *
+     * @param \KingdomHall\DataBundle\Entity\TerritoryNoVisit $noVisits
+     */
+    public function removeNoVisit(\KingdomHall\DataBundle\Entity\TerritoryNoVisit $noVisits)
+    {
+        $this->noVisits->removeElement($noVisits);
+    }
+
+    /**
+     * Get noVisits
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNoVisits()
+    {
+        return $this->noVisits;
     }
 }

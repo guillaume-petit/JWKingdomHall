@@ -80,3 +80,8 @@ fos_rest:
 # Vich uploader Configuration
 vich_uploader:
     db_driver: orm
+    mappings:
+        territory_map:
+            uri_prefix: /images/territory/map
+            upload_destination: %kernel.root_dir%/../web/images/territory/map
+            namer: vich_uploader.namer_uniqid

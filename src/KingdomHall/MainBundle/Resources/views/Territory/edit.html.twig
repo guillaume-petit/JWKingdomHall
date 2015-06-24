@@ -14,7 +14,7 @@
             {% trans %}jwkh.territories.edit.map{% endtrans %}
         </div>
         <div class="panel-body">
-            Map goes here
+            <img class="img-responsive" src="{{ vich_uploader_asset(territory, 'mapFile') }}" alt="{{ territory.name }}" />
         </div>
     </div>
     <div class="panel panel-default">
@@ -30,15 +30,43 @@
             {% trans %}jwkh.territories.edit.history{% endtrans %}
         </div>
         <div class="panel-body">
-            Historique des entrées/sorties
+            <table id="territoryHistoryTable"
+                   data-toggle="table"
+                   data-classes="table table-hover table-no-bordered"
+                   data-striped="true"
+                   data-mobile-responsive="true">
+                <thead>
+                    <tr>
+                        <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
+                        <th>{% trans %}jwkh.entity.territory_history.borrow_date{% endtrans %}</th>
+                        <th>{% trans %}jwkh.entity.territory_history.return_date{% endtrans %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for history in territory.histories %}
+                        <tr>
+                            <td>{{ history.publisher.firstName }}&nbsp;{{ history.publisher.lastName }}</td>
+                            <td>{% if history.borrowDate %}{{ history.borrowDate|date(dateFormat) }}{% else %}-{% endif %}</td>
+                            <td>{% if history.returnDate %}{{ history.returnDate|date(dateFormat) }}{% else %}-{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock content_left %}
 
 {% block content_right %}
+    <button type="button" class="btn btn-primary btn-block" data-toggle="modal"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> {% trans %}jwkh.common.back{% endtrans %}</span></button>
     <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#borrowTerritoryModal"><span class="glyphicon glyphicon-edit" aria-hidden="true"> {% trans %}jwkh.common.edit{% endtrans %}</span></button>
     <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#borrowTerritoryModal"><span class="glyphicon glyphicon-save-file" aria-hidden="true"> {% trans %}jwkh.common.borrow{% endtrans %}</span></button>
     <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#borrowTerritoryModal"><span class="glyphicon glyphicon-open-file" aria-hidden="true"> {% trans %}jwkh.common.return{% endtrans %}</span></button>
 
     {% include '@KingdomHallMain/Layout/basic-modal-form.html.twig' with { id: 'borrowTerritoryModal', title: 'jwkh.territories.edit.edit_modal_title'|trans, form: form } %}
+
+    <script>
+        $('.btn-primary').on('click', function() {
+            window.history.back();
+        });
+    </script>
 {% endblock content_right %}
