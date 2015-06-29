@@ -6,7 +6,27 @@ kingdom_hall_territories_list:
     path:     /{_locale}/{congregationCode}/territories
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:index }
 
+kingdom_hall_territories_new:
+    path:     /{_locale}/{congregationCode}/territories/new
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:new }
+
 kingdom_hall_territories_edit:
-    path:     /{_locale}/{congregationCode}/territories/{territoryId}
+    path:     /{_locale}/{congregationCode}/territories/{territoryId}/edit
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:edit }
+
+kingdom_hall_territories_borrow:
+    path:     /{_locale}/{congregationCode}/territories/{territoryId}/borrow
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:borrow }
+
+kingdom_hall_territories_return:
+    path:     /{_locale}/{congregationCode}/territories/{territoryId}/return
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:return }
+
+kingdom_hall_territories_novisit_new:
+    path:     /{_locale}/{congregationCode}/territories/{territoryId}/novisit/new
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:newNoVisit }
+
+kingdom_hall_territories_view:
+    path:     /{_locale}/{congregationCode}/territories/{territoryId}/view
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:view }
 

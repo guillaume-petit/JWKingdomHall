@@ -49,6 +49,14 @@ class Publisher {
     protected $lastName;
 
     /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->lastName . ' ' . $this->firstName;
+    }
+
+    /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\Territory", mappedBy="publisher")
      */

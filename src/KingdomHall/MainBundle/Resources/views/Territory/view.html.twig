@@ -1,0 +1,140 @@
+{% extends app.request.isXmlHttpRequest() ? "@KingdomHallMain/Layout/layout-modal.html.twig" : "@KingdomHallMain/Layout/layout-page.html.twig" %}
+
+{% block content_header %}
+    {{ territory.number }} - {{ territory.name }} ({{ territory.area }})
+{% endblock content_header %}
+
+{% block menu_left_content %}
+    {{ knp_menu_render('KingdomHallMainBundle:Builder:territoriesMenu', {'depth': 1, 'ancestorClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_left.html.twig'}) }}
+{% endblock %}
+
+{% block content_body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {% trans %}jwkh.territories.view.map{% endtrans %}
+        </div>
+        <div class="panel-body">
+            <img class="img-responsive" src="{{ vich_uploader_asset(territory, 'mapFile') }}" alt="{{ territory.name }}" />
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {% trans %}jwkh.territories.view.novisit{% endtrans %}
+        </div>
+        <div class="panel-body">
+            <div id="territoryHistoryToolbar" class="btn-group ">
+                <button type="button" class="btn btn-default" id="addNoVisitButton">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+                <button type="button" class="btn btn-default">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </div>
+            <table id="territoryHistoryTable"
+                   data-toggle="table"
+                   data-classes="table table-hover table-no-bordered"
+                   data-striped="true"
+                   data-toolbar="#territoryHistoryToolbar"
+                   data-mobile-responsive="true">
+                <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th>{% trans %}jwkh.entity.territory_no_visit.name{% endtrans %}</th>
+                    <th>{% trans %}jwkh.entity.territory_no_visit.address{% endtrans %}</th>
+                    <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
+                    <th>{% trans %}jwkh.entity.territory_no_visit.date{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for novisit in territory.noVisits %}
+                    <tr>
+                        <td></td>
+                        <td>{{ novisit.name }}</td>
+                        <td>{{ novisit.address }}</td>
+                        <td>{{ novisit.publisher.firstName }}&nbsp;{{ novisit.publisher.lastName }}</td>
+                        <td>{{ novisit.date|date(dateFormat) }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {% trans %}jwkh.territories.view.history{% endtrans %}
+        </div>
+        <div class="panel-body">
+            <table id="territoryHistoryTable"
+                   data-toggle="table"
+                   data-classes="table table-hover table-no-bordered"
+                   data-striped="true"
+                   data-mobile-responsive="true">
+                <thead>
+                    <tr>
+                        <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
+                        <th>{% trans %}jwkh.entity.territory_history.borrow_date{% endtrans %}</th>
+                        <th>{% trans %}jwkh.entity.territory_history.return_date{% endtrans %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for history in territory.histories %}
+                        <tr>
+                            <td>{{ history.publisher.firstName }}&nbsp;{{ history.publisher.lastName }}</td>
+                            <td>{% if history.borrowDate %}{{ history.borrowDate|date(dateFormat) }}{% else %}-{% endif %}</td>
+                            <td>{% if history.returnDate %}{{ history.returnDate|date(dateFormat) }}{% else %}-{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content_body %}
+
+{% block content_right %}
+    <button type="button" class="btn btn-primary btn-block btn-back"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> {% trans %}jwkh.common.back{% endtrans %}</span></button>
+    <button type="button" class="btn btn-default btn-block" id="editTerritoryButton"><span class="glyphicon glyphicon-edit" aria-hidden="true"> {% trans %}jwkh.common.edit{% endtrans %}</span></button>
+    {% if territory.publisher %}
+        <button type="button" class="btn btn-default btn-block" id="returnTerritoryButton"><span class="glyphicon glyphicon-open-file" aria-hidden="true"> {% trans %}jwkh.common.return{% endtrans %}</span></button>
+    {% else %}
+        <button type="button" class="btn btn-default btn-block" id="borrowTerritoryButton"><span class="glyphicon glyphicon-save-file" aria-hidden="true"> {% trans %}jwkh.common.borrow{% endtrans %}</span></button>
+    {% endif %}
+
+    <script>
+        $(document).ready(function () {
+            $('.btn-back').on('click', function () {
+                var url = '{{ path('kingdom_hall_territories_list', {'congregationCode': territory.congregation.code, 'type': territory.type}) }}';
+                window.location = url;
+            });
+
+            $('#editTerritoryButton').on('click', function (e) {
+                $('#pageModal .modal-content').load('{{ path('kingdom_hall_territories_edit', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    $('#pageModal').modal();
+                });
+            });
+
+            $('#borrowTerritoryButton').on('click', function (e) {
+                $('#pageModal .modal-content').load('{{ path('kingdom_hall_territories_borrow', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    $('#pageModal').modal();
+                });
+            });
+
+            $('#returnTerritoryButton').on('click', function (e) {
+                $('#pageModal .modal-content').load('{{ path('kingdom_hall_territories_return', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    $('#pageModal').modal();
+                });
+            });
+
+            $('#addNoVisitButton').on('click', function (e) {
+                $('#pageModal .modal-content').load('{{ path('kingdom_hall_territories_novisit_new', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    $('#pageModal').modal();
+                });
+            });
+
+            $('#pageModal').on('hide.bs.modal', function (e) {
+                if (e.target.id == 'pageModal') {
+                    location.reload();
+                }
+            });
+        });
+    </script>
+{% endblock content_right %}

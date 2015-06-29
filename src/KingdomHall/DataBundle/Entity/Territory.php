@@ -9,6 +9,7 @@
 namespace KingdomHall\DataBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use JMS\Serializer\Annotation\Type;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -21,8 +22,8 @@ use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
  * @package KingdomHall\DataBundle\Entity
  *
  * @ORM\Entity()
- * @ORM\Table(name="territory")
- * @UniqueEntity("number")
+ * @ORM\Table(name="territory", uniqueConstraints={@UniqueConstraint(name="territory_idx", columns={"congregation_id", "type", "number"})})
+ * @UniqueEntity(fields={"congregation", "type", "number"}, errorPath="number")
  * @Uploadable()
  */
 class Territory {
@@ -52,21 +53,21 @@ class Territory {
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryHistory", mappedBy="territory")
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryHistory", mappedBy="territory", cascade={"PERSIST"})
      * @ORM\OrderBy({"borrowDate" = "DESC"})
      */
     protected $histories;
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryNoVisit", mappedBy="territory")
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryNoVisit", mappedBy="territory", cascade={"PERSIST"})
      * @ORM\OrderBy({"name" = "ASC"})
      */
     protected $noVisits;
 
     /**
      * @var integer
-     * @ORM\Column(type="integer", nullable=false, unique=true)
+     * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotBlank()
      * @Assert\Type(type="integer", message="The value {{ value }} is not a valid {{ type }}.")
      */
@@ -108,7 +109,7 @@ class Territory {
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $mapName;
 
@@ -117,6 +118,12 @@ class Territory {
      * @UploadableField(mapping="territory_map", fileNameProperty="mapName")
      */
     protected $mapFile;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    protected $updatedAt;
 
     /**
      * @return UploadedFile
@@ -132,6 +139,10 @@ class Territory {
     public function setMapFile($mapFile)
     {
         $this->mapFile = $mapFile;
+
+        if ($mapFile) {
+            $this->updatedAt = new \DateTime();
+        }
     }
 
     /**
@@ -368,7 +379,7 @@ class Territory {
     public function addHistory(\KingdomHall\DataBundle\Entity\TerritoryHistory $histories)
     {
         $this->histories[] = $histories;
-
+        $histories->setTerritory($this);
         return $this;
     }
 
@@ -385,7 +396,7 @@ class Territory {
     /**
      * Get histories
      *
-     * @return TerritoryHistory[]
+     * @return ArrayCollection|TerritoryHistory[]
      */
     public function getHistories()
     {
@@ -401,6 +412,7 @@ class Territory {
     public function addNoVisit(\KingdomHall\DataBundle\Entity\TerritoryNoVisit $noVisits)
     {
         $this->noVisits[] = $noVisits;
+        $noVisits->setTerritory($this);
 
         return $this;
     }
@@ -418,10 +430,33 @@ class Territory {
     /**
      * Get noVisits
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return TerritoryNoVisit[]
      */
     public function getNoVisits()
     {
         return $this->noVisits;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Territory
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

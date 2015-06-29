@@ -11,6 +11,7 @@ namespace KingdomHall\DataBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 use JMS\Serializer\Annotation\Type;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class TerritoryNoVisit
@@ -37,15 +38,31 @@ class TerritoryNoVisit {
     protected $territory;
 
     /**
+     * @var Publisher
+     * @ORM\ManyToOne(targetEntity="KingdomHall\DataBundle\Entity\Publisher")
+     * @ORM\JoinColumn(name="publisher_id", referencedColumnName="id")
+     */
+    protected $publisher;
+
+    /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $name;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    protected $address;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
      * @Type("DateTime<'d/m/Y'>")
+     * @Assert\NotBlank()
      */
     protected $date;
 
@@ -126,5 +143,51 @@ class TerritoryNoVisit {
     public function getTerritory()
     {
         return $this->territory;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return TerritoryNoVisit
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set publisher
+     *
+     * @param \KingdomHall\DataBundle\Entity\Publisher $publisher
+     * @return TerritoryNoVisit
+     */
+    public function setPublisher(\KingdomHall\DataBundle\Entity\Publisher $publisher = null)
+    {
+        $this->publisher = $publisher;
+
+        return $this;
+    }
+
+    /**
+     * Get publisher
+     *
+     * @return \KingdomHall\DataBundle\Entity\Publisher 
+     */
+    public function getPublisher()
+    {
+        return $this->publisher;
     }
 }

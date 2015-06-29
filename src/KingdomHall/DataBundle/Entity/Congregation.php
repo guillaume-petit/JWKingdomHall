@@ -60,6 +60,7 @@ class Congregation {
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\Publisher", mappedBy="congregation")
+     * @ORM\OrderBy({"lastName" = "ASC", "firstName" = "ASC"})
      */
     protected $publishers;
 

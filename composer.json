@@ -25,7 +25,8 @@
         "wenzhixin/bootstrap-table": "~1.8",
         "friendsofsymfony/rest-bundle": "^1.7",
         "jms/serializer-bundle": "^1.0",
-        "vich/uploader-bundle": "^0.14.0"
+        "vich/uploader-bundle": "^0.14.0",
+        "eternicode/bootstrap-datepicker": "^1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

@@ -48,7 +48,7 @@ class Builder extends ContainerAware {
                 $menu->addChild(
                     $congregation->getName(),
                     array(
-                        'route' => $this->container->get('request')->get('_route'),
+                        'route' => 'kingdom_hall_homepage',
                         'routeParameters' => $routeParams,
                         'label' => $congregation->getName(),
                     )
@@ -70,6 +70,7 @@ class Builder extends ContainerAware {
     {
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav nav-pills nav-stacked');
+
         $menu->addChild('jwkh.territories.menu.territories', array(
             'route' => 'kingdom_hall_territories_list',
             'routeParameters' => $this->container->get('request')->get('_route_params'),

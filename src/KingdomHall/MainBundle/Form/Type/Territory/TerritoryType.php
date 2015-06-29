@@ -6,7 +6,7 @@
  * Time: 8:42 PM
  */
 
-namespace KingdomHall\MainBundle\Form\Type;
+namespace KingdomHall\MainBundle\Form\Type\Territory;
 
 
 use Symfony\Component\Form\AbstractType;

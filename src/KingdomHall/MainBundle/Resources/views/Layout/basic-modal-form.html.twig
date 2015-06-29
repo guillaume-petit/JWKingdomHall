@@ -13,7 +13,7 @@
 {% block modal_js %}
     <script>
         $(document).ready(function () {
-            $('.action-save').on('click', function() {
+            $('#{{ id }} .action-save').on('click', function(e) {
                 $('form[name="{{ form.vars.id }}"]').submit();
             });
 
