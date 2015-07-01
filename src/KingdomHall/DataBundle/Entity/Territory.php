@@ -53,14 +53,14 @@ class Territory {
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryHistory", mappedBy="territory", cascade={"PERSIST"})
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryHistory", mappedBy="territory", indexBy="id", cascade={"PERSIST", "REMOVE"})
      * @ORM\OrderBy({"borrowDate" = "DESC"})
      */
     protected $histories;
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryNoVisit", mappedBy="territory", cascade={"PERSIST"})
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryNoVisit", mappedBy="territory", indexBy="id", cascade={"PERSIST", "REMOVE"})
      * @ORM\OrderBy({"name" = "ASC"})
      */
     protected $noVisits;
@@ -124,6 +124,12 @@ class Territory {
      * @ORM\Column(type="datetime")
      */
     protected $updatedAt;
+
+    /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    protected $phone;
 
     /**
      * @return UploadedFile
@@ -458,5 +464,28 @@ class Territory {
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param boolean $phone
+     * @return Territory
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return boolean 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }

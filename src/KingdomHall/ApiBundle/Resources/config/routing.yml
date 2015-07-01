@@ -2,3 +2,10 @@ kingdom_hall_api_territories:
     prefix: /api
     type: rest
     resource: KingdomHall\ApiBundle\Controller\TerritoryController
+
+#kingdom_hall_api_territories_delete:
+#    prefix:   /api
+#    path:     /congregations/{congregation}/territories
+#    methods:  [DELETE]
+#    defaults: { _locale: en, _controller: KingdomHallApiBundle:Territory:deleteCongregationTerritories }
+#

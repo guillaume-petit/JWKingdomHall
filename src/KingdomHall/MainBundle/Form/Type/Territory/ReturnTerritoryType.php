@@ -19,6 +19,14 @@ class ReturnTerritoryType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
+            'worked',
+            'checkbox',
+            array (
+                'mapped' => false,
+                'label' => 'jwkh.territories.return.worked',
+            )
+        );
+        $builder->add(
             'returnDate',
             'date',
             array (

@@ -30,3 +30,7 @@ kingdom_hall_territories_view:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/view
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:view }
 
+
+kingdom_hall_modal_confirmation:
+    path:     /{_locale}/modal/confirmation
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Modal:confirmationModal }

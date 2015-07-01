@@ -52,14 +52,14 @@ class Congregation {
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\Territory", mappedBy="congregation")
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\Territory", mappedBy="congregation", indexBy="id")
      * @ORM\OrderBy({"number" = "ASC"})
      */
     protected $territories;
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\Publisher", mappedBy="congregation")
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\Publisher", mappedBy="congregation", indexBy="id")
      * @ORM\OrderBy({"lastName" = "ASC", "firstName" = "ASC"})
      */
     protected $publishers;
@@ -176,7 +176,7 @@ class Congregation {
     /**
      * Get territories
      *
-     * @return Territory[]
+     * @return ArrayCollection|Territory[]
      */
     public function getTerritories()
     {

@@ -180,4 +180,5 @@ class Publisher {
     {
         return $this->territories;
     }
+
 }

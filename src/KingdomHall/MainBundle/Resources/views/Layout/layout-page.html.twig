@@ -111,40 +111,42 @@
         {% endblock main_content %}
     </div>
 </div>
-<div id="pageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-label">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
+<div id="pageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-label"></div>
 <script>
-    $('.modal').on('shown.bs.modal', function(e) {
-        var modal = this;
-        $('.modal-footer .action-save', modal).on('click', function(data) {
-            data.preventDefault();
-            var formData = new FormData($('form')[0]);
-            var url = $('form', modal).attr('action');
-            var uploadFields = $('form input[type="file"]');
-            $.each(uploadFields, function(index, uploadField) {
-                var file = uploadField.files[0];
-                formData.append(uploadField.getAttribute('name'), file);
-            });
+    $(document).ready(function () {
+        $('.modal').on('shown.bs.modal', function (e) {
+            var modal = this;
+            $('.modal-footer .action-save', modal).on('click', function (data) {
+                data.preventDefault();
+                var formData = new FormData($('form')[0]);
+                var url = $('form', modal).attr('action');
+                var uploadFields = $('form input[type="file"]');
+                $.each(uploadFields, function (index, uploadField) {
+                    var file = uploadField.files[0];
+                    formData.append(uploadField.getAttribute('name'), file);
+                });
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', url, false);
-            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-            xhr.onprogress = function(e) {
-                $('.modal-footer .action-save').button('loading');
-            }
-            xhr.onload = function() {
-                if ($('.form-errors', xhr.responseText).children().length > 0) {
-                    $('.modal-content', modal).html(xhr.responseText);
-                    $('.modal').trigger('shown.bs.modal');
-                } else {
-                    $('.modal').modal('hide');
-                }
-            };
-            xhr.send(formData);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', url, false);
+                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+                xhr.onprogress = function (e) {
+                    $('.modal-footer .action-save').button('loading');
+                };
+                xhr.onload = function () {
+                    if ($('.form-errors', xhr.responseText).children().length > 0) {
+                        $('.modal-content', modal).html(xhr.responseText);
+                        $('.modal').trigger('shown.bs.modal');
+                    } else {
+                        $('.modal').modal('hide');
+                    }
+                };
+                xhr.send(formData);
+            });
+        });
+
+        $('.bs-checkbox').on('click', function (e) {
+            e.preventDefault();
+            $('input', this).prop('checked', true);
         });
     });
 </script>

@@ -206,14 +206,23 @@ class TerritoryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
             $history = $territory->getHistories()->first();
-            $history->setReturnDate($territory->getReturnDate());
+            $worked = $form->get('worked')->getData();
+
+            if (!$worked) {
+                $territory->removeHistory($history);
+                $manager->remove($history);
+            } else {
+                $history->setReturnDate($territory->getReturnDate());
+                $manager->persist($history);
+            }
+
             $territory
                 ->setPublisher(null)
                 ->setBorrowDate(null);
-            $manager = $this->getDoctrine()->getManager();
             $manager->persist($territory);
-            $manager->persist($history);
+
             $manager->flush();
         }
 

@@ -9,6 +9,9 @@
 {% endblock %}
 
 {% block content_body %}
+    {% if territory.phone %}
+        <p><span class="glyphicon glyphicon-phone-alt"> {% trans %}jwkh.territories.view.phone{% endtrans %}</span> </p>
+    {% endif %}
     <div class="panel panel-default">
         <div class="panel-heading">
             {% trans %}jwkh.territories.view.map{% endtrans %}
@@ -22,23 +25,24 @@
             {% trans %}jwkh.territories.view.novisit{% endtrans %}
         </div>
         <div class="panel-body">
-            <div id="territoryHistoryToolbar" class="btn-group ">
+            <div id="territoryNoVisitToolbar" class="btn-group ">
                 <button type="button" class="btn btn-default" id="addNoVisitButton">
                     <i class="glyphicon glyphicon-plus"></i>
                 </button>
-                <button type="button" class="btn btn-default">
+                <button type="button" class="btn btn-default" id="removeNoVisitButton">
                     <i class="glyphicon glyphicon-trash"></i>
                 </button>
             </div>
-            <table id="territoryHistoryTable"
+            <table id="territoryNoVisitTable"
                    data-toggle="table"
                    data-classes="table table-hover table-no-bordered"
                    data-striped="true"
-                   data-toolbar="#territoryHistoryToolbar"
+                   data-toolbar="#territoryNoVisitToolbar"
                    data-mobile-responsive="true">
                 <thead>
                 <tr>
                     <th data-checkbox="true"></th>
+                    <th data-field="id" data-visible="false"></th>
                     <th>{% trans %}jwkh.entity.territory_no_visit.name{% endtrans %}</th>
                     <th>{% trans %}jwkh.entity.territory_no_visit.address{% endtrans %}</th>
                     <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
@@ -49,9 +53,10 @@
                 {% for novisit in territory.noVisits %}
                     <tr>
                         <td></td>
+                        <td>{{ novisit.id }}</td>
                         <td>{{ novisit.name }}</td>
                         <td>{{ novisit.address }}</td>
-                        <td>{{ novisit.publisher.firstName }}&nbsp;{{ novisit.publisher.lastName }}</td>
+                        <td>{{ novisit.publisher.fullName }}</td>
                         <td>{{ novisit.date|date(dateFormat) }}</td>
                     </tr>
                 {% endfor %}
@@ -101,36 +106,60 @@
 
     <script>
         $(document).ready(function () {
+            var modal = $('#pageModal');
+
             $('.btn-back').on('click', function () {
                 var url = '{{ path('kingdom_hall_territories_list', {'congregationCode': territory.congregation.code, 'type': territory.type}) }}';
                 window.location = url;
             });
 
             $('#editTerritoryButton').on('click', function (e) {
-                $('#pageModal .modal-content').load('{{ path('kingdom_hall_territories_edit', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
-                    $('#pageModal').modal();
+                modal.load('{{ path('kingdom_hall_territories_edit', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    modal.modal();
                 });
             });
 
             $('#borrowTerritoryButton').on('click', function (e) {
-                $('#pageModal .modal-content').load('{{ path('kingdom_hall_territories_borrow', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
-                    $('#pageModal').modal();
+                modal.load('{{ path('kingdom_hall_territories_borrow', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    modal.modal();
                 });
             });
 
             $('#returnTerritoryButton').on('click', function (e) {
-                $('#pageModal .modal-content').load('{{ path('kingdom_hall_territories_return', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
-                    $('#pageModal').modal();
+                modal.load('{{ path('kingdom_hall_territories_return', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    modal.modal();
                 });
             });
 
             $('#addNoVisitButton').on('click', function (e) {
-                $('#pageModal .modal-content').load('{{ path('kingdom_hall_territories_novisit_new', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
-                    $('#pageModal').modal();
+                modal.load('{{ path('kingdom_hall_territories_novisit_new', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    modal.modal();
                 });
             });
 
-            $('#pageModal').on('hide.bs.modal', function (e) {
+            $('#removeNoVisitButton').on('click', function (e) {
+                var rows = $('#territoryNoVisitTable').bootstrapTable('getSelections');
+                if (rows.length > 0) {
+                    var ids = rows.map(function (row) {
+                        return row.id;
+                    });
+                    var url = '{{ path('delete_congregation_territory_no_visits', {'congregation': congregation.id, 'territory': territory.id, 'ids': '{ids}'}) }}'.replace('%7Bids%7D', ids.join(','));
+                    modal.load('{{ path('kingdom_hall_modal_confirmation', { 'message': 'jwkh.territories.novisit.remove_confirmation.message' }) }}'.replace('&amp;', '&'), function () {
+                        modal.modal();
+                        $('button.action-confirm', modal).on('click', function () {
+                            $.ajax({
+                                url: url,
+                                type: 'DELETE',
+                                success: function () {
+                                    modal.modal('hide');
+                                }
+                            });
+                        });
+                    });
+                }
+            });
+
+            modal.on('hide.bs.modal', function (e) {
                 if (e.target.id == 'pageModal') {
                     location.reload();
                 }

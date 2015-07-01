@@ -73,9 +73,13 @@ swiftmailer:
 fos_rest:
     param_fetcher_listener: true
     view:
-        view_response_listener: true
+        view_response_listener: 'force'
     routing_loader:
         default_format: json
+
+# Sensio Configuration
+#sensio_framework_extra:
+#    view: { annotations: false }
 
 # Vich uploader Configuration
 vich_uploader:

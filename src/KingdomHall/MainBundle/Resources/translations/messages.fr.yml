@@ -10,6 +10,10 @@ jwkh:
         edit: Modifier
         back: Retour
         sending: Envoi
+        confirm: Confirmer
+    confirmation:
+        content_header: Confirmation
+        content_body: Es-tu sûr de vouloir réaliser cette action ?
     navbar:
         territories: Territoires
         administration: Administration
@@ -27,13 +31,20 @@ jwkh:
             content_header: Emprunt
         return:
             content_header: Retour
+            worked: Le territoire a-t-il été parcouru ?
         novisit:
+            remove_confirmation:
+                message: Veux-tu vraiment supprimer ces personnes à ne pas visiter ?
             new:
                 content_header: Nouvelle personne à ne pas visiter
         view:
+            phone: Territoire par téléphone
             map: Carte du territoire
             novisit: Personnes à ne pas visiter
             history: Historique
+        remove_confirmation:
+            header: Confirmation
+            message: Veux-tu vraiment supprimer les territoires sélectionnés ?
     entity:
         territory:
             entity: Territoire
@@ -46,6 +57,7 @@ jwkh:
             borrow_date: Emprunté le
             return_date: Rendu le
             map: Carte
+            phone: Téléphone
 
         territory_history:
             borrow_date: Emprunté le

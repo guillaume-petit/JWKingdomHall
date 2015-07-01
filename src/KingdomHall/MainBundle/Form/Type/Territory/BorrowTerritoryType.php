@@ -31,6 +31,7 @@ class BorrowTerritoryType extends AbstractType {
             array (
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
+                'label' => 'jwkh.entity.territory.borrow_date',
                 'attr' => array (
                     'class' => 'form-control input-inline datepicker',
                     'data-provide' => 'datepicker',
