@@ -1,7 +1,7 @@
 <?php
 
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
@@ -21,14 +21,16 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new FOS\RestBundle\FOSRestBundle(),
+            new \FOS\UserBundle\FOSUserBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
 
             // Application bundles
             new KingdomHall\MainBundle\KingdomHallMainBundle(),
             new KingdomHall\DataBundle\KingdomHallDataBundle(),
             new KingdomHall\ServiceBundle\KingdomHallServiceBundle(),
             new KingdomHall\ApiBundle\KingdomHallApiBundle(),
-            new Vich\UploaderBundle\VichUploaderBundle(),
+            new KingdomHall\UserBundle\KingdomHallUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

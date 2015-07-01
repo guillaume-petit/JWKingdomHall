@@ -1,7 +1,28 @@
 kingdom_hall_api:
     resource: "@KingdomHallApiBundle/Resources/config/routing.yml"
-    prefix:   /
 
 kingdom_hall_main:
     resource: "@KingdomHallMainBundle/Resources/config/routing.yml"
-    prefix:   /
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+
+kingdom_hall_fallback:
+    path:     /
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Home:index, congregationCode: '3277' }

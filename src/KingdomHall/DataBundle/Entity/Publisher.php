@@ -145,6 +145,7 @@ class Publisher {
      */
     public function __construct()
     {
+        parent::__construct();
         $this->territories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

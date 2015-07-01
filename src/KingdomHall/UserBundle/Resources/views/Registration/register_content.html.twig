@@ -1,0 +1,26 @@
+{% form_theme form '@KingdomHallMain/Form/fields.html.twig' %}
+
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Register
+        </div>
+        <div class="panel-body">
+            <form novalidate="novalidate" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal fos_user_registration_register">
+                {{ form_widget(form) }}
+            </form>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+        </div>
+    </div>
+</div>
+<div class="col-md-2"></div>
+<script>
+    $(document).ready(function () {
+        $('.panel-footer .btn-primary').on('click', function () {
+            $('form.fos_user_registration_register').submit();
+        });
+    });
+</script>
