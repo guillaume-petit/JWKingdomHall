@@ -12,8 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ModalController extends Controller
 {
     /**
-     * Index action, lists all territories
-     *
      * @param ParamFetcher $fetcher
      *
      * @QueryParam(name="header")
@@ -24,6 +22,24 @@ class ModalController extends Controller
      * @return array
      */
     public function confirmationModalAction(ParamFetcher $fetcher)
+    {
+        return array(
+            'header' => $fetcher->get('header'),
+            'message' => $fetcher->get('message'),
+        );
+    }
+
+    /**
+     * @param ParamFetcher $fetcher
+     *
+     * @QueryParam(name="header")
+     * @QueryParam(name="message")
+     *
+     * @Template()
+     *
+     * @return array
+     */
+    public function infoModalAction(ParamFetcher $fetcher)
     {
         return array(
             'header' => $fetcher->get('header'),

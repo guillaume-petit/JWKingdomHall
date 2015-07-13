@@ -1,0 +1,104 @@
+{% extends 'KingdomHallMainBundle:Layout:layout-page.html.twig' %}
+
+{% block content_header %}
+    {% trans %}jwkh.campaigns.list.content_header{% endtrans %}
+{% endblock content_header %}
+
+{% block menu_left_content %}
+    {{ knp_menu_render('KingdomHallMainBundle:Builder:territoriesMenu', {'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_left.html.twig'}) }}
+{% endblock menu_left_content %}
+
+{% block content_body %}
+    <div id="campaignListToolbar" class="btn-group ">
+        <button id="newCampaignButton" type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-plus"></i>
+        </button>
+        <button id="editCampaignButton" type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-edit"></i>
+        </button>
+        <button id="removeCampaignButton" type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-trash"></i>
+        </button>
+    </div>
+    <table id="campaignListTable"
+           data-toggle="table"
+           data-url="{{ path('get_congregation_campaigns', {'congregation': congregation.id}) }}"
+           data-classes="table table-hover table-no-bordered"
+           data-striped="true"
+           data-click-to-select="true"
+           data-select-item-name="selectedCampaign"
+           data-mobile-responsive="true"
+           data-row-style="campaignRowStyle"
+           data-toolbar="#campaignListToolbar">
+        <thead>
+        <tr>
+            <th data-field="state" data-radio="true"></th>
+            <th data-field="id" data-visible="false"></th>
+            <th data-sortable="true" data-field="name">{% trans %}jwkh.entity.campaign.name{% endtrans %}</th>
+            <th data-sortable="true" data-field="start_date">{% trans %}jwkh.entity.campaign.start_date{% endtrans %}</th>
+            <th data-sortable="true" data-field="end_date">{% trans %}jwkh.entity.campaign.end_date{% endtrans %}</th>
+        </tr>
+        </thead>
+    </table>
+    <script>
+        $(document).ready(function () {
+            var modal = $('#pageModal');
+
+            $('#newCampaignButton').on('click', function(e) {
+                modal.load('{{ path('kingdom_hall_campaigns_new', {'congregationCode': congregation.code}) }}', function(data) {
+                    modal.modal();
+                });
+            });
+
+            $('#editCampaignButton').on('click', function(e) {
+                var rows = $('#campaignListTable').bootstrapTable('getSelections');
+                if (rows.length > 0) {
+                    var id = rows[0].id;
+                    modal.load('{{ path('kingdom_hall_campaigns_edit', {'congregationCode': congregation.code, 'campaignId': '{id}'}) }}'.replace('%7Bid%7D', id), function (data) {
+                        modal.modal();
+                    });
+                }
+            });
+
+            $('#removeCampaignButton').on('click', function() {
+                var rows = $('#campaignListTable').bootstrapTable('getSelections');
+                if (rows.length > 0) {
+                    var id = rows[0].id;
+                    var url = '{{ path('delete_congregation_campaign', {'congregation': congregation.id, 'campaign': '{id}'}) }}'.replace('%7Bid%7D', id);
+                    modal.load('{{ path('kingdom_hall_modal_confirmation', { 'header': 'jwkh.campaigns.remove_confirmation.header', 'message': 'jwkh.campaigns.remove_confirmation.message' }) }}'.replace('&amp;', '&'), function () {
+                        modal.modal();
+                        $('button.action-confirm', modal).on('click', function () {
+                            $.ajax({
+                                url: url,
+                                type: 'DELETE',
+                                success: function () {
+                                    modal.modal('hide');
+                                }
+                            });
+                        });
+                    });
+                }
+            });
+
+            modal.on('hide.bs.modal', function(e) {
+                $('#campaignListTable').bootstrapTable('refresh');
+            });
+
+        });
+
+        function campaignRowStyle(row, index) {
+            var now  = new Date,
+                startDate = new Date(row.start_date),
+                endDate = new Date(row.end_date);
+            if (startDate < now && now < endDate) {
+                return { classes: 'success' };
+            } else {
+                return {};
+            }
+        }
+    </script>
+{% endblock content_body %}
+
+{% block content_right %}
+{% endblock content_right %}
+

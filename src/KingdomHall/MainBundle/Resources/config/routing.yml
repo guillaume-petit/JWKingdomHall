@@ -1,36 +1,68 @@
+############
+# Homepage #
+############
+
 kingdom_hall_homepage:
     path:     /{_locale}/{congregationCode}/home
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Home:index }
 
+###############
+# Territories #
+###############
+
+# List
+
 kingdom_hall_territories_list:
     path:     /{_locale}/{congregationCode}/territories
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:index }
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:index }
 
 kingdom_hall_territories_new:
     path:     /{_locale}/{congregationCode}/territories/new
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:new }
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:new }
 
 kingdom_hall_territories_edit:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/edit
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:edit }
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:edit }
 
 kingdom_hall_territories_borrow:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/borrow
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:borrow }
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:borrow }
 
 kingdom_hall_territories_return:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/return
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:return }
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:return }
 
 kingdom_hall_territories_novisit_new:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/novisit/new
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:newNoVisit }
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:newNoVisit }
 
 kingdom_hall_territories_view:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/view
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory:view }
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:view }
 
+# Campaigns
+
+kingdom_hall_campaigns_list:
+    path:     /{_locale}/{congregationCode}/campaigns
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/Campaign:index }
+
+kingdom_hall_campaigns_new:
+    path:     /{_locale}/{congregationCode}/campaigns/new
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/Campaign:new }
+
+kingdom_hall_campaigns_edit:
+    path:     /{_locale}/{congregationCode}/campaigns/{campaignId}/edit
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/Campaign:edit }
+
+
+##########
+# Modals #
+##########
 
 kingdom_hall_modal_confirmation:
     path:     /{_locale}/modal/confirmation
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Modal:confirmationModal }
+
+kingdom_hall_modal_info:
+    path:     /{_locale}/modal/info
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Modal:infoModal }

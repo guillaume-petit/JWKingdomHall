@@ -2,10 +2,10 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">{{ header|default('jwkh.confirmation.content_header')|trans }}</h4>
+            <h4 class="modal-title">{{ header|default('jwkh.modal.confirmation.content_header')|trans }}</h4>
         </div>
         <div class="modal-body" id="myModalLabel">
-            {{ message|default('jwkh.confirmation.content_body')|trans }}
+            {{ message|default('jwkh.modal.confirmation.content_body')|trans }}
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}jwkh.common.cancel{% endtrans %}</button>

@@ -2,6 +2,7 @@
 
 namespace KingdomHall\ApiBundle\Controller;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -14,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class DefaultController
+ * Class TerritoryController
  * @package KingdomHall\ApiBundle\Controller
  */
 class TerritoryController extends FOSRestController
@@ -25,13 +26,47 @@ class TerritoryController extends FOSRestController
      *
      * @View()
      * @QueryParam(name="type")
+     * @QueryParam(name="offset")
+     * @QueryParam(name="limit")
+     * @QueryParam(name="sort")
+     * @QueryParam(name="order")
+     * @QueryParam(name="search")
      * @ParamConverter(name="congregation", class="KingdomHallDataBundle:Congregation")
      *
      * @return array
      */
     public function getCongregationTerritoriesAction($congregation, ParamFetcherInterface $paramFetcher)
     {
-        return $congregation->getTerritoriesByType($paramFetcher->get('type'))->getValues();
+        $limit = $paramFetcher->get('limit');
+        $offset = $paramFetcher->get('offset');
+        $type = $paramFetcher->get('type');
+        $sort = $paramFetcher->get('sort');
+        if (!$sort) {
+            $sort = 'number';
+        }
+        $order = $paramFetcher->get('order');
+        $search = $paramFetcher->get('search');
+
+        $manager = $this->get('doctrine')->getEntityManager();
+
+        $query = $manager->createQueryBuilder()
+            ->select('t')
+            ->from('KingdomHallDataBundle:Territory', 't')
+            ->where('t.type = :type')
+            ->orderBy('t.'.$sort, $order)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->setParameter('type', $type)
+            ->getQuery();
+
+        $paginator = new Paginator($query);
+
+        $territories = $query->getResult();
+        $response  = array (
+            'total' => count($paginator),
+            'rows' => $territories,
+        );
+        return $response;
     }
 
     /**

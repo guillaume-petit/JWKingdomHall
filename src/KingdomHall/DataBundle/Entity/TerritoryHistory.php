@@ -10,7 +10,6 @@ namespace KingdomHall\DataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
-use JMS\Serializer\Annotation\Type;
 
 /**
  * Class TerritoryHistory
@@ -46,14 +45,12 @@ class TerritoryHistory {
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
-     * @Type("DateTime<'d/m/Y'>")
      */
     protected $borrowDate;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
-     * @Type("DateTime<'d/m/Y'>")
      */
     protected $returnDate;
 

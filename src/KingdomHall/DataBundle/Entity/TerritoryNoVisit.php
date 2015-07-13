@@ -10,7 +10,6 @@ namespace KingdomHall\DataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
-use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -61,7 +60,6 @@ class TerritoryNoVisit {
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
-     * @Type("DateTime<'d/m/Y'>")
      * @Assert\NotBlank()
      */
     protected $date;

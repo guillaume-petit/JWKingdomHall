@@ -11,9 +11,16 @@ jwkh:
         back: Retour
         sending: Envoi
         confirm: Confirmer
-    confirmation:
-        content_header: Confirmation
-        content_body: Es-tu sûr de vouloir réaliser cette action ?
+        ok: OK
+
+    modal:
+        confirmation:
+            content_header: Confirmation
+            content_body: Es-tu sûr de vouloir réaliser cette action ?
+        info:
+            content_header: Information
+            content_body: Information.
+
     navbar:
         territories: Territoires
         administration: Administration
@@ -21,6 +28,7 @@ jwkh:
     territories:
         menu:
             territories: Territoires
+            campaigns: Campagnes
         list:
             content_header: Liste des territoires
         new:
@@ -29,6 +37,9 @@ jwkh:
             content_header: Modification
         borrow:
             content_header: Emprunt
+            unavailable: >
+                Ce territoire n'est pas disponible pour le moment. Soit aucune campagne n'est prévue soit le territoire
+                a déjà été travaillé.
         return:
             content_header: Retour
             worked: Le territoire a-t-il été parcouru ?
@@ -45,6 +56,18 @@ jwkh:
         remove_confirmation:
             header: Confirmation
             message: Veux-tu vraiment supprimer les territoires sélectionnés ?
+
+    campaigns:
+        list:
+            content_header: Liste des campagnes
+        new:
+            content_header: Nouvelle campagne
+        edit:
+            content_header: Modification
+        remove_confirmation:
+            header: Confirmation
+            message: Veux-tu vraiment supprimer cette campagne ?
+
     entity:
         territory:
             entity: Territoire
@@ -72,3 +95,8 @@ jwkh:
             entity: Proclamateur
             firstName: Prénom
             lastName: Nom
+
+        campaign:
+            name: Nom
+            start_date: Début
+            end_date: Fin

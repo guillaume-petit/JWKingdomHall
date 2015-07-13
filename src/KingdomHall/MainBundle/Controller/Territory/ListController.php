@@ -1,6 +1,6 @@
 <?php
 
-namespace KingdomHall\MainBundle\Controller;
+namespace KingdomHall\MainBundle\Controller\Territory;
 
 use Doctrine\Common\Persistence\AbstractManagerRegistry;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class TerritoryController extends Controller
+class ListController extends Controller
 {
     /**
      * Index action, lists all territories

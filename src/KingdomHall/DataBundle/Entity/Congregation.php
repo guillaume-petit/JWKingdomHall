@@ -65,6 +65,19 @@ class Congregation {
     protected $publishers;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\Campaign", mappedBy="congregation", indexBy="id")
+     * @ORM\OrderBy({"startDate" = "DESC"})
+     */
+    protected $campaigns;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\CongregationSetting", mappedBy="congregation", indexBy="code")
+     */
+    protected $settings;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -147,16 +160,16 @@ class Congregation {
      */
     public function __construct()
     {
-        $this->territories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->territories = new ArrayCollection();
     }
 
     /**
      * Add territories
      *
-     * @param \KingdomHall\DataBundle\Entity\Territory $territories
+     * @param Territory $territories
      * @return Congregation
      */
-    public function addTerritory(\KingdomHall\DataBundle\Entity\Territory $territories)
+    public function addTerritory(Territory $territories)
     {
         $this->territories[] = $territories;
 
@@ -166,9 +179,9 @@ class Congregation {
     /**
      * Remove territories
      *
-     * @param \KingdomHall\DataBundle\Entity\Territory $territories
+     * @param Territory $territories
      */
-    public function removeTerritory(\KingdomHall\DataBundle\Entity\Territory $territories)
+    public function removeTerritory(Territory $territories)
     {
         $this->territories->removeElement($territories);
     }
@@ -197,10 +210,10 @@ class Congregation {
     /**
      * Add publishers
      *
-     * @param \KingdomHall\DataBundle\Entity\Publisher $publishers
+     * @param Publisher $publishers
      * @return Congregation
      */
-    public function addPublisher(\KingdomHall\DataBundle\Entity\Publisher $publishers)
+    public function addPublisher(Publisher $publishers)
     {
         $this->publishers[] = $publishers;
 
@@ -210,9 +223,9 @@ class Congregation {
     /**
      * Remove publishers
      *
-     * @param \KingdomHall\DataBundle\Entity\Publisher $publishers
+     * @param Publisher $publishers
      */
-    public function removePublisher(\KingdomHall\DataBundle\Entity\Publisher $publishers)
+    public function removePublisher(Publisher $publishers)
     {
         $this->publishers->removeElement($publishers);
     }
@@ -225,5 +238,100 @@ class Congregation {
     public function getPublishers()
     {
         return $this->publishers;
+    }
+
+    /**
+     * Add campaigns
+     *
+     * @param Campaign $campaigns
+     * @return Congregation
+     */
+    public function addCampaign(Campaign $campaigns)
+    {
+        $this->campaigns[] = $campaigns;
+
+        return $this;
+    }
+
+    /**
+     * Remove campaigns
+     *
+     * @param Campaign $campaigns
+     */
+    public function removeCampaign(Campaign $campaigns)
+    {
+        $this->campaigns->removeElement($campaigns);
+    }
+
+    /**
+     * Get campaigns
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCampaigns()
+    {
+        return $this->campaigns;
+    }
+
+    /**
+     * Add settings
+     *
+     * @param \KingdomHall\DataBundle\Entity\CongregationSetting $settings
+     * @return Congregation
+     */
+    public function addSetting(\KingdomHall\DataBundle\Entity\CongregationSetting $settings)
+    {
+        $this->settings[] = $settings;
+
+        return $this;
+    }
+
+    /**
+     * Remove settings
+     *
+     * @param \KingdomHall\DataBundle\Entity\CongregationSetting $settings
+     */
+    public function removeSetting(\KingdomHall\DataBundle\Entity\CongregationSetting $settings)
+    {
+        $this->settings->removeElement($settings);
+    }
+
+    /**
+     * Get settings
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return mixed the typed value
+     */
+    public function getTypedSetting($code)
+    {
+        $value = null;
+        $setting = $this->getSettings()->get($code);
+        if ($setting) {
+            $value = $setting->getValue();
+            settype($value, $setting->getType());
+        }
+        return $value;
+    }
+
+    /**
+     * Get unexpired campaigns, that is ongoing and future campaigns.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUnexpiredCampaigns()
+    {
+        return $this->campaigns->filter(function(Campaign $campaign) {
+            $now = new \DateTime();
+            return $now < $campaign->getEndDate();
+        });
     }
 }

@@ -10,6 +10,9 @@ namespace KingdomHall\DataBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Type;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -28,6 +31,11 @@ use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
  */
 class Territory {
 
+    const TERRITORY_TYPE_CAMPAIGN = 'campaign';
+    const TERRITORY_TYPE_STANDARD = 'standard';
+    const TERRITORY_STATUS_ALERT = 'danger';
+    const TERRITORY_STATUS_WARNING = 'warning';
+
     /**
      * @var integer
      *
@@ -41,6 +49,7 @@ class Territory {
      * @var Congregation
      * @ORM\ManyToOne(targetEntity="KingdomHall\DataBundle\Entity\Congregation", inversedBy="territories")
      * @ORM\JoinColumn(name="congregation_id", referencedColumnName="id")
+     * @Exclude()
      */
     protected $congregation;
 
@@ -48,6 +57,7 @@ class Territory {
      * @var Publisher
      * @ORM\ManyToOne(targetEntity="KingdomHall\DataBundle\Entity\Publisher", inversedBy="territories")
      * @ORM\JoinColumn(name="publisher_id", referencedColumnName="id")
+     * @MaxDepth(depth=1)
      */
     protected $publisher;
 
@@ -55,6 +65,7 @@ class Territory {
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryHistory", mappedBy="territory", indexBy="id", cascade={"PERSIST", "REMOVE"})
      * @ORM\OrderBy({"borrowDate" = "DESC"})
+     * @Exclude()
      */
     protected $histories;
 
@@ -62,6 +73,7 @@ class Territory {
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryNoVisit", mappedBy="territory", indexBy="id", cascade={"PERSIST", "REMOVE"})
      * @ORM\OrderBy({"name" = "ASC"})
+     * @Exclude()
      */
     protected $noVisits;
 
@@ -96,16 +108,28 @@ class Territory {
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
-     * @Type("DateTime<'d/m/Y'>")
      */
     protected $borrowDate;
 
     /**
+     * @var string
+     * @Accessor(getter="getFormattedBorrowDate")
+     * @Type(name="string")
+     */
+    protected $formattedBorrowDate;
+
+    /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
-     * @Type("DateTime<'d/m/Y'>")
      */
     protected $returnDate;
+
+    /**
+     * @var string
+     * @Accessor(getter="getFormattedReturnDate")
+     * @Type(name="string")
+     */
+    protected $formattedReturnDate;
 
     /**
      * @var string
@@ -130,6 +154,13 @@ class Territory {
      * @ORM\Column(type="boolean")
      */
     protected $phone;
+
+    /**
+     * @var string
+     * @Accessor(getter="getStatus")
+     * @Type(name="string")
+     */
+    protected $status;
 
     /**
      * @return UploadedFile
@@ -233,10 +264,10 @@ class Territory {
     /**
      * Set congregation
      *
-     * @param \KingdomHall\DataBundle\Entity\Congregation $congregation
+     * @param Congregation $congregation
      * @return Territory
      */
-    public function setCongregation(\KingdomHall\DataBundle\Entity\Congregation $congregation = null)
+    public function setCongregation(Congregation $congregation = null)
     {
         $this->congregation = $congregation;
 
@@ -246,7 +277,7 @@ class Territory {
     /**
      * Get congregation
      *
-     * @return \KingdomHall\DataBundle\Entity\Congregation 
+     * @return Congregation
      */
     public function getCongregation()
     {
@@ -279,10 +310,10 @@ class Territory {
     /**
      * Set publisher
      *
-     * @param \KingdomHall\DataBundle\Entity\Publisher $publisher
+     * @param Publisher $publisher
      * @return Territory
      */
-    public function setPublisher(\KingdomHall\DataBundle\Entity\Publisher $publisher = null)
+    public function setPublisher(Publisher $publisher = null)
     {
         $this->publisher = $publisher;
 
@@ -292,7 +323,7 @@ class Territory {
     /**
      * Get publisher
      *
-     * @return \KingdomHall\DataBundle\Entity\Publisher 
+     * @return Publisher
      */
     public function getPublisher()
     {
@@ -323,6 +354,16 @@ class Territory {
     }
 
     /**
+     * Get formatted date
+     *
+     * @return string
+     */
+    public function getFormattedBorrowDate()
+    {
+        return $this->borrowDate ? $this->borrowDate->format($this->congregation->getSettings()->get('date_format_twig')->getValue()) : null;
+    }
+
+    /**
      * Set returnDate
      *
      * @param \DateTime $returnDate
@@ -343,6 +384,16 @@ class Territory {
     public function getReturnDate()
     {
         return $this->returnDate;
+    }
+
+    /**
+     * Get formatted date
+     *
+     * @return string
+     */
+    public function getFormattedReturnDate()
+    {
+        return $this->returnDate ? $this->returnDate->format($this->congregation->getSettings()->get('date_format_twig')->getValue()) : null;
     }
 
     /**
@@ -373,16 +424,16 @@ class Territory {
      */
     public function __construct()
     {
-        $this->histories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->histories = new ArrayCollection();
     }
 
     /**
      * Add histories
      *
-     * @param \KingdomHall\DataBundle\Entity\TerritoryHistory $histories
+     * @param TerritoryHistory $histories
      * @return Territory
      */
-    public function addHistory(\KingdomHall\DataBundle\Entity\TerritoryHistory $histories)
+    public function addHistory(TerritoryHistory $histories)
     {
         $this->histories[] = $histories;
         $histories->setTerritory($this);
@@ -392,9 +443,9 @@ class Territory {
     /**
      * Remove histories
      *
-     * @param \KingdomHall\DataBundle\Entity\TerritoryHistory $histories
+     * @param TerritoryHistory $histories
      */
-    public function removeHistory(\KingdomHall\DataBundle\Entity\TerritoryHistory $histories)
+    public function removeHistory(TerritoryHistory $histories)
     {
         $this->histories->removeElement($histories);
     }
@@ -412,10 +463,10 @@ class Territory {
     /**
      * Add noVisits
      *
-     * @param \KingdomHall\DataBundle\Entity\TerritoryNoVisit $noVisits
+     * @param TerritoryNoVisit $noVisits
      * @return Territory
      */
-    public function addNoVisit(\KingdomHall\DataBundle\Entity\TerritoryNoVisit $noVisits)
+    public function addNoVisit(TerritoryNoVisit $noVisits)
     {
         $this->noVisits[] = $noVisits;
         $noVisits->setTerritory($this);
@@ -426,9 +477,9 @@ class Territory {
     /**
      * Remove noVisits
      *
-     * @param \KingdomHall\DataBundle\Entity\TerritoryNoVisit $noVisits
+     * @param TerritoryNoVisit $noVisits
      */
-    public function removeNoVisit(\KingdomHall\DataBundle\Entity\TerritoryNoVisit $noVisits)
+    public function removeNoVisit(TerritoryNoVisit $noVisits)
     {
         $this->noVisits->removeElement($noVisits);
     }
@@ -487,5 +538,38 @@ class Territory {
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Checks if the territory is available for borrow
+     *
+     * @return bool
+     */
+    public function isAvailable()
+    {
+        $currentCampaigns = $this->congregation->getUnexpiredCampaigns();
+        return  $this->type == self::TERRITORY_TYPE_STANDARD ||
+                ($this->type == self::TERRITORY_TYPE_CAMPAIGN &&                    // Check if this is a campaign territory
+                !$currentCampaigns->isEmpty() &&                                   // Check if a campaign is currently ongoing or planned in the future
+                $this->returnDate < $currentCampaigns->first()->getStartDate());    // Check if the territory has already been worked during the campaign
+    }
+
+    public function getStatus()
+    {
+        $status = '';
+        if ($this->publisher) {
+            $warningDate = new \DateTime();
+            $warningDate->add(\DateInterval::createFromDateString('-'.$this->congregation->getSettings()->get('territory_warning_borrow_time')->getValue()));
+            $alertDate = new \DateTime();
+            $alertDate->add(\DateInterval::createFromDateString('-'.$this->congregation->getSettings()->get('territory_max_borrow_time')->getValue()));
+            if ($this->borrowDate) {
+                if ($this->borrowDate < $alertDate) {
+                    $status = self::TERRITORY_STATUS_ALERT;
+                } elseif ($this->borrowDate < $warningDate) {
+                    $status = self::TERRITORY_STATUS_WARNING;
+                }
+            }
+        }
+        return $status;
     }
 }

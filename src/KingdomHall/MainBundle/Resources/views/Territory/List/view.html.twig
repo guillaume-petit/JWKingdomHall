@@ -57,7 +57,7 @@
                         <td>{{ novisit.name }}</td>
                         <td>{{ novisit.address }}</td>
                         <td>{{ novisit.publisher.fullName }}</td>
-                        <td>{{ novisit.date|date(dateFormat) }}</td>
+                        <td>{{ novisit.date|date(congregation_setting('date_format_twig')) }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -85,8 +85,8 @@
                     {% for history in territory.histories %}
                         <tr>
                             <td>{{ history.publisher.firstName }}&nbsp;{{ history.publisher.lastName }}</td>
-                            <td>{% if history.borrowDate %}{{ history.borrowDate|date(dateFormat) }}{% else %}-{% endif %}</td>
-                            <td>{% if history.returnDate %}{{ history.returnDate|date(dateFormat) }}{% else %}-{% endif %}</td>
+                            <td>{% if history.borrowDate %}{{ history.borrowDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
+                            <td>{% if history.returnDate %}{{ history.returnDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -101,7 +101,7 @@
     {% if territory.publisher %}
         <button type="button" class="btn btn-default btn-block" id="returnTerritoryButton"><span class="glyphicon glyphicon-open-file" aria-hidden="true"> {% trans %}jwkh.common.return{% endtrans %}</span></button>
     {% else %}
-        <button type="button" class="btn btn-default btn-block" id="borrowTerritoryButton"><span class="glyphicon glyphicon-save-file" aria-hidden="true"> {% trans %}jwkh.common.borrow{% endtrans %}</span></button>
+        <button type="button" class="btn btn-default btn-block {% if not territory.available %}disabled{% endif %}" id="borrowTerritoryButton"><span class="glyphicon glyphicon-save-file" aria-hidden="true"> {% trans %}jwkh.common.borrow{% endtrans %}</span></button>
     {% endif %}
 
     <script>
@@ -120,9 +120,17 @@
             });
 
             $('#borrowTerritoryButton').on('click', function (e) {
-                modal.load('{{ path('kingdom_hall_territories_borrow', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
-                    modal.modal();
-                });
+
+                {% if not territory.available %}
+                    modal.load('{{ path('kingdom_hall_modal_info', { 'message': 'jwkh.territories.borrow.unavailable' }) }}'.replace('&amp;', '&'), function () {
+                        modal.modal();
+                    });
+                {% else %}
+                    modal.load('{{ path('kingdom_hall_territories_borrow', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                        modal.modal();
+                    });
+                {% endif %}
+
             });
 
             $('#returnTerritoryButton').on('click', function (e) {

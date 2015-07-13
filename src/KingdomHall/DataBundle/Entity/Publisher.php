@@ -10,6 +10,7 @@ namespace KingdomHall\DataBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Class Publisher
@@ -33,6 +34,7 @@ class Publisher {
      * @var Congregation
      * @ORM\ManyToOne(targetEntity="KingdomHall\DataBundle\Entity\Congregation", inversedBy="publishers")
      * @ORM\JoinColumn(name="congregation_id", referencedColumnName="id")
+     * @Exclude()
      */
     protected $congregation;
 
@@ -59,6 +61,7 @@ class Publisher {
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\Territory", mappedBy="publisher")
+     * @Exclude()
      */
     protected $territories;
 

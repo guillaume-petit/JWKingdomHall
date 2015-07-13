@@ -5,6 +5,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <!-- Form types -->
+
+        <!-- Territories -->
         <service id="kingdomhall.form.type.territory" class="KingdomHall\MainBundle\Form\Type\Territory\TerritoryType">
             <tag name="form.type" alias="kingdomhall_form_territory" />
         </service>
@@ -17,6 +20,19 @@
         <service id="kingdomhall.form.type.territory_no_visit" class="KingdomHall\MainBundle\Form\Type\Territory\TerritoryNoVisitType">
             <tag name="form.type" alias="kingdomhall_form_territory_no_visit" />
         </service>
+
+        <!-- Campaigns -->
+        <service id="kingdomhall.form.type.campaign" class="KingdomHall\MainBundle\Form\Type\Campaign\CampaignType">
+            <tag name="form.type" alias="kingdomhall_form_campaign" />
+        </service>
+
+
+        <!-- TWIG Extensions -->
+        <service id="kingdomhall.twig.jwkh_extension" class="KingdomHall\MainBundle\Twig\JWKHExtension">
+            <tag name="twig.extension" />
+            <argument type="service" id="service_container" />
+        </service>
+
     </services>
 
 </container>

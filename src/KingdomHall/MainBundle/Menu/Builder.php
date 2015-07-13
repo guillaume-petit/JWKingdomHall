@@ -20,6 +20,20 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  */
 class Builder extends ContainerAware {
 
+    public function navbarMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('navbar');
+        $menu->setChildrenAttribute('class', 'nav navbar-nav');
+
+        $menu->addChild('jwkh.territories.menu.territories', array(
+            'route' => 'kingdom_hall_territories_list',
+            'routeParameters' => $this->container->get('request')->get('_route_params'),
+            'label' => 'jwkh.territories.menu.territories',
+        ));
+
+        return $menu;
+    }
+
     /**
      * Returns the switch congregation menu on the top right corner
      *
@@ -75,6 +89,12 @@ class Builder extends ContainerAware {
             'route' => 'kingdom_hall_territories_list',
             'routeParameters' => $this->container->get('request')->get('_route_params'),
             'label' => 'jwkh.territories.menu.territories',
+        ));
+
+        $menu->addChild('jwkh.territories.menu.campaigns', array(
+            'route' => 'kingdom_hall_campaigns_list',
+            'routeParameters' => $this->container->get('request')->get('_route_params'),
+            'label' => 'jwkh.territories.menu.campaigns',
         ));
 
         return $menu;
