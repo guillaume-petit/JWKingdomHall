@@ -43,8 +43,7 @@
                 <th data-sortable="true" data-field="name">{% trans %}jwkh.entity.territory.name{% endtrans %}</th>
                 <th data-sortable="true" data-field="area">{% trans %}jwkh.entity.territory.area{% endtrans %}</th>
                 <th data-sortable="true" data-field="formatted_borrow_date">{% trans %}jwkh.entity.territory.borrow_date{% endtrans %}</th>
-                <th data-sortable="true" data-field="publisher.first_name">{% trans %}jwkh.entity.publisher.firstName{% endtrans %}</th>
-                <th data-sortable="true" data-field="publisher.last_name">{% trans %}jwkh.entity.publisher.lastName{% endtrans %}</th>
+                <th data-sortable="false" data-field="publisher.full_name">{% trans %}jwkh.entity.publisher.lastName{% endtrans %}</th>
                 <th data-sortable="true" data-field="formatted_return_date">{% trans %}jwkh.entity.territory.return_date{% endtrans %}</th>
             </tr>
         </thead>
@@ -103,6 +102,7 @@
 {% endblock content_body %}
 
 {% block content_right %}
+    <a href="#" class="btn btn-default btn-block"><span class="glyphicon glyphicon-file" aria-hidden="true"> {% trans %}jwkh.territories.list.s13{% endtrans %}</span></a>
     <a href="#" class="btn btn-default btn-block disabled"><span class="glyphicon glyphicon-import" aria-hidden="true"> {% trans %}jwkh.common.import{% endtrans %}</span></a>
     <a href="#" class="btn btn-default btn-block disabled"><span class="glyphicon glyphicon-export" aria-hidden="true"> {% trans %}jwkh.common.export{% endtrans %}</span></a>
 {% endblock content_right %}

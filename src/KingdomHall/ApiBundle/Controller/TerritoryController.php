@@ -2,7 +2,6 @@
 
 namespace KingdomHall\ApiBundle\Controller;
 
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -28,7 +27,7 @@ class TerritoryController extends FOSRestController
      * @QueryParam(name="type")
      * @QueryParam(name="offset")
      * @QueryParam(name="limit")
-     * @QueryParam(name="sort")
+     * @QueryParam(name="sort", default="number")
      * @QueryParam(name="order")
      * @QueryParam(name="search")
      * @ParamConverter(name="congregation", class="KingdomHallDataBundle:Congregation")
@@ -37,36 +36,18 @@ class TerritoryController extends FOSRestController
      */
     public function getCongregationTerritoriesAction($congregation, ParamFetcherInterface $paramFetcher)
     {
-        $limit = $paramFetcher->get('limit');
-        $offset = $paramFetcher->get('offset');
         $type = $paramFetcher->get('type');
-        $sort = $paramFetcher->get('sort');
-        if (!$sort) {
-            $sort = 'number';
-        }
-        $order = $paramFetcher->get('order');
+        $pagination = array (
+            'offset' => $paramFetcher->get('offset'),
+            'limit' => $paramFetcher->get('limit'),
+        );
+        $sort = array (
+            'sort' => $paramFetcher->get('sort'),
+            'order' => $paramFetcher->get('order'),
+        );
         $search = $paramFetcher->get('search');
 
-        $manager = $this->get('doctrine')->getEntityManager();
-
-        $query = $manager->createQueryBuilder()
-            ->select('t')
-            ->from('KingdomHallDataBundle:Territory', 't')
-            ->where('t.type = :type')
-            ->orderBy('t.'.$sort, $order)
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
-            ->setParameter('type', $type)
-            ->getQuery();
-
-        $paginator = new Paginator($query);
-
-        $territories = $query->getResult();
-        $response  = array (
-            'total' => count($paginator),
-            'rows' => $territories,
-        );
-        return $response;
+        return $this->getDoctrine()->getRepository('KingdomHallDataBundle:Territory')->searchTerritories($congregation, $type, $pagination, $sort, $search);
     }
 
     /**

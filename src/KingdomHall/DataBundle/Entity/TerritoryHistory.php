@@ -10,6 +10,7 @@ namespace KingdomHall\DataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Class TerritoryHistory
@@ -32,6 +33,7 @@ class TerritoryHistory {
      * @var Territory
      * @ORM\ManyToOne(targetEntity="KingdomHall\DataBundle\Entity\Territory", inversedBy="histories")
      * @ORM\JoinColumn(name="territory_id", referencedColumnName="id")
+     * @Exclude()
      */
     protected $territory;
 

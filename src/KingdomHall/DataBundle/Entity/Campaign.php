@@ -10,6 +10,7 @@ namespace KingdomHall\DataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\Type;
 
 
@@ -35,6 +36,7 @@ class Campaign {
      * @var Congregation
      * @ORM\ManyToOne(targetEntity="KingdomHall\DataBundle\Entity\Congregation", inversedBy="campaigns")
      * @ORM\JoinColumn(name="congregation_id", referencedColumnName="id")
+     * @Exclude()
      */
     protected $congregation;
 

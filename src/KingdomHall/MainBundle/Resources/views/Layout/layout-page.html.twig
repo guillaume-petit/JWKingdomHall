@@ -22,6 +22,7 @@
         '%kernel.root_dir%/../vendor/jquery/jquery/jquery-1.11.1.js'
         '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js'
         '%kernel.root_dir%/../vendor/eternicode/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
+        '%kernel.root_dir%/../vendor/eternicode/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js'
         '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/bootstrap-table.min.js'
         '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/extensions/flat-json/bootstrap-table-flat-json.min.js'
         '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/extensions/mobile/bootstrap-table-mobile.min.js'
@@ -51,14 +52,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">JWKH</a>
+                <a class="navbar-brand" href="{{ path('kingdom_hall_homepage', {'congregationCode': congregation.code}) }}">JWKH</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 {{ knp_menu_render('KingdomHallMainBundle:Builder:navbarMenu', {'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_left.html.twig'}) }}
-                {#<ul class="nav navbar-nav">#}
-                    {#<li class="active"><a href="#">{% trans %}jwkh.navbar.territories{% endtrans %} <span class="sr-only">(current)</span></a></li>#}
-                    {#<li><a href="#">{% trans %}jwkh.navbar.administration{% endtrans %}</a></li>#}
-                {#</ul>#}
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Guillaume Petit <span class="caret"></span></a>
@@ -132,7 +129,7 @@
                 };
                 xhr.onload = function () {
                     if ($('.form-errors', xhr.responseText).children().length > 0) {
-                        $('.modal-content', modal).html(xhr.responseText);
+                        $('.modal-dialog', modal).html(xhr.responseText);
                         $('.modal').trigger('shown.bs.modal');
                     } else {
                         $('.modal').modal('hide');
@@ -140,13 +137,26 @@
                 };
                 xhr.send(formData);
             });
+            initDatepicker();
         });
 
         $('.bs-checkbox').on('click', function (e) {
             e.preventDefault();
             $('input', this).prop('checked', true);
         });
+
+        initDatepicker();
     });
+
+    function initDatepicker() {
+        $('.datepicker').datepicker(
+            {
+                'language': '{{ app.request.locale }}',
+                'todayHighlight': true,
+                'autoclose': true
+            }
+        );
+    }
 </script>
 </body>
 </html>

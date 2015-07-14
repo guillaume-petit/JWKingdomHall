@@ -11,6 +11,7 @@ namespace KingdomHall\DataBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use JMS\Serializer\Annotation\Exclude;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -38,6 +39,7 @@ class CongregationSetting {
      * @var Congregation
      * @ORM\ManyToOne(targetEntity="KingdomHall\DataBundle\Entity\Congregation", inversedBy="settings")
      * @ORM\JoinColumn(name="congregation_id", referencedColumnName="id")
+     * @Exclude()
      */
     protected $congregation;
 

@@ -1,3 +1,5 @@
+{# override form_div_layout.html.twig #}
+
 {% block form %}
     {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
     {{ form_widget(form) }}
@@ -43,7 +45,7 @@
 
 {% block form_widget_simple %}
     {% set type = type|default('text') %}
-    <input type="{{ type }}" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    <input type="{{ type }}" class="{{ form.vars.attr.class|default ~ ' form-control' }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
 {% endblock form_widget_simple %}
 
 {% block choice_widget %}
@@ -54,6 +56,19 @@
         {{ block('choice_widget_collapsed') }}
     {% endif %}
 {% endblock choice_widget %}
+
+{% block choice_widget_expanded %}
+    <div {{ block('widget_container_attributes') }}>
+        {% for child in form %}
+            {% if multiple %}
+                {{ form_widget(child) }}
+                {{ form_label(child) }}
+            {% else %}
+                <label class="radio-inline">{{ form_widget(child) }} {{ child.vars.label|trans }}</label>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock choice_widget_expanded %}
 
 {% block submit_widget %}
     {% set type = type|default('submit') %}
@@ -84,3 +99,14 @@
         </div>
     {% endspaceless %}
 {% endblock checkbox_widget %}
+
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        <ul>
+            {% for error in errors %}
+                <li>{{ error.message|trans }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock form_errors %}
+

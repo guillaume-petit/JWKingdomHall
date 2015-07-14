@@ -209,8 +209,7 @@ class ListController extends Controller
             $manager = $this->getDoctrine()->getManager();
             $history = $territory->getHistories()->first();
             $worked = $form->get('worked')->getData();
-
-            if (!$worked) {
+            if ($worked == 'no') {
                 $territory->removeHistory($history);
                 $manager->remove($history);
             } else {

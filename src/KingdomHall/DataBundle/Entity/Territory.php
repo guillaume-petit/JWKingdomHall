@@ -14,6 +14,7 @@ use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Type;
+use KingdomHall\MainBundle\Form\Validator\Constraints as JWKHAssert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -24,10 +25,11 @@ use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
  * Class Territory
  * @package KingdomHall\DataBundle\Entity
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="KingdomHall\DataBundle\Repository\TerritoryRepository")
  * @ORM\Table(name="territory", uniqueConstraints={@UniqueConstraint(name="territory_idx", columns={"congregation_id", "type", "number"})})
  * @UniqueEntity(fields={"congregation", "type", "number"}, errorPath="number")
  * @Uploadable()
+ * @JWKHAssert\TerritoryReturnDate()
  */
 class Territory {
 
@@ -65,7 +67,6 @@ class Territory {
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryHistory", mappedBy="territory", indexBy="id", cascade={"PERSIST", "REMOVE"})
      * @ORM\OrderBy({"borrowDate" = "DESC"})
-     * @Exclude()
      */
     protected $histories;
 
@@ -73,7 +74,6 @@ class Territory {
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryNoVisit", mappedBy="territory", indexBy="id", cascade={"PERSIST", "REMOVE"})
      * @ORM\OrderBy({"name" = "ASC"})
-     * @Exclude()
      */
     protected $noVisits;
 

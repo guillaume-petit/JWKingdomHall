@@ -10,7 +10,9 @@ namespace KingdomHall\DataBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\Type;
 
 /**
  * Class Publisher
@@ -49,6 +51,19 @@ class Publisher {
      * @ORM\Column(type="string", length=255)
      */
     protected $lastName;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $email;
+
+    /**
+     * @var string
+     * @Accessor(getter="getFullName")
+     * @Type(name="string")
+     */
+    protected $fullName;
 
     /**
      * @return string
@@ -185,4 +200,27 @@ class Publisher {
         return $this->territories;
     }
 
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Publisher
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
 }
