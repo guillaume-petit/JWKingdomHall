@@ -1,0 +1,58 @@
+{% extends '@KingdomHallMain/Layout/layout-page.html.twig' %}
+
+{% block content_header %}
+    {% trans %}jwkh.territories.s13.header{% endtrans %}
+{% endblock %}
+
+{% block menu_left_content %}
+    {{ knp_menu_render('KingdomHallMainBundle:Builder:territoriesMenu', {'depth': 1, 'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_left.html.twig'}) }}
+{% endblock menu_left_content %}
+
+{% block content %}
+    {% set page = app.request.get('page')|default(0) %}
+    {% set lastPage = (territories['total'] / 5)|round(0, 'floor') %}
+    <div class="row">
+        <div class="col-md-10" style="margin-bottom: 10px;">
+            <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code, 'page': 0}) }}" class="btn btn-default {% if page == 0 %}disabled{% endif %}"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></a>
+            <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code, 'page': page - 1 }) }}" class="btn btn-default {% if page == 0 %}disabled{% endif %}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+            <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code, 'page': page + 1 }) }}" class="btn btn-default {% if page == lastPage %}disabled{% endif %}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code, 'page': lastPage }) }}" class="btn btn-default {% if page == lastPage %}disabled{% endif %}"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></a>
+        </div>
+        <div class="col-md-2">
+            {#<a href="{{ path('kingdom_hall_territories_list', {'congregationCode': congregation.code }) }}" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> {% trans %}jwkh.common.back{% endtrans %}</span></a>#}
+            <a href="#" class="btn btn-default btn-block"><span class="glyphicon glyphicon-print" aria-hidden="true"> {% trans %}jwkh.common.print{% endtrans %}</span></a>
+        </div>
+    </div>
+    <div class="row s13 header" style="margin-bottom: 10px;">
+        {% for territory in territories.rows %}
+            <div class="col-md-2 column">
+                <div class="row">
+                    <div class="col-md-3"><b>Terr.</b></div>
+                    <div class="col-md-9">{{ territory.name }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><b>N°</b></div>
+                    <div class="col-md-9">{{ territory.number }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row s13 body">
+        {% for territory in territories.rows %}
+            <div class="col-md-2 column">
+                {% for history in territory.histories %}
+                    <div class="row">
+                        <div class="row" style="margin-right: 1px">
+                            <div class="col-md-12 cell">{{ history.publisher.fullName }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 cell">{{ history.borrowDate|date(congregation_setting('date_format_twig')) }}</div>
+                            <div class="col-md-6 cell">{{ history.returnDate|date(congregation_setting('date_format_twig')) }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

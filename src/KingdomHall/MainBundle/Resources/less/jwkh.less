@@ -5,3 +5,35 @@
 .btn-block {
     text-align: left;
 }
+
+.s13 {
+    div {
+        padding: 0;
+    }
+
+    .column {
+        display: table;
+        border-collapse: collapse;
+        border: solid 1px 0 0 1px;
+
+        >.row {
+            width: 100%;
+            display: table-row;
+        }
+
+        .row {
+            margin: 0;
+        }
+
+    }
+
+    &.body {
+        .cell {
+            display: table-cell;
+            border: solid 1px;
+            border-collapse: collapse;
+            margin: -1px 0 0 -1px;
+            padding: 0 2px 0 2px;
+        }
+    }
+}

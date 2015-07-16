@@ -30,7 +30,7 @@
         <!-- TWIG Extensions -->
         <service id="kingdomhall.twig.jwkh_extension" class="KingdomHall\MainBundle\Twig\JWKHExtension">
             <tag name="twig.extension" />
-            <argument type="service" id="service_container" />
+            <argument type="service" id="request_stack" />
         </service>
 
     </services>

@@ -10,18 +10,17 @@ namespace KingdomHall\MainBundle\Twig;
 
 
 use KingdomHall\DataBundle\Entity\Congregation;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class JWKHExtension extends \Twig_Extension
 {
 
     /** @var  Congregation */
-    protected $congregation;
+    protected $request;
 
-    public function __construct(Container $container)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->congregation = $container->get('request')->get('congregation');
+        $this->request = $requestStack->getCurrentRequest();
     }
 
     public function getFilters()
@@ -40,7 +39,7 @@ class JWKHExtension extends \Twig_Extension
 
     public function getCongregationSetting($code)
     {
-        return $this->congregation->getTypedSetting($code);
+        return $this->request->get('congregation')->getTypedSetting($code);
     }
 
     /**

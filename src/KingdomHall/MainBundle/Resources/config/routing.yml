@@ -40,6 +40,10 @@ kingdom_hall_territories_view:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/view
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:view }
 
+kingdom_hall_territories_s13:
+    path:     /{_locale}/{congregationCode}/territories/s13
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:attribution }
+
 # Campaigns
 
 kingdom_hall_campaigns_list:

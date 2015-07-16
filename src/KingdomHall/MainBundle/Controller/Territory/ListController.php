@@ -273,4 +273,35 @@ class ListController extends Controller
             'form' => $form->createView()
         );
     }
+
+    /**
+     * @param Request      $request
+     * @param Congregation $congregation
+     *
+     * @Template()
+     *
+     * @return array
+     */
+    public function attributionAction(Request $request, Congregation $congregation)
+    {
+        $page = $request->get('page');
+
+        $territories = $this->getDoctrine()->getRepository('KingdomHallDataBundle:Territory')->searchTerritories(
+            $congregation,
+            'standard',
+            array(
+                'limit' => 5,
+                'offset' => $page * 5,
+            ),
+            array (
+                'sort' =>'number',
+                'order' => 'ASC',
+            )
+        );
+
+        return array (
+            'congregation' => $congregation,
+            'territories' => $territories
+        );
+    }
 }

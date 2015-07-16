@@ -14,7 +14,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class TerritoryRepository extends EntityRepository {
 
-    public function searchTerritories($congregation, $type, $pagination, $sort, $search)
+    public function searchTerritories($congregation, $type, $pagination, $sort, $search = '')
     {
         // Map date sorting
         if ($sort['sort'] == 'formatted_borrow_date') {
@@ -61,6 +61,7 @@ class TerritoryRepository extends EntityRepository {
             'total' => count($paginator),
             'rows' => $territories,
         );
+
         return $response;
     }
 }

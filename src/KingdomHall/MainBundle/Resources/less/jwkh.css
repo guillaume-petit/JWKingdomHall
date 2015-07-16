@@ -6767,3 +6767,25 @@ button.close {
 .btn-block {
   text-align: left;
 }
+.s13 div {
+  padding: 0;
+}
+.s13 .column {
+  display: table;
+  border-collapse: collapse;
+  border: solid 1px 0 0 1px;
+}
+.s13 .column > .row {
+  width: 100%;
+  display: table-row;
+}
+.s13 .column .row {
+  margin: 0;
+}
+.s13.body .cell {
+  display: table-cell;
+  border: solid 1px;
+  border-collapse: collapse;
+  margin: -1px 0 0 -1px;
+  padding: 0 2px 0 2px;
+}

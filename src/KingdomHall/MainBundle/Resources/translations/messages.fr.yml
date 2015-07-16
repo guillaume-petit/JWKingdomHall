@@ -14,6 +14,7 @@ jwkh:
         ok: OK
         yes: Oui
         no: Non
+        print: Imprimer
 
     modal:
         confirmation:
@@ -71,6 +72,8 @@ jwkh:
         remove_confirmation:
             header: Confirmation
             message: Veux-tu vraiment supprimer les territoires sélectionnés ?
+        s13:
+            header: Relevé des attributions du territoire
 
     campaigns:
         list:
