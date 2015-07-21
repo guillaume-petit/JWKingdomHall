@@ -19,8 +19,7 @@
             <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code, 'page': lastPage }) }}" class="btn btn-default {% if page == lastPage %}disabled{% endif %}"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></a>
         </div>
         <div class="col-md-2">
-            {#<a href="{{ path('kingdom_hall_territories_list', {'congregationCode': congregation.code }) }}" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> {% trans %}jwkh.common.back{% endtrans %}</span></a>#}
-            <a href="#" class="btn btn-default btn-block"><span class="glyphicon glyphicon-print" aria-hidden="true"> {% trans %}jwkh.common.print{% endtrans %}</span></a>
+            <a href="{{ path('kingdom_hall_territories_s13_download', {'congregationCode': congregation.code}) }}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"> {% trans %}jwkh.common.download{% endtrans %}</span></a>
         </div>
     </div>
     <div class="row s13 header" style="margin-bottom: 10px;">

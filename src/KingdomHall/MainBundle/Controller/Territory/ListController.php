@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ListController extends Controller
 {
@@ -282,7 +283,7 @@ class ListController extends Controller
      *
      * @return array
      */
-    public function attributionAction(Request $request, Congregation $congregation)
+    public function s13Action(Request $request, Congregation $congregation)
     {
         $page = $request->get('page');
 
@@ -303,5 +304,56 @@ class ListController extends Controller
             'congregation' => $congregation,
             'territories' => $territories
         );
+    }
+
+    /**
+     * @param Request $request
+     * @param Congregation $congregation
+     *
+     * @return Response
+     */
+    public function s13PdfAction(Request $request, Congregation $congregation)
+    {
+        $territories = $congregation->getTerritoriesByType('standard')->getValues();
+
+        $pdfData = array();
+
+        $page = 0;
+        while ($page < count($territories) / 5) {
+            $pdfData[$page]['body'] = array();
+            for ($i = 0; $i < 5; $i++) {
+                if (array_key_exists($page * 5 + $i, $territories)) {
+                    $territory = $territories[$page * 5 + $i];
+                    $pdfData[$page]['header'][$i] = array(
+                        'name' => $territory->getName(),
+                        'number' => $territory->getNumber(),
+                    );
+                    $row = 0;
+                    foreach ($territory->getHistories() as $history) {
+                        $pdfData[$page]['body'][$row][$i] = array(
+                            'name' => $history->getPublisher()->getFullName(),
+                            'borrow' => $history->getBorrowDate(),
+                            'return' => $history->getReturnDate(),
+                        );
+                        $row++;
+                    }
+                }
+            }
+            $page++;
+        }
+
+        $html = $this->render(
+            '@KingdomHallMain/Territory/List/s13Pdf.html.twig',
+            array(
+                'data' => $pdfData,
+            )
+        );
+
+        $mpdf = new \mPDF();
+        $mpdf->ignore_invalid_utf8 = true;
+        $mpdf->WriteHTML($html);
+        $pdf = $mpdf->Output($congregation->getName() . '_s13.pdf', 'I');
+
+        return new Response($pdf);
     }
 }

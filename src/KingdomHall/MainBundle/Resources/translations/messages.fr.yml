@@ -15,6 +15,7 @@ jwkh:
         yes: Oui
         no: Non
         print: Imprimer
+        download: Télécharger
 
     modal:
         confirmation:

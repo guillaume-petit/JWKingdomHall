@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Nespresso Registration Summary</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <style type="text/css">
+        h3 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .column {
+            width: 20%;
+        }
+
+        thead .column td:first-child {
+            width: 20%;
+        }
+
+        .history {
+            border: solid 1px;
+        }
+
+        .history .column {
+            width: 20%;
+            padding: 0;
+        }
+
+        .history td {
+            border: solid;
+            border-width: .3mm;
+        }
+
+        .name td {
+            text-align: center;
+            padding: 1px;
+        }
+
+        .dates td {
+            width: 50%
+        }
+
+    </style>
+
+</head>
+<body>
+    {% for page in data %}
+        <h3>{% trans %}jwkh.territories.s13.header{% endtrans %}</h3>
+        <table class="page">
+            <thead>
+            <tr>
+                {% for territory in page.header %}
+                    <td class="column">
+                        <table>
+                            <tr>
+                                <td>Terr:</td><td>{{ territory.name }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for territory in page.header %}
+                    <td class="column">
+                        <table>
+                            <tr>
+                                <td>N°</td><td>{{ territory.number }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody class="history">
+                {% for row in page.body %}
+                    <tr>
+                        {% for i in 0..4 %}
+                            <td class="column">
+                                <table>
+                                    <tr class="name">
+                                        <td colspan="2" class="name">{% if row[i] is defined %}{{ row[i].name }}{% else %}&nbsp;{% endif %}</td>
+                                    </tr>
+                                    <tr class="dates">
+                                        <td>{% if row[i] is defined %}{{ row[i].borrow|date(congregation_setting('date_format_twig')) }}{% else %}&nbsp;{% endif %}</td>
+                                        <td>{% if row[i] is defined %}{{ row[i].return|date(congregation_setting('date_format_twig')) }}{% else %}&nbsp;{% endif %}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if not loop.last %}<pagebreak />{% endif %}
+    {% endfor %}
+</body>
+</html>
