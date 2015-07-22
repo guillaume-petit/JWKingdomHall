@@ -14,7 +14,6 @@ use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Type;
-use KingdomHall\MainBundle\Form\Validator\Constraints as JWKHAssert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -29,7 +28,6 @@ use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
  * @ORM\Table(name="territory", uniqueConstraints={@UniqueConstraint(name="territory_idx", columns={"congregation_id", "type", "number"})})
  * @UniqueEntity(fields={"congregation", "type", "number"}, errorPath="number")
  * @Uploadable()
- * @JWKHAssert\TerritoryReturnDate()
  */
 class Territory {
 

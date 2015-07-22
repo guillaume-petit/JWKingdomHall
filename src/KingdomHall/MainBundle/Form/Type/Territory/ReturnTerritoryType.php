@@ -9,6 +9,7 @@
 namespace KingdomHall\MainBundle\Form\Type\Territory;
 
 
+use KingdomHall\MainBundle\Form\Validator\Constraints\TerritoryReturnDate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -47,7 +48,9 @@ class ReturnTerritoryType extends AbstractType {
         $constraints = array();
         if ($data && array_key_exists('worked', $data)) {
             if ($data['worked'] == 'yes') {
-                $constraints[] = new NotBlank();
+                $constraints = array (
+                    new NotBlank(),
+                );
             }
         }
         $form->add(
@@ -60,6 +63,7 @@ class ReturnTerritoryType extends AbstractType {
                     'class' => 'input-inline datepicker',
                 ),
                 'constraints' => $constraints,
+                'data' => null,
             )
         );
     }
@@ -69,6 +73,7 @@ class ReturnTerritoryType extends AbstractType {
         $resolver->setDefaults(
             array(
                 'data_class' => 'KingdomHall\DataBundle\Entity\Territory',
+                'constraints' => array (new TerritoryReturnDate()),
             )
         );
     }
