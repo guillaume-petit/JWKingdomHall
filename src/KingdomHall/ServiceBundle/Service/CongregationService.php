@@ -44,4 +44,9 @@ class CongregationService {
         );
     }
 
+    public function getFirst()
+    {
+        return $this->em->getRepository('KingdomHallDataBundle:Congregation')->findAll()[0];
+    }
+
 }

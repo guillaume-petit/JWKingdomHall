@@ -23,6 +23,15 @@ fos_user_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
+# Fallbacks
+kingdom_hall_fallback_home:
+    path: /{_locale}/{congregationCode}
+    defaults: { _controller: KingdomHallMainBundle:Home:index }
+
+kingdom_hall_fallback_locale:
+    path: /{_locale}
+    defaults: { _controller: KingdomHallMainBundle:Fallback:fallback }
+
 kingdom_hall_fallback:
     path:     /
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Home:index, congregationCode: '3277' }
+    defaults: { _controller: KingdomHallMainBundle:Fallback:fallback }

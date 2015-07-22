@@ -12,9 +12,10 @@
 
         <!-- Listeners -->
         <service id="kingdomhall.listener.congregation_converter" class="KingdomHall\ServiceBundle\Listener\CongregationConverter">
-            <tag name="request.param_converter" priority="100" />
+            <tag name="request.param_converter" priority="1" />
             <argument type="service" id="kingdomhall.service.congregation" />
         </service>
+
     </services>
 
 </container>

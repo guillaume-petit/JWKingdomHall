@@ -13,7 +13,7 @@ use KingdomHall\ServiceBundle\Service\CongregationService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class CongregationConverter
@@ -49,17 +49,17 @@ class CongregationConverter implements ParamConverterInterface {
     {
         $congregationCode = strtolower($request->attributes->get('congregationCode'));
 
-        if (!$congregationCode) {
-            throw new BadRequestHttpException('You must provide a congregation code in the url');
+
+        if ($congregationCode) {
+            $congregation = $this->congregationService->findByCode($congregationCode);
+
+            if ($congregation) {
+                $request->attributes->set($configuration->getName(), $congregation);
+            } else {
+                throw new NotFoundHttpException('Unknown congregation code: ' . $congregationCode);
+            }
         }
 
-        $congregation = $this->congregationService->findByCode($congregationCode);
-
-        if (!$congregation) {
-            throw new BadRequestHttpException('This congregation does not exist');
-        }
-
-        $request->attributes->set($configuration->getName(), $congregation);
     }
 
     /**
