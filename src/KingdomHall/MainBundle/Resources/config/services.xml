@@ -26,6 +26,16 @@
             <tag name="form.type" alias="kingdomhall_form_campaign" />
         </service>
 
+        <!-- Settings -->
+        <service id="kingdomhall.form.type.settings" class="KingdomHall\MainBundle\Form\Type\Settings\CongregationSettingsType">
+            <tag name="form.type" alias="kingdomhall_form_congregation_settings" />
+        </service>
+
+        <service id="kingdomhall.form.type.setting" class="KingdomHall\MainBundle\Form\Type\Settings\CongregationSettingType">
+            <tag name="form.type" alias="kingdomhall_form_congregation_setting" />
+        </service>
+
+        <!-- End of form types -->
 
         <!-- TWIG Extensions -->
         <service id="kingdomhall.twig.jwkh_extension" class="KingdomHall\MainBundle\Twig\JWKHExtension">

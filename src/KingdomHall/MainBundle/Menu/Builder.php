@@ -25,10 +25,16 @@ class Builder extends ContainerAware {
         $menu = $factory->createItem('navbar');
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
-        $menu->addChild('jwkh.territories.menu.territories', array(
+        $menu->addChild('jwkh.navbar.territories', array(
             'route' => 'kingdom_hall_territories_list',
             'routeParameters' => $this->container->get('request')->get('_route_params'),
-            'label' => 'jwkh.territories.menu.territories',
+            'label' => 'jwkh.navbar.territories',
+        ));
+
+        $menu->addChild('jwkh.navbar.settings', array(
+            'route' => 'kingdom_hall_settings',
+            'routeParameters' => $this->container->get('request')->get('_route_params'),
+            'label' => 'jwkh.navbar.settings',
         ));
 
         return $menu;

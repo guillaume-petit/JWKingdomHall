@@ -317,7 +317,12 @@ class Congregation {
         $setting = $this->getSettings()->get($code);
         if ($setting) {
             $value = $setting->getValue();
-            settype($value, $setting->getType());
+            $type = $setting->getType();
+            if ($type === 'array') {
+                $value = explode(',', $value);
+            } else {
+                settype($value, $type);
+            }
         }
         return $value;
     }

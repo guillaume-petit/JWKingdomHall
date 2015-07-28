@@ -27,7 +27,7 @@ jwkh:
 
     navbar:
         territories: Territoires
-        administration: Administration
+        settings: Paramètres
 
     home:
         welcome: JW Kingdom Hall
@@ -70,6 +70,7 @@ jwkh:
             map: Carte du territoire
             novisit: Personnes à ne pas visiter
             history: Historique
+            languages: Faire toutes les langues SAUF
         remove_confirmation:
             header: Confirmation
             message: Veux-tu vraiment supprimer les territoires sélectionnés ?
@@ -87,6 +88,9 @@ jwkh:
             header: Confirmation
             message: Veux-tu vraiment supprimer cette campagne ?
 
+    settings:
+        content_header: Paramètres
+
     entity:
         territory:
             entity: Territoire
@@ -100,6 +104,7 @@ jwkh:
             return_date: Rendu le
             map: Carte
             phone: Téléphone
+            excluded_languages: Langues à ne pas visiter
 
         territory_history:
             borrow_date: Emprunté le
@@ -119,3 +124,9 @@ jwkh:
             name: Nom
             start_date: Début
             end_date: Fin
+
+        setting:
+            date_format_twig: Format de date
+            territory_max_borrow_time: Période maximale pour l'emprunt d'un territoire
+            territory_warning_borrow_time: Période avant notification de retour de territoire
+            excluded_languages: Liste des langues à ne pas faire

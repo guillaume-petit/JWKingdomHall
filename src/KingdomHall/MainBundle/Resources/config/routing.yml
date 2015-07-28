@@ -62,6 +62,12 @@ kingdom_hall_campaigns_edit:
     path:     /{_locale}/{congregationCode}/campaigns/{campaignId}/edit
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/Campaign:edit }
 
+# Settings
+
+kingdom_hall_settings:
+    path:     /{_locale}/{congregationCode}/settings
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Settings:index }
+
 
 ##########
 # Modals #

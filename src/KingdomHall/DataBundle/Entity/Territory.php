@@ -161,6 +161,12 @@ class Territory {
     protected $status;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $excludedLanguages;
+
+    /**
      * @return UploadedFile
      */
     public function getMapFile()
@@ -569,5 +575,28 @@ class Territory {
             }
         }
         return $status;
+    }
+
+    /**
+     * Set excludedLanguages
+     *
+     * @param string $excludedLanguages
+     * @return Territory
+     */
+    public function setExcludedLanguages($excludedLanguages)
+    {
+        $this->excludedLanguages = $excludedLanguages;
+
+        return $this;
+    }
+
+    /**
+     * Get excludedLanguages
+     *
+     * @return string 
+     */
+    public function getExcludedLanguages()
+    {
+        return $this->excludedLanguages;
     }
 }

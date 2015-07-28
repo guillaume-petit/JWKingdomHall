@@ -9,14 +9,20 @@
 namespace KingdomHall\MainBundle\Form\Type\Territory;
 
 
+use KingdomHall\DataBundle\Entity\Territory;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TerritoryType extends AbstractType {
-
+class TerritoryType extends AbstractType
+{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var Territory $territory */
+        $territory = $options['data'];
+        $languages = explode(',', $territory->getCongregation()->getTypedSetting('excluded_languages'));
+
         $builder->add('type', 'choice', array(
             'expanded' => false,
             'multiple' => false,
@@ -31,6 +37,26 @@ class TerritoryType extends AbstractType {
         $builder->add('area', 'text', array('label' => 'jwkh.entity.territory.area',));
         $builder->add('mapFile', 'file', array('label' => 'jwkh.entity.territory.map',));
         $builder->add('phone', 'checkbox', array('label' => 'jwkh.entity.territory.phone',));
+        $builder
+            ->add('excludedLanguages', 'choice', array (
+                'expanded' => false,
+                'multiple' => true,
+                'choices'  => array_combine($languages, $languages),
+                'label'    => 'jwkh.entity.territory.excluded_languages',
+            ));
+        $builder
+            ->get('excludedLanguages')
+            ->addModelTransformer(new CallbackTransformer(
+
+                function ($languages) {
+                    $data = explode(',', $languages);
+                    return array_combine($data, $data);
+                },
+
+                function ($languages) {
+                    return implode(',', $languages);
+                }
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

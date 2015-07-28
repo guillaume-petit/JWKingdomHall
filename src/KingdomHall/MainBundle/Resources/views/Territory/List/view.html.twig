@@ -22,6 +22,16 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
+            {% trans %}jwkh.territories.view.languages{% endtrans %}
+        </div>
+        <div class="panel-body">
+            {% for language in territory.excludedLanguages|split(',') %}
+                <h4 style="display: inline-block;"><span class="label label-info">{{ language }}</span></h4>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
             {% trans %}jwkh.territories.view.novisit{% endtrans %}
         </div>
         <div class="panel-body">
