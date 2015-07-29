@@ -31,6 +31,12 @@ class Builder extends ContainerAware {
             'label' => 'jwkh.navbar.territories',
         ));
 
+        $menu->addChild('jwkh.navbar.publishers', array(
+            'route' => 'kingdom_hall_publishers_list',
+            'routeParameters' => $this->container->get('request')->get('_route_params'),
+            'label' => 'jwkh.navbar.publishers',
+        ));
+
         $menu->addChild('jwkh.navbar.settings', array(
             'route' => 'kingdom_hall_settings',
             'routeParameters' => $this->container->get('request')->get('_route_params'),

@@ -6789,3 +6789,6 @@ button.close {
   margin: -1px 0 0 -1px;
   padding: 0 2px 0 2px;
 }
+.fixed-table-body .card-view .title {
+  min-width: 40%;
+}

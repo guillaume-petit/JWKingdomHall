@@ -9,9 +9,9 @@
 
     {% block stylesheets %}
         {% stylesheets
-        '@KingdomHallMainBundle/Resources/public/css/jwkh.css'
         '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/bootstrap-table.min.css'
         '%kernel.root_dir%/../vendor/eternicode/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
+        '@KingdomHallMainBundle/Resources/public/css/jwkh.css'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}  
@@ -73,7 +73,7 @@
 <div class="container">
     <div class="row row-offcanvas row-offcanvas-left">
         {% block menu_left %}
-            <div class="col-xs-4 col-sm-2 sidebar-offcanvas menu-left" id="sidebar" role="navigation">
+            <div class="col-xs-12 col-md-2 sidebar-offcanvas menu-left" id="sidebar" role="navigation">
                 {% block menu_left_content %}
                     <ul class="nav nav-pills nav-stacked">
                     </ul>
@@ -82,20 +82,20 @@
         {% endblock menu_left %}
 
         {% block main_content %}
-            <div class="col-xs-14 col-sm-10 page">
+            <div class="col-xs-12 col-md-10 page">
                 <div class="page-header">
                     <h1>{% block content_header %}Page title{% endblock content_header %}</h1>
                 </div>
 
                 {% block content %}
                     <div class="row">
-                        <div class="page-content col-xs-14 col-sm-10">
+                        <div class="page-content col-xs-12 col-md-10">
                             {% block content_body %}
                             {% endblock content_body %}
                             {% block content_footer %}
                             {% endblock content_footer %}
                         </div>
-                        <div class="page-actions col-xs-4 col-sm-2">
+                        <div class="page-actions col-xs-6 col-md-2">
                             {% block content_right %}
                                 Right actions
                             {% endblock content_right %}

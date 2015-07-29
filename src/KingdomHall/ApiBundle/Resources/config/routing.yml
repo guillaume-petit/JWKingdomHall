@@ -8,3 +8,8 @@ kingdom_hall_api_campaigns:
     type: rest
     resource: KingdomHall\ApiBundle\Controller\CampaignController
 
+kingdom_hall_api_publishers:
+    prefix: /api
+    type: rest
+    resource: KingdomHall\ApiBundle\Controller\PublisherController
+

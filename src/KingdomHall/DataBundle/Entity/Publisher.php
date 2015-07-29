@@ -13,12 +13,14 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\Type;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Class Publisher
  * @package KingdomHall\DataBundle\Entity
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="KingdomHall\DataBundle\Repository\PublisherRepository")
  * @ORM\Table(name="publisher")
  */
 class Publisher {
@@ -54,7 +56,8 @@ class Publisher {
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email()
      */
     protected $email;
 
@@ -64,6 +67,12 @@ class Publisher {
      * @Type(name="string")
      */
     protected $fullName;
+
+    /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    protected $deleted = false;
 
     /**
      * @return string
@@ -163,7 +172,6 @@ class Publisher {
      */
     public function __construct()
     {
-        parent::__construct();
         $this->territories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -222,5 +230,28 @@ class Publisher {
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     * @return Publisher
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean 
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

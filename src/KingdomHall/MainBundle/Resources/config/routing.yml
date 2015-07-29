@@ -68,6 +68,16 @@ kingdom_hall_settings:
     path:     /{_locale}/{congregationCode}/settings
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Settings:index }
 
+# Publishers
+
+kingdom_hall_publishers_list:
+    path:     /{_locale}/{congregationCode}/publishers
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Publisher:list }
+
+kingdom_hall_publishers_edit:
+    path:     /{_locale}/{congregationCode}/publishers/{publisherId}/edit
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Publisher:edit, publisherId: 0 }
+
 
 ##########
 # Modals #

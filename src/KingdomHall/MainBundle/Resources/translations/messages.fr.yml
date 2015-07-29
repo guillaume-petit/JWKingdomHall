@@ -27,6 +27,7 @@ jwkh:
 
     navbar:
         territories: Territoires
+        publishers: Proclamateurs
         settings: Paramètres
 
     home:
@@ -91,6 +92,14 @@ jwkh:
     settings:
         content_header: Paramètres
 
+    publishers:
+        list:
+            content_header: Liste des proclamateurs
+        edit:
+            content_header: Modification
+            remove_confirmation:
+                messsage: Veux-tu vraiment supprimer les proclamateurs sélectionnés?
+
     entity:
         territory:
             entity: Territoire
@@ -117,8 +126,9 @@ jwkh:
 
         publisher:
             entity: Proclamateur
-            firstName: Prénom
-            lastName: Nom
+            first_name: Prénom
+            last_name: Nom
+            email: Email
 
         campaign:
             name: Nom

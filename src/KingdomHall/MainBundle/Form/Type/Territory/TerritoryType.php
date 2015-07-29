@@ -21,7 +21,7 @@ class TerritoryType extends AbstractType
     {
         /** @var Territory $territory */
         $territory = $options['data'];
-        $languages = explode(',', $territory->getCongregation()->getTypedSetting('excluded_languages'));
+        $languages = $territory->getCongregation()->getTypedSetting('excluded_languages');
 
         $builder->add('type', 'choice', array(
             'expanded' => false,

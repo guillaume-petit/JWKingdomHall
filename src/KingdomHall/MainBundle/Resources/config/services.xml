@@ -35,6 +35,11 @@
             <tag name="form.type" alias="kingdomhall_form_congregation_setting" />
         </service>
 
+        <!-- Publisher -->
+        <service id="kingdomhall.form.type.publisher" class="KingdomHall\MainBundle\Form\Type\Publisher\PublisherType">
+            <tag name="form.type" alias="kingdomhall_form_publisher" />
+        </service>
+
         <!-- End of form types -->
 
         <!-- TWIG Extensions -->

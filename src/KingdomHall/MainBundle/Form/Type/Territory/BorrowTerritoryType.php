@@ -9,6 +9,7 @@
 namespace KingdomHall\MainBundle\Form\Type\Territory;
 
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +24,11 @@ class BorrowTerritoryType extends AbstractType {
             'label' => 'jwkh.entity.publisher.entity',
             'expanded' => false,
             'multiple' => false,
-            'choice_label' => 'fullName',
+            'property' => 'fullName',
+            'query_builder' =>
+                function(EntityRepository $er) {
+                    return $er->createQueryBuilder('p')->where('p.deleted = false');
+                },
         ));
         $builder->add(
             'borrowDate',
