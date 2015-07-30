@@ -232,30 +232,37 @@ class ListController extends Controller
     }
 
     /**
-     * @param Request      $request
-     * @param Congregation $congregation
-     * @param Territory    $territory
+     * @param Request          $request
+     * @param Congregation     $congregation
+     * @param Territory        $territory
+     * @param TerritoryNoVisit $noVisit
      *
      * @ParamConverter(name="territory", class="KingdomHallDataBundle:Territory", options={"id" = "territoryId"})
+     * @ParamConverter(name="noVisit", isOptional=true, class="KingdomHallDataBundle:TerritoryNoVisit", options={"id" = "noVisitId"})
      *
      * @return array
      *
      * @Template()
      */
-    public function newNoVisitAction(Request $request, Congregation $congregation, Territory $territory)
+    public function editNoVisitAction(Request $request, Congregation $congregation, Territory $territory, TerritoryNoVisit $noVisit = null)
     {
-        $noVisit = new TerritoryNoVisit();
-        $noVisit->setTerritory($territory);
+        if (!$noVisit) {
+            $noVisit = new TerritoryNoVisit();
+            $noVisit->setTerritory($territory);
+        }
+
+        $id = $noVisit->getId();
 
         $form = $this->createForm(
             'kingdomhall_form_territory_no_visit',
             $noVisit,
             array(
                 'action' => $this->generateUrl(
-                    'kingdom_hall_territories_novisit_new',
+                    'kingdom_hall_territories_novisit_edit',
                     array (
                         'congregationCode' => $congregation->getCode(),
                         'territoryId' => $territory->getId(),
+                        'noVisitId' => $id ? $id : 0,
                     )
                 )
             )

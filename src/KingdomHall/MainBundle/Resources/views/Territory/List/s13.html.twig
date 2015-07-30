@@ -45,8 +45,8 @@
                             <div class="col-md-12 cell">{{ history.publisher.fullName }}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 cell">{{ history.borrowDate|date(congregation_setting('date_format_twig')) }}</div>
-                            <div class="col-md-6 cell">{{ history.returnDate|date(congregation_setting('date_format_twig')) }}</div>
+                            <div class="col-md-6 cell">{% if history.borrowDate %}{{ history.borrowDate|date(congregation_setting('date_format_twig')) }}{% else %}&nbsp;{% endif %}</div>
+                            <div class="col-md-6 cell">{% if history.returnDate %}{{ history.returnDate|date(congregation_setting('date_format_twig')) }}{% else %}&nbsp;{% endif %}</div>
                         </div>
                     </div>
                 {% endfor %}

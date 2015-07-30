@@ -64,7 +64,7 @@ class Territory {
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="KingdomHall\DataBundle\Entity\TerritoryHistory", mappedBy="territory", indexBy="id", cascade={"PERSIST", "REMOVE"})
-     * @ORM\OrderBy({"borrowDate" = "DESC"})
+     * @ORM\OrderBy({"borrowDate" = "ASC"})
      */
     protected $histories;
 

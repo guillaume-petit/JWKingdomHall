@@ -6788,6 +6788,7 @@ button.close {
   border-collapse: collapse;
   margin: -1px 0 0 -1px;
   padding: 0 2px 0 2px;
+  height: 45px;
 }
 .fixed-table-body .card-view .title {
   min-width: 40%;

@@ -98,7 +98,7 @@ jwkh:
         edit:
             content_header: Modification
             remove_confirmation:
-                messsage: Veux-tu vraiment supprimer les proclamateurs sélectionnés?
+                message: Veux-tu vraiment supprimer les proclamateurs sélectionnés?
 
     entity:
         territory:

@@ -39,6 +39,7 @@
         .name td {
             text-align: center;
             padding: 1px;
+            font-size: small;
         }
 
         .dates td {
@@ -87,7 +88,7 @@
                                     </tr>
                                     <tr class="dates">
                                         <td>{% if row[i] is defined %}{{ row[i].borrow|date(congregation_setting('date_format_twig')) }}{% else %}&nbsp;{% endif %}</td>
-                                        <td>{% if row[i] is defined %}{{ row[i].return|date(congregation_setting('date_format_twig')) }}{% else %}&nbsp;{% endif %}</td>
+                                        <td>{% if row[i] is defined and row[i].return %}{{ row[i].return|date(congregation_setting('date_format_twig')) }}{% else %}&nbsp;{% endif %}</td>
                                     </tr>
                                 </table>
                             </td>

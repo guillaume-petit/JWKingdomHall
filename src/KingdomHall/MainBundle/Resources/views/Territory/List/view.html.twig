@@ -39,6 +39,9 @@
                 <button type="button" class="btn btn-default" id="addNoVisitButton">
                     <i class="glyphicon glyphicon-plus"></i>
                 </button>
+                <button id="editNoVisitButton" type="button" class="btn btn-default">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </button>
                 <button type="button" class="btn btn-default" id="removeNoVisitButton">
                     <i class="glyphicon glyphicon-trash"></i>
                 </button>
@@ -49,10 +52,11 @@
                    data-striped="true"
                    data-toolbar="#territoryNoVisitToolbar"
                    data-mobile-responsive="true"
+                   data-select-item-name="selectedNoVisit"
                    data-click-to-select="true">
                 <thead>
                 <tr>
-                    <th data-checkbox="true"></th>
+                    <th data-radio="true"></th>
                     <th data-field="id" data-visible="false"></th>
                     <th>{% trans %}jwkh.entity.territory_no_visit.name{% endtrans %}</th>
                     <th>{% trans %}jwkh.entity.territory_no_visit.address{% endtrans %}</th>
@@ -151,9 +155,19 @@
             });
 
             $('#addNoVisitButton').on('click', function (e) {
-                modal.load('{{ path('kingdom_hall_territories_novisit_new', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                modal.load('{{ path('kingdom_hall_territories_novisit_edit', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
                     modal.modal();
                 });
+            });
+
+            $('#editNoVisitButton').on('click', function(e) {
+                var rows = $('#territoryNoVisitTable').bootstrapTable('getSelections');
+                if (rows.length > 0) {
+                    var id = rows[0].id;
+                    modal.load('{{ path('kingdom_hall_territories_novisit_edit', {'congregationCode': congregation.code, 'territoryId': territory.id, 'noVisitId': '{id}'}) }}'.replace('%7Bid%7D', id), function (data) {
+                        modal.modal();
+                    });
+                }
             });
 
             $('#removeNoVisitButton').on('click', function (e) {

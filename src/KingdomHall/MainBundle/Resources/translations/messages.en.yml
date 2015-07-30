@@ -1,21 +1,102 @@
 jwkh:
     common:
-        add: Ajouter
-        import: Importer
-        export: Exporter
-        save: Sauver
-        cancel: Annuler
+        add: Add
+        import: Import
+        export: Export
+        save: Save
+        cancel: Cancel
+        borrow: Borrow
+        return: Return
+        edit: Edit
+        back: Back
+        sending: Sending
+        confirm: Confirm
+        ok: OK
+        yes: Yes
+        no: No
+        print: Print
+        download: Download
+
+    modal:
+        confirmation:
+            content_header: Confirmation
+            content_body: Do you really want to do this?
+        info:
+            content_header: Information
+            content_body: Information.
+
     navbar:
-        territories: Territoires
-        administration: Administration
+        territories: Territories
+        publishers: Publishers
+        settings: Settings
+
+    home:
+        welcome: JW Kingdom Hall
+        header: Welcome to the JW Kingdom Hall application!
+        content: |
+            <p>The goal of this application is to provide some administrative tools to help the management of the
+            various services in the congregation.</p>
+            <p>From the top right menu, you can change the congregation or log out from the application.</p>
 
     territories:
         menu:
-            territories: Territoires
+            territories: Territories
+            campaigns: Campaigns
         list:
-            page_header: Liste des territoires
+            content_header: Territories list
+            s13: S-13
         new:
-            modal_title: Nouveau territoire
+            content_header: New territory
+        edit:
+            content_header: Modification
+        borrow:
+            content_header: Borrow
+            unavailable: >
+                This territory is not available for the moment. Either no campaign is planned or the territory has
+                already been worked.
+        return:
+            content_header: Return
+            worked: Has the territory been worked?
+            error:
+                return_date: The return date can not preceed the borrow date
+        novisit:
+            remove_confirmation:
+                message: Do you really want to remove these persons not to visit?
+            new:
+                content_header: New person not to visit
+        view:
+            phone: Territory by phone
+            map: Territory map
+            novisit: Persons not to visit
+            history: History
+            languages: All languages except
+        remove_confirmation:
+            header: Confirmation
+            message: Do you really want to remove the selected territories?
+        s13:
+            header: Relevé des attributions du territoire
+
+    campaigns:
+        list:
+            content_header: Liste des campagnes
+        new:
+            content_header: Nouvelle campagne
+        edit:
+            content_header: Modification
+        remove_confirmation:
+            header: Confirmation
+            message: Veux-tu vraiment supprimer cette campagne ?
+
+    settings:
+        content_header: Paramètres
+
+    publishers:
+        list:
+            content_header: Liste des proclamateurs
+        edit:
+            content_header: Modification
+            remove_confirmation:
+                message: Veux-tu vraiment supprimer les proclamateurs sélectionnés?
 
     entity:
         territory:
@@ -28,8 +109,32 @@ jwkh:
             area: Région
             borrow_date: Emprunté le
             return_date: Rendu le
+            map: Carte
+            phone: Téléphone
+            excluded_languages: Langues à ne pas visiter
+
+        territory_history:
+            borrow_date: Emprunté le
+            return_date: Rendu le
+
+        territory_no_visit:
+            name: Nom
+            address: Adresse
+            date: Date
 
         publisher:
             entity: Proclamateur
-            firstName: Prénom
-            lastName: Nom
+            first_name: Prénom
+            last_name: Nom
+            email: Email
+
+        campaign:
+            name: Nom
+            start_date: Début
+            end_date: Fin
+
+        setting:
+            date_format_twig: Format de date
+            territory_max_borrow_time: Période maximale pour l'emprunt d'un territoire
+            territory_warning_borrow_time: Période avant notification de retour de territoire
+            excluded_languages: Liste des langues à ne pas faire

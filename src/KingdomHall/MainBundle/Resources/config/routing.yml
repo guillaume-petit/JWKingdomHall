@@ -32,9 +32,9 @@ kingdom_hall_territories_return:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/return
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:return }
 
-kingdom_hall_territories_novisit_new:
-    path:     /{_locale}/{congregationCode}/territories/{territoryId}/novisit/new
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:newNoVisit }
+kingdom_hall_territories_novisit_edit:
+    path:     /{_locale}/{congregationCode}/territories/{territoryId}/novisit/{noVisitId}/edit
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:editNoVisit, noVisitId: 0 }
 
 kingdom_hall_territories_view:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/view
