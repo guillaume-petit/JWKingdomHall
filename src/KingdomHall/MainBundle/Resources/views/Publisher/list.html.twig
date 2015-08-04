@@ -9,6 +9,9 @@
         <button id="newPublisherButton" type="button" class="btn btn-default">
             <i class="glyphicon glyphicon-plus"></i>
         </button>
+        <button id="editPublisherButton" type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-edit"></i>
+        </button>
         <button id="removePublisherButton" type="button" class="btn btn-default">
             <i class="glyphicon glyphicon-trash"></i>
         </button>
@@ -25,10 +28,12 @@
            data-pagination="true"
            data-side-pagination="server"
            data-page-list="[10, 20, 40, 60]"
+           data-select-item-name="selectedPublisher"
+           data-click-to-select="true"
             >
         <thead>
         <tr>
-            <th data-field="state" data-checkbox="true"></th>
+            <th data-radio="true"></th>
             <th data-field="id" data-visible="false"></th>
             <th data-sortable="true" data-field="lastName">{% trans %}jwkh.entity.publisher.last_name{% endtrans %}</th>
             <th data-sortable="true" data-field="firstName">{% trans %}jwkh.entity.publisher.first_name{% endtrans %}</th>
@@ -41,10 +46,14 @@
         $(document).ready(function () {
             var modal = $('#pageModal');
 
-            $('#publisherListTable').on('click-row.bs.table', function (e, row, $element) {
-                modal.load('{{ path('kingdom_hall_publishers_edit', {'congregationCode': congregation.code, 'publisherId': '{publisherId}'}) }}'.replace('%7BpublisherId%7D', row.id), function (data) {
-                    modal.modal();
-                });
+            $('#editPublisherButton').on('click', function (e) {
+                var rows = $('#publisherListTable').bootstrapTable('getSelections');
+                if (rows.length > 0) {
+                    var id = rows[0].id;
+                    modal.load('{{ path('kingdom_hall_publishers_edit', {'congregationCode': congregation.code, 'publisherId': '{publisherId}'}) }}'.replace('%7BpublisherId%7D', id), function (data) {
+                        modal.modal();
+                    });
+                }
             });
 
             modal.on('hide.bs.modal', function (e) {

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content_right %}
-    <a href="{{ path('kingdom_hall_territories_list', {'congregationCode': congregation.code}) }}" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> {% trans %}jwkh.common.back{% endtrans %}</span></a>
+    <a href="{{ path('kingdom_hall_territories_list', {'congregationCode': congregation.code}) }}" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.back{% endtrans %}</span></span></a>
     <a href="{{ path('kingdom_hall_territories_s13_download', {'congregationCode': congregation.code}) }}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"> {% trans %}jwkh.common.download{% endtrans %}</span></a>
 {% endblock content_right %}
 

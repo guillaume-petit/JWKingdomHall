@@ -78,9 +78,8 @@ class Territory {
 
     /**
      * @var integer
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="string", nullable=false, length=50)
      * @Assert\NotBlank()
-     * @Assert\Type(type="integer", message="The value {{ value }} is not a valid {{ type }}.")
      */
     protected $number;
 

@@ -1,0 +1,1 @@
+update territory set map_name = concat(number,'.jpg');
