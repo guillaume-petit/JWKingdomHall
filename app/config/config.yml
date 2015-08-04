@@ -81,7 +81,7 @@ vich_uploader:
     mappings:
         territory_map:
             uri_prefix: /images/territory/map
-            upload_destination: %kernel.root_dir%/../web/images/territory/map
+            upload_destination: %kernel.root_dir%/../public_html/images/territory/map
             namer: vich_uploader.namer_uniqid
 
 # FOS User Configuration

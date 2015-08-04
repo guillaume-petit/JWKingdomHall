@@ -6764,8 +6764,63 @@ button.close {
     display: none !important;
   }
 }
+html,
+body,
+.container,
+.main-content {
+  height: 100%;
+}
+body {
+  overflow: hidden;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
 .btn-block {
   text-align: left;
+}
+@media (max-width: 767px) {
+  .page-actions {
+    z-index: 3;
+    position: fixed;
+    top: 9px;
+    right: 64px;
+  }
+  .page-actions .btn span .btn-text {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .page-actions {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 56px;
+  }
+  .page-actions .btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 4px;
+  }
+}
+@media (min-width: 768px) and (min-width: 992px) {
+  .page-actions {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+.page {
+  margin-top: 30px;
+  height: calc(100% - 56px);
+  overflow-y: auto;
+}
+.page-header {
+  margin-top: auto;
 }
 .s13 div {
   padding: 0;
@@ -6773,20 +6828,18 @@ button.close {
 .s13 .column {
   display: table;
   border-collapse: collapse;
-  border: solid 1px 0 0 1px;
 }
 .s13 .column > .row {
   width: 100%;
   display: table-row;
 }
 .s13 .column .row {
-  margin: 0;
+  margin: 0 1px 0 0;
 }
 .s13.body .cell {
   display: table-cell;
-  border: solid 1px;
+  border: 1px solid;
   border-collapse: collapse;
-  margin: -1px 0 0 -1px;
   padding: 0 2px 0 2px;
 }
 .fixed-table-body .card-view .title {

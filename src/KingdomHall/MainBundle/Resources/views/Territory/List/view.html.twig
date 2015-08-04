@@ -4,10 +4,6 @@
     {{ territory.number }} - {{ territory.name }} ({{ territory.area }})
 {% endblock content_header %}
 
-{% block menu_left_content %}
-    {{ knp_menu_render('KingdomHallMainBundle:Builder:territoriesMenu', {'depth': 1, 'ancestorClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_left.html.twig'}) }}
-{% endblock %}
-
 {% block content_body %}
     {% if territory.phone %}
         <p><span class="glyphicon glyphicon-phone-alt"> {% trans %}jwkh.territories.view.phone{% endtrans %}</span> </p>
@@ -111,12 +107,12 @@
 {% endblock content_body %}
 
 {% block content_right %}
-    <button type="button" class="btn btn-primary btn-block btn-back"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> {% trans %}jwkh.common.back{% endtrans %}</span></button>
-    <button type="button" class="btn btn-default btn-block" id="editTerritoryButton"><span class="glyphicon glyphicon-edit" aria-hidden="true"> {% trans %}jwkh.common.edit{% endtrans %}</span></button>
+    <button type="button" class="btn btn-primary btn-back"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.back{% endtrans %}</span></span></button>
+    <button type="button" class="btn btn-default" id="editTerritoryButton"><span class="glyphicon glyphicon-edit" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.edit{% endtrans %}</span></span></button>
     {% if territory.publisher %}
-        <button type="button" class="btn btn-default btn-block" id="returnTerritoryButton"><span class="glyphicon glyphicon-open-file" aria-hidden="true"> {% trans %}jwkh.common.return{% endtrans %}</span></button>
+        <button type="button" class="btn btn-default" id="returnTerritoryButton"><span class="glyphicon glyphicon-open-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.return{% endtrans %}</span></span></button>
     {% else %}
-        <button type="button" class="btn btn-default btn-block {% if not territory.available %}disabled{% endif %}" id="borrowTerritoryButton"><span class="glyphicon glyphicon-save-file" aria-hidden="true"> {% trans %}jwkh.common.borrow{% endtrans %}</span></button>
+        <button type="button" class="btn btn-default {% if not territory.available %}disabled{% endif %}" id="borrowTerritoryButton"><span class="glyphicon glyphicon-save-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.borrow{% endtrans %}</span></span></button>
     {% endif %}
 
     <script>

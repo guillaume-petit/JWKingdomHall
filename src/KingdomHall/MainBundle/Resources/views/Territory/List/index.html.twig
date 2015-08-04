@@ -4,10 +4,6 @@
     {% trans %}jwkh.territories.list.content_header{% endtrans %}
 {% endblock content_header %}
 
-{% block menu_left_content %}
-    {{ knp_menu_render('KingdomHallMainBundle:Builder:territoriesMenu', {'depth': 1, 'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_left.html.twig'}) }}
-{% endblock menu_left_content %}
-
 {% block content_body %}
     <ul class="nav nav-tabs">
         <li role="presentation" class="{% if type == 'standard' %}active{% endif %}"><a href="{{ path('kingdom_hall_territories_list', {'congregationCode': congregation.code, 'type': 'standard'}) }}">{% trans %}jwkh.entity.territory.standard{% endtrans %}</a></li>
@@ -102,8 +98,8 @@
 {% endblock content_body %}
 
 {% block content_right %}
-    <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code }) }}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-file" aria-hidden="true"> {% trans %}jwkh.territories.list.s13{% endtrans %}</span></a>
-    <a href="#" class="btn btn-default btn-block disabled"><span class="glyphicon glyphicon-import" aria-hidden="true"> {% trans %}jwkh.common.import{% endtrans %}</span></a>
-    <a href="#" class="btn btn-default btn-block disabled"><span class="glyphicon glyphicon-export" aria-hidden="true"> {% trans %}jwkh.common.export{% endtrans %}</span></a>
+    <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code }) }}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.territories.list.s13{% endtrans %}</span></span></a>
+    {#<a href="#" class="btn btn-default btn-block disabled"><span class="glyphicon glyphicon-import" aria-hidden="true"> {% trans %}jwkh.common.import{% endtrans %}</span></a>#}
+    {#<a href="#" class="btn btn-default btn-block disabled"><span class="glyphicon glyphicon-export" aria-hidden="true"> {% trans %}jwkh.common.export{% endtrans %}</span></a>#}
 {% endblock content_right %}
 

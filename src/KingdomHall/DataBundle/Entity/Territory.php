@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\MaxDepth;
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -106,6 +107,7 @@ class Territory {
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
+     * @SerializedName("borrowDate")
      */
     protected $borrowDate;
 
@@ -113,12 +115,14 @@ class Territory {
      * @var string
      * @Accessor(getter="getFormattedBorrowDate")
      * @Type(name="string")
+     * @SerializedName("formattedBorrowDate")
      */
     protected $formattedBorrowDate;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
+     * @SerializedName("returnDate")
      */
     protected $returnDate;
 
@@ -126,6 +130,7 @@ class Territory {
      * @var string
      * @Accessor(getter="getFormattedReturnDate")
      * @Type(name="string")
+     * @SerializedName("formattedReturnDate")
      */
     protected $formattedReturnDate;
 

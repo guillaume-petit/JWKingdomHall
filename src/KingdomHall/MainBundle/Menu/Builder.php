@@ -18,18 +18,64 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  *
  * @package KingdomHall\MainBundle\Menu
  */
-class Builder extends ContainerAware {
+class Builder extends ContainerAware
+{
+
+    public function territoriesMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('jwkh.navbar.territories.title');
+        $menu->setUri($this->container->get('request')->getRequestUri())
+            ->setExtra('activeParent', true)
+            ->setAttribute('class', 'nav navbar-nav navbar-left')
+            ->setChildrenAttribute('class', 'dropdown-menu');
+
+        $menu->addChild('jwkh.navbar.territories.list', array(
+            'route' => 'kingdom_hall_territories_list',
+            'routeParameters' => $this->container->get('request')->get('_route_params'),
+            'label' => 'jwkh.navbar.territories.list',
+        ));
+
+        $menu->addChild('jwkh.navbar.territories.campaigns', array(
+            'route' => 'kingdom_hall_campaigns_list',
+            'routeParameters' => $this->container->get('request')->get('_route_params'),
+            'label' => 'jwkh.navbar.territories.campaigns',
+        ));
+
+        return $menu;
+    }
+
+    public function publishersMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('jwkh.navbar.publishers', array(
+            'route' => 'kingdom_hall_publishers_list',
+            'routeParameters' => $this->container->get('request')->get('_route_params'),
+            'label' => 'jwkh.navbar.publishers',
+        ));
+
+        return $menu;
+    }
+
+    public function settingsMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('jwkh.navbar.settings', array(
+            'route' => 'kingdom_hall_settings',
+            'routeParameters' => $this->container->get('request')->get('_route_params'),
+            'label' => 'jwkh.navbar.settings',
+        ));
+
+        return $menu;
+    }
 
     public function navbarMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $factory->createItem('navbar');
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
-        $menu->addChild('jwkh.navbar.territories', array(
-            'route' => 'kingdom_hall_territories_list',
-            'routeParameters' => $this->container->get('request')->get('_route_params'),
+        $territories = $menu->addChild('jwkh.navbar.territories', array(
             'label' => 'jwkh.navbar.territories',
-        ));
+        ))
+            ->setExtra('active-parent', true)
+            ->setAttribute('class', 'nav navbar-nav')
+            ->setChildrenAttribute('class', 'dropdown-menu');
 
         $menu->addChild('jwkh.navbar.publishers', array(
             'route' => 'kingdom_hall_publishers_list',
@@ -92,24 +138,24 @@ class Builder extends ContainerAware {
      *
      * @return \Knp\Menu\ItemInterface
      */
-    public function territoriesMenu(FactoryInterface $factory, array $options)
-    {
-        $menu = $factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav nav-pills nav-stacked');
-
-        $menu->addChild('jwkh.territories.menu.territories', array(
-            'route' => 'kingdom_hall_territories_list',
-            'routeParameters' => $this->container->get('request')->get('_route_params'),
-            'label' => 'jwkh.territories.menu.territories',
-        ));
-
-        $menu->addChild('jwkh.territories.menu.campaigns', array(
-            'route' => 'kingdom_hall_campaigns_list',
-            'routeParameters' => $this->container->get('request')->get('_route_params'),
-            'label' => 'jwkh.territories.menu.campaigns',
-        ));
-
-        return $menu;
-    }
+//    public function territoriesMenu(FactoryInterface $factory, array $options)
+//    {
+//        $menu = $factory->createItem('root');
+//        $menu->setChildrenAttribute('class', 'nav nav-pills nav-stacked');
+//
+//        $menu->addChild('jwkh.territories.menu.territories', array(
+//            'route' => 'kingdom_hall_territories_list',
+//            'routeParameters' => $this->container->get('request')->get('_route_params'),
+//            'label' => 'jwkh.territories.menu.territories',
+//        ));
+//
+//        $menu->addChild('jwkh.territories.menu.campaigns', array(
+//            'route' => 'kingdom_hall_campaigns_list',
+//            'routeParameters' => $this->container->get('request')->get('_route_params'),
+//            'label' => 'jwkh.territories.menu.campaigns',
+//        ));
+//
+//        return $menu;
+//    }
 
 }

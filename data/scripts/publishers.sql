@@ -1,104 +1,103 @@
-insert into publisher (congregation_id, last_name, first_name) values
-(1, 'Al-Moussawi','Juliette'),
-(1, 'Audouin', 'Rosangela'),
-(1, 'Barraud', 'Ruth'),
-(1, 'Becker', 'Annette'),
-(1, 'Berguerand', 'Aurélien'),
-(1, 'Berguerand', 'Mélissa'),
-(1, 'Berguerand', 'Raymond'),
-(1, 'Berguerand', 'Rose-Marie'),
-(1, 'Bertholet', 'Nathalie'),
-(1, 'Beuret', 'Jimmy'),
-(1, 'Bomanski', 'Rosette'),
-(1, 'Bonazza', 'Alexandra'),
-(1, 'Borloz', 'Marianne'),
-(1, 'Boubala', 'Catriana'),
-(1, 'Brand', 'Christian'),
-(1, 'Brand', 'Daniel'),
-(1, 'Brand', 'Rösli'),
-(1, 'Buchilly', 'Renée'),
-(1, 'Chassot', 'Monique'),
-(1, 'Chollet', 'Carole'),
-(1, 'Chollet', 'Christian'),
-(1, 'Châtelain', 'Suzanne'),
-(1, 'Colatruglio', 'Laurent'),
-(1, 'Colatruglio', 'Mattéo'),
-(1, 'Croissant', 'Marie'),
-(1, 'D''Ascenzo', 'Michel'),
-(1, 'Devaud', 'Jonathan'),
-(1, 'Donzé', 'Rose-Marie'),
-(1, 'Duarte', 'Luis'),
-(1, 'Duarte', 'Vanessa'),
-(1, 'Ducommun', 'Monique'),
-(1, 'Ducraux', 'Esmeralda'),
-(1, 'El-Assad', 'Marguerite'),
-(1, 'Emonet', 'Philomène'),
-(1, 'Finelli', 'Rosetta'),
-(1, 'Genillard', 'Philippe'),
-(1, 'Gervasio', 'Michelina'),
-(1, 'Gosteli', 'Ernest'),
-(1, 'Graf', 'Caroline'),
-(1, 'Guillet', 'Martine'),
-(1, 'Hasni', 'Sandrine'),
-(1, 'Henry', 'Suzanne'),
-(1, 'Hufschmid', 'Liliane'),
-(1, 'Hufschmid', 'Marc'),
-(1, 'Hugi', 'Nelly'),
-(1, 'Jaccoud', 'Lydia'),
-(1, 'La Rosa', 'Antonino'),
-(1, 'La Rosa', 'Lucia'),
-(1, 'Lawson', 'Lucie'),
-(1, 'Longo', 'Monya'),
-(1, 'Martin', 'Gina'),
-(1, 'Martin', 'Jean'),
-(1, 'Martin', 'Nathan'),
-(1, 'Martin', 'Nelly'),
-(1, 'Mayor', 'Anke'),
-(1, 'Mayor', 'Maaike'),
-(1, 'Mayor', 'Philippe'),
-(1, 'Michael', 'Faostino'),
-(1, 'Michael', 'Regina'),
-(1, 'Oguey', 'Lila'),
-(1, 'Pale', 'Fabienne'),
-(1, 'Pasche', 'Lorena'),
-(1, 'Pasche', 'Mickaël'),
-(1, 'Peixe', 'Marcio'),
-(1, 'Peixe', 'Stéphanie'),
-(1, 'Perrenoud', 'Evelyne'),
-(1, 'Perrenoud', 'Guy'),
-(1, 'Perrenoud', 'Jelena'),
-(1, 'Perrenoud', 'Yves'),
-(1, 'Petit', 'Guillaume'),
-(1, 'Petit', 'Jacques'),
-(1, 'Petit', 'Michèle'),
-(1, 'Petit', 'Nicole'),
-(1, 'Pizio', 'Rita'),
-(1, 'Pizio', 'Sacha'),
-(1, 'Riccio', 'Angelo'),
-(1, 'Robert', 'Maria'),
-(1, 'Rossier', 'Andrée'),
-(1, 'Salvadore', 'Sonia'),
-(1, 'Scheidegger', 'Violette'),
-(1, 'Spack', 'Françoise'),
-(1, 'Storti', 'Elena'),
-(1, 'Storti', 'Ferdinando'),
-(1, 'Studer', 'Bénédicte'),
-(1, 'Studer', 'Emma'),
-(1, 'Tarin', 'François'),
-(1, 'Tarin', 'Valérie'),
-(1, 'Tufarolo', 'Lina'),
-(1, 'Vargas', 'Claudia'),
-(1, 'Vargas', 'Rocío'),
-(1, 'Vargas', 'Rodrigo'),
-(1, 'Westphal', 'Josette'),
-(1, 'Wirth', 'Marcel'),
-(1, 'Yang', 'Jun'),
-(1, 'Zabbeni', 'Luigi'),
-(1, 'Zabbeni', 'Marie-Jo'),
-(1, 'Zabbeni', 'Ophélie'),
-(1, 'Zeugin', 'Michel'),
-(1, 'Zeugin', 'Verena'),
-(1, 'Zucco', 'Aldo'),
-(1, 'Zumbach', 'Jacqueline'),
-(1, 'Zurkinden', 'Olivier'),
-(1, 'Zurkinden', 'Émilie');
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Juliette', 'Al-Moussawi', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Rosangela', 'Audouin', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Ruth', 'Barraud', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Annette', 'Becker', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Aurélien', 'Berguerand', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Mélissa', 'Berguerand', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Raymond', 'Berguerand', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Rose-Marie', 'Berguerand', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Nathalie', 'Bertholet', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Jimmy', 'Beuret', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Rosette', 'Bomanski', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Alexandra', 'Bonazza', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Marianne', 'Borloz', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Catriana', 'Boubala', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Christian', 'Brand', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Daniel', 'Brand', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Rösli', 'Brand', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Renée', 'Buchilly', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Monique', 'Chassot', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Carole', 'Chollet', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Christian', 'Chollet', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Suzanne', 'Châtelain', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Laurent', 'Colatruglio', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Mattéo', 'Colatruglio', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Marie', 'Croissant', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Michel', 'D''Ascenzo', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Jonathan', 'Devaud', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Rose-Marie', 'Donzé', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Luis', 'Duarte', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Vanessa', 'Duarte', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Monique', 'Ducommun', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Esmeralda', 'Ducraux', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Marguerite', 'El-Assad', '', 1 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Philomène', 'Emonet', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Rosetta', 'Finelli', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Philippe', 'Genillard', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Michelina', 'Gervasio', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Ernest', 'Gosteli', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Caroline', 'Graf', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Martine', 'Guillet', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Sandrine', 'Hasni', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Suzanne', 'Henry', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Liliane', 'Hufschmid', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Marc', 'Hufschmid', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Nelly', 'Hugi', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Lydia', 'Jaccoud', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Antonino', 'La Rosa', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Lucia', 'La Rosa', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Lucie', 'Lawson', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Monya', 'Longo', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Gina', 'Martin', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Jean', 'Martin', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Nathan', 'Martin', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Nelly', 'Martin', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Anke', 'Mayor', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Maaike', 'Mayor', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Philippe', 'Mayor', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Faostino', 'Michael', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Regina', 'Michael', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Lila', 'Oguey', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Fabienne', 'Pale', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Lorena', 'Pasche', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Mickaël', 'Pasche', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Marcio', 'Peixe', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Stéphanie', 'Peixe', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Evelyne', 'Perrenoud', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Guy', 'Perrenoud', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Jelena', 'Perrenoud', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Yves', 'Perrenoud', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Guillaume', 'Petit', 'guillaume.petit30@gmail.com', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Jacques', 'Petit', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Michèle', 'Petit', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Nicole', 'Petit', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Rita', 'Pizio', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Sacha', 'Pizio', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Angelo', 'Riccio', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Maria', 'Robert', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Andrée', 'Rossier', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Sonia', 'Salvadore', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Violette', 'Scheidegger', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Françoise', 'Spack', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Elena', 'Storti', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Ferdinando', 'Storti', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Bénédicte', 'Studer', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Emma', 'Studer', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'François', 'Tarin', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Valérie', 'Tarin', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Lina', 'Tufarolo', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Claudia', 'Vargas', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Rocío', 'Vargas', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Rodrigo', 'Vargas', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Josette', 'Westphal', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Marcel', 'Wirth', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Jun', 'Yang', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Luigi', 'Zabbeni', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Marie-Jo', 'Zabbeni', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Ophélie', 'Zabbeni', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Michel', 'Zeugin', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Verena', 'Zeugin', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Aldo', 'Zucco', '', 1 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Jacqueline', 'Zumbach', '', 0 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Olivier', 'Zurkinden', '', 1 from congregation where code = '3277';
+INSERT INTO publisher (congregation_id, first_name, last_name, email, deleted) select id, 'Émilie', 'Zurkinden', '', 1 from congregation where code = '3277';

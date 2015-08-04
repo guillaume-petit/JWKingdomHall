@@ -26,7 +26,10 @@ jwkh:
             content_body: Information.
 
     navbar:
-        territories: Territoires
+        territories:
+            title: Territoires
+            list: Liste
+            campaigns: Campagnes
         publishers: Proclamateurs
         settings: Paramètres
 
@@ -41,9 +44,6 @@ jwkh:
             actuellement ouverte concerne la gestion des territoires.</p>
 
     territories:
-        menu:
-            territories: Territoires
-            campaigns: Campagnes
         list:
             content_header: Liste des territoires
             s13: S-13

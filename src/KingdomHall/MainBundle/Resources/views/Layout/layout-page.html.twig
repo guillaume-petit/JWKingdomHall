@@ -55,7 +55,21 @@
                 <a class="navbar-brand" href="{{ path('kingdom_hall_homepage', {'congregationCode': congregation.code}) }}">JWKH</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                {{ knp_menu_render('KingdomHallMainBundle:Builder:navbarMenu', {'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_left.html.twig'}) }}
+                {{ knp_menu_render('KingdomHallMainBundle:Builder:territoriesMenu', {'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_top.html.twig'}) }}
+                <ul class="nav navbar-nav navbar-left">
+                    <li {% if 'kingdom_hall_publishers_list' == app.request.attributes.get('_route') %}class="active"{% endif %}>
+                        <a href="{{ path('kingdom_hall_publishers_list', app.request.attributes.get('_route_params')) }}">
+                            {% trans %}jwkh.navbar.publishers{% endtrans %}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-left">
+                    <li {% if 'kingdom_hall_settings' == app.request.attributes.get('_route') %}class="active"{% endif %}>
+                        <a href="{{ path('kingdom_hall_settings', app.request.attributes.get('_route_params')) }}">
+                            {% trans %}jwkh.navbar.settings{% endtrans %}
+                        </a>
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Guillaume Petit <span class="caret"></span></a>
@@ -70,18 +84,14 @@
     </div>
 {% endblock navbar %}
 
-<div class="container">
-    <div class="row row-offcanvas row-offcanvas-left">
-        {% block menu_left %}
-            <div class="col-xs-12 col-md-2 sidebar-offcanvas menu-left" id="sidebar" role="navigation">
-                {% block menu_left_content %}
-                    <ul class="nav nav-pills nav-stacked">
-                    </ul>
-                {% endblock menu_left_content %}
-            </div>
-        {% endblock menu_left %}
 
+<div class="container">
+    <div class="row row-offcanvas row-offcanvas-left main-content">
         {% block main_content %}
+            <div class="page-actions">
+                {% block content_right %}
+                {% endblock content_right %}
+            </div>
             <div class="col-xs-12 col-md-10 page">
                 <div class="page-header">
                     <h1>{% block content_header %}Page title{% endblock content_header %}</h1>
@@ -89,16 +99,11 @@
 
                 {% block content %}
                     <div class="row">
-                        <div class="page-content col-xs-12 col-md-10">
+                        <div class="page-content col-xs-12 col-md-12">
                             {% block content_body %}
                             {% endblock content_body %}
                             {% block content_footer %}
                             {% endblock content_footer %}
-                        </div>
-                        <div class="page-actions col-xs-6 col-md-2">
-                            {% block content_right %}
-                                Right actions
-                            {% endblock content_right %}
                         </div>
                     </div>
                 {% endblock content %}

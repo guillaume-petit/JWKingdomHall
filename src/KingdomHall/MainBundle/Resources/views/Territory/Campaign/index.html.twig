@@ -4,10 +4,6 @@
     {% trans %}jwkh.campaigns.list.content_header{% endtrans %}
 {% endblock content_header %}
 
-{% block menu_left_content %}
-    {{ knp_menu_render('KingdomHallMainBundle:Builder:territoriesMenu', {'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_left.html.twig'}) }}
-{% endblock menu_left_content %}
-
 {% block content_body %}
     <div id="campaignListToolbar" class="btn-group ">
         <button id="newCampaignButton" type="button" class="btn btn-default">

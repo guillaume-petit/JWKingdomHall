@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -45,12 +46,14 @@ class Publisher {
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @SerializedName("firstName")
      */
     protected $firstName;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @SerializedName("lastName")
      */
     protected $lastName;
 
@@ -65,6 +68,7 @@ class Publisher {
      * @var string
      * @Accessor(getter="getFullName")
      * @Type(name="string")
+     * @SerializedName("fullName")
      */
     protected $fullName;
 
