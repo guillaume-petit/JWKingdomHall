@@ -42,6 +42,21 @@ jwkh:
             <p>Le menu en haut à droite te permet de te déconnecter de l'application ou de changer de congrégation.</p>
             <p>Le menu en haut à gauche te permet de naviguer entre les différentes sections du site. La seule section
             actuellement ouverte concerne la gestion des territoires.</p>
+            <h3>Derniers changements</h3>
+            <h5>5 août 2015</h5>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Notifications automatiques par email</li>
+                    </ul>
+                </li>
+                <li>Corrections
+                    <ul>
+                        <li>Correction de la génération des fichiers pdf</li>
+                        <li>Correction des tris dans la liste des territoires</li>
+                    </ul>
+                </li>
+            </ul>
 
     territories:
         list:
@@ -77,6 +92,26 @@ jwkh:
             message: Veux-tu vraiment supprimer les territoires sélectionnés ?
         s13:
             header: Relevé des attributions du territoire
+        email:
+            warning:
+                subject: Territoire à rendre bientôt
+                body: |
+                    Chèr(e) %firstName%,
+
+                    Tu t'es engagé(e) à travailler le territoire %number%. La période d'emprunt arrivera à terme le %date%.
+
+                    En te remerciant pour ton travail,
+                    Le services des territoires.
+
+            danger:
+                subject: Territoire à rendre
+                body: |
+                    Chèr(e) %firstName%,
+
+                    Tu t'es engagé(e) à travailler le territoire numéro %number%. La période d'emprunt est arrivée à terme le %date%.
+
+                    En te remerciant pour ton travail,
+                    Le services des territoires.
 
     campaigns:
         list:
@@ -114,6 +149,7 @@ jwkh:
             map: Carte
             phone: Téléphone
             excluded_languages: Langues à ne pas visiter
+            notified: Notifié
 
         territory_history:
             borrow_date: Emprunté le

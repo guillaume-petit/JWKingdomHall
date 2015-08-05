@@ -17,11 +17,14 @@ class TerritoryRepository extends EntityRepository {
     public function searchTerritories($congregation, $type, $pagination, $sort, $search = '')
     {
         // Map date sorting
-        if ($sort['sort'] == 'formatted_borrow_date') {
-            $sort['sort'] = 'borrowDate';
-        }
-        if ($sort['sort'] == 'formatted_return_date') {
-            $sort['sort'] = 'returnDate';
+        if ($sort['sort'] == 'formattedBorrowDate') {
+            $sort['sort'] = 't.borrowDate';
+        } elseif ($sort['sort'] == 'formattedReturnDate') {
+            $sort['sort'] = 't.returnDate';
+        } elseif ($sort['sort'] == 'publisher.fullName') {
+            $sort['sort'] = 'p.lastName';
+        } else {
+            $sort['sort'] = 't.'.$sort['sort'];
         }
 
         $builder = $this->getEntityManager()->createQueryBuilder()
@@ -35,7 +38,7 @@ class TerritoryRepository extends EntityRepository {
 
         // Set order
         $builder
-            ->orderBy('t.'.$sort['sort'], $sort['order']);
+            ->orderBy($sort['sort'], $sort['order']);
 
         // Set pagination
         $builder->setMaxResults($pagination['limit'])
@@ -64,4 +67,5 @@ class TerritoryRepository extends EntityRepository {
 
         return $response;
     }
+
 }

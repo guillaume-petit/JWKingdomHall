@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new KingdomHall\ServiceBundle\KingdomHallServiceBundle(),
             new KingdomHall\ApiBundle\KingdomHallApiBundle(),
             new KingdomHall\UserBundle\KingdomHallUserBundle(),
+            new KingdomHall\TaskBundle\KingdomHallTaskBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

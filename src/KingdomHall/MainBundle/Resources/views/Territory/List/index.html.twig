@@ -39,8 +39,9 @@
                 <th data-sortable="true" data-field="name">{% trans %}jwkh.entity.territory.name{% endtrans %}</th>
                 <th data-sortable="true" data-field="area">{% trans %}jwkh.entity.territory.area{% endtrans %}</th>
                 <th data-sortable="true" data-field="formattedBorrowDate">{% trans %}jwkh.entity.territory.borrow_date{% endtrans %}</th>
-                <th data-sortable="false" data-field="publisher.fullName">{% trans %}jwkh.entity.publisher.last_name{% endtrans %}</th>
+                <th data-sortable="true" data-field="publisher.fullName">{% trans %}jwkh.entity.publisher.last_name{% endtrans %}</th>
                 <th data-sortable="true" data-field="formattedReturnDate">{% trans %}jwkh.entity.territory.return_date{% endtrans %}</th>
+                <th data-sortable="true" data-formatter="boolStyle" data-field="notified" data-align="center">{% trans %}jwkh.entity.territory.notified{% endtrans %}</th>
             </tr>
         </thead>
     </table>
@@ -92,6 +93,15 @@
             return {
                 classes: row.status
             };
+        }
+
+        function boolStyle(value, row, index) {
+            var icon = value == row.status ? "ok" : "remove";
+            if (row.status == "warning" || row.status == "danger") {
+                return "<span class=\"glyphicon glyphicon-" + icon + "\"></span>";
+            } else {
+                return "";
+            }
         }
 
     </script>

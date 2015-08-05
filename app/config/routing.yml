@@ -1,6 +1,12 @@
 kingdom_hall_api:
     resource: "@KingdomHallApiBundle/Resources/config/routing.yml"
 
+kingdom_hall_tasks:
+    resource: "@KingdomHallServiceBundle/Resources/config/routing.yml"
+
+kingdom_hall_cron:
+    resource: "@KingdomHallTaskBundle/Resources/config/routing.yml"
+
 kingdom_hall_main:
     resource: "@KingdomHallMainBundle/Resources/config/routing.yml"
 

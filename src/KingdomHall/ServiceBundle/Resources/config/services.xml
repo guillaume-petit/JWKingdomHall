@@ -10,10 +10,22 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
+        <service id="kingdomhall.service.mail" class="KingdomHall\ServiceBundle\Service\MailService">
+            <argument type="service" id="mailer" />
+        </service>
+
         <!-- Listeners -->
         <service id="kingdomhall.listener.congregation_converter" class="KingdomHall\ServiceBundle\Listener\CongregationConverter">
             <tag name="request.param_converter" priority="1" />
             <argument type="service" id="kingdomhall.service.congregation" />
+        </service>
+
+        <!-- Tasks -->
+        <service id="kingdomhall.task.notify_territory" class="KingdomHall\ServiceBundle\Tasks\NotifyTerritoryTask">
+            <tag name="kingdomhall.service.task" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="kingdomhall.service.mail" />
+            <argument type="service" id="translator.default" />
         </service>
 
     </services>

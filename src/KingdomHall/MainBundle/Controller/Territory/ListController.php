@@ -361,6 +361,8 @@ class ListController extends Controller
         $mpdf->WriteHTML($html);
         $pdf = $mpdf->Output($congregation->getName() . '_s13.pdf', 'I');
 
-        return new Response($pdf);
+        return new Response($pdf, 200, array (
+            'Content-Type' => 'application/pdf',
+        ));
     }
 }

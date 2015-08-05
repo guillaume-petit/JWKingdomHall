@@ -1,0 +1,3 @@
+kingdom_hall_cron_run:
+    path:     /cron/run
+    defaults: { _locale: en, _controller: KingdomHallTaskBundle:Cron:cron }
