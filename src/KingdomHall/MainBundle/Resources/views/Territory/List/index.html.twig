@@ -36,6 +36,7 @@
                 <th data-field="state" data-checkbox="true"></th>
                 <th data-field="id" data-visible="false"></th>
                 <th data-sortable="true" data-field="number">{% trans %}jwkh.entity.territory.number{% endtrans %}</th>
+                <th data-sortable="true" data-formatter="phoneStyle" data-field="phone" data-align="center"><span class="glyphicon glyphicon-phone-alt"></span></th>
                 <th data-sortable="true" data-field="name">{% trans %}jwkh.entity.territory.name{% endtrans %}</th>
                 <th data-sortable="true" data-field="area">{% trans %}jwkh.entity.territory.area{% endtrans %}</th>
                 <th data-sortable="true" data-field="formattedBorrowDate">{% trans %}jwkh.entity.territory.borrow_date{% endtrans %}</th>
@@ -104,12 +105,14 @@
             }
         }
 
+        function phoneStyle(value, row, index) {
+            return value ? "<span class=\"glyphicon glyphicon-phone-alt\"></span>" : "-";
+        }
+
     </script>
 {% endblock content_body %}
 
 {% block content_right %}
     <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code }) }}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.territories.list.s13{% endtrans %}</span></span></a>
-    {#<a href="#" class="btn btn-default btn-block disabled"><span class="glyphicon glyphicon-import" aria-hidden="true"> {% trans %}jwkh.common.import{% endtrans %}</span></a>#}
-    {#<a href="#" class="btn btn-default btn-block disabled"><span class="glyphicon glyphicon-export" aria-hidden="true"> {% trans %}jwkh.common.export{% endtrans %}</span></a>#}
 {% endblock content_right %}
 
