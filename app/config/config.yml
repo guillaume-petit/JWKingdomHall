@@ -89,3 +89,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: KingdomHall\UserBundle\Entity\User
+    registration:
+        form:
+            handler: kingdomhall.registration.form.handler

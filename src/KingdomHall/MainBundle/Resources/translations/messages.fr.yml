@@ -140,8 +140,20 @@ jwkh:
             content_header: Liste des proclamateurs
         edit:
             content_header: Modification
+            create_user_button: Créer utilisateur
+            delete_user_button: Supprimer utilisateur
             remove_confirmation:
                 message: Veux-tu vraiment supprimer les proclamateurs sélectionnés?
+        email:
+            welcome:
+                subject: Bienvenue sur le site JW Kingdom Hall
+                body: |
+                    Cher frère,
+
+                    Tu as été invité à t'inscrire sur le site JW Kingdom Hall. Cliques sur le lien suivant pour choisir un nom d'utilisateur et un mot de passe: %link%.
+
+                    Fraternellement,
+                    JW Kingdom Hall
 
     entity:
         territory:
@@ -173,6 +185,7 @@ jwkh:
             first_name: Prénom
             last_name: Nom
             email: Email
+            is_user: Utilisateur du site
 
         campaign:
             name: Nom
@@ -184,3 +197,7 @@ jwkh:
             territory_max_borrow_time: Période maximale pour l'emprunt d'un territoire
             territory_warning_borrow_time: Période avant notification de retour de territoire
             excluded_languages: Liste des langues à ne pas faire
+
+        user:
+            username: Nom d'utilisateur
+            password: Mot de passe

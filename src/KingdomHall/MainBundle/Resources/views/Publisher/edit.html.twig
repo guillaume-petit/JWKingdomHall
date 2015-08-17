@@ -6,10 +6,35 @@
 {% endblock content_header %}
 
 {% block content_body %}
-    {{ form(form) }}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {% for child in form.children %}
+        {% if child.vars.name == 'user' %}
+            {{ form_row(child.username) }}
+        {% else %}
+            {{ form_row(child) }}
+        {% endif %}
+    {% endfor %}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
 {% endblock content_body %}
 
 {% block content_footer %}
     <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}jwkh.common.cancel{% endtrans %}</button>
+    {% if form.vars.data is defined and form.vars.data.user %}
+        <button type="button" class="btn btn-primary action-remove">{% trans %}jwkh.publishers.edit.delete_user_button{% endtrans %}</button>
+    {% else %}
+        <button type="button" class="btn btn-primary action-create">{% trans %}jwkh.publishers.edit.create_user_button{% endtrans %}</button>
+    {% endif %}
     <button type="button" class="btn btn-primary action-save" data-loading-text="{% trans %}jwkh.common.sending{% endtrans %}...">{% trans %}jwkh.common.save{% endtrans %}</button>
+
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('.action-remove').on('click', function () {
+                $('button[name$="[action-remove]"]').click();
+            });
+            $('.action-create').on('click', function () {
+                $('button[name$="[action-create]"]').click();
+            });
+        });
+    </script>
 {% endblock content_footer %}

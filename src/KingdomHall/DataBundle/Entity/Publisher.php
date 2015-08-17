@@ -14,6 +14,7 @@ use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
+use KingdomHall\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -77,6 +78,13 @@ class Publisher {
      * @ORM\Column(type="boolean")
      */
     protected $deleted = false;
+
+    /**
+     * @var User
+     * @ORM\OneToOne(targetEntity="KingdomHall\UserBundle\Entity\User", mappedBy="publisher")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
 
     /**
      * @return string
@@ -257,5 +265,28 @@ class Publisher {
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \KingdomHall\UserBundle\Entity\User $user
+     * @return Publisher
+     */
+    public function setUser(\KingdomHall\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \KingdomHall\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
