@@ -1,6 +1,6 @@
 <?php
 
-namespace KingdomHall\MainBundle\Controller;
+namespace KingdomHall\MainBundle\Controller\Admin;
 
 
 use KingdomHall\DataBundle\Entity\Congregation;

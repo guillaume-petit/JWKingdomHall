@@ -18,6 +18,12 @@ use KingdomHall\DataBundle\Entity\Publisher;
  */
 class User extends FOSUser
 {
+    public static $ROLES = array (
+        'ROLE_USER' => 'ROLE_USER',
+        'ROLE_TERRITORY' => 'ROLE_TERRITORY',
+        'ROLE_ADMIN' => 'ROLE_ADMIN',
+    );
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

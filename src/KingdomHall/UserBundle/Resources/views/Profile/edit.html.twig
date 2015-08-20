@@ -2,20 +2,22 @@
 {% form_theme form '@KingdomHallMain/Form/fields.html.twig' %}
 
 {% block content_header %}
-    {% trans %}jwkh.publishers.edit.content_header{% endtrans %}
+    {% trans %}jwkh.admin.users.edit.content_header{% endtrans %}
 {% endblock content_header %}
 
 {% block content_body %}
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+<form action="{{ path('fos_user_profile_edit', {'userId': user.id}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit form-horizontal" novalidate="novalidate">
     {% for child in form.children %}
-        {% if child.vars.name == 'user' %}
-            {{ form_row(child.username) }}
+        {% if child.vars.name == 'roles' %}
+            {% for role in child.children %}
+                {{ form_row(role, {'label': child.vars.label}) }}
+            {% endfor %}
         {% else %}
             {{ form_row(child) }}
         {% endif %}
     {% endfor %}
     {{ form_rest(form) }}
-    {{ form_end(form) }}
+</form>
 {% endblock content_body %}
 
 {% block content_footer %}

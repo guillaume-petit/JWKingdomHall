@@ -11,6 +11,7 @@ namespace KingdomHall\DataBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 
 
@@ -57,6 +58,7 @@ class Campaign {
      * @var string
      * @Accessor(getter="getFormattedStartDate")
      * @Type(name="string")
+     * @SerializedName("formattedStartDate")
      */
     protected $formattedStartDate;
 
@@ -70,6 +72,7 @@ class Campaign {
      * @var string
      * @Accessor(getter="getFormattedEndDate")
      * @Type(name="string")
+     * @SerializedName("formattedEndDate")
      */
     protected $formattedEndDate;
 

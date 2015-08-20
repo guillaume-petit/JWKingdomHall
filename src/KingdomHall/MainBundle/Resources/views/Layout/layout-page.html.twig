@@ -56,25 +56,24 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 {{ knp_menu_render('KingdomHallMainBundle:Builder:territoriesMenu', {'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_top.html.twig'}) }}
-                <ul class="nav navbar-nav navbar-left">
-                    <li {% if 'kingdom_hall_publishers_list' == app.request.attributes.get('_route') %}class="active"{% endif %}>
-                        <a href="{{ path('kingdom_hall_publishers_list', app.request.attributes.get('_route_params')) }}">
-                            {% trans %}jwkh.navbar.publishers{% endtrans %}
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-left">
-                    <li {% if 'kingdom_hall_settings' == app.request.attributes.get('_route') %}class="active"{% endif %}>
-                        <a href="{{ path('kingdom_hall_settings', app.request.attributes.get('_route_params')) }}">
-                            {% trans %}jwkh.navbar.settings{% endtrans %}
-                        </a>
-                    </li>
-                </ul>
+                {% if is_granted('ROLE_TERRITORY') %}
+                    <ul class="nav navbar-nav navbar-left">
+                        <li {% if 'kingdom_hall_publishers_list' == app.request.attributes.get('_route') %}class="active"{% endif %}>
+                            <a href="{{ path('kingdom_hall_publishers_list', app.request.attributes.get('_route_params')) }}">
+                                {% trans %}jwkh.navbar.publishers{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    {{ knp_menu_render('KingdomHallMainBundle:Builder:adminMenu', {'currentClass': 'active', 'template': 'KingdomHallMainBundle:Menu:knp_menu_top.html.twig'}) }}
+                {% endif %}
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username|capitalize }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                            <li><a href="#" id="profileLink">{% trans %}jwkh.navbar.user.profile{% endtrans %}</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">{% trans %}jwkh.navbar.user.logout{% endtrans %}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -114,6 +113,8 @@
 <div id="pageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-label"></div>
 <script>
     $(document).ready(function () {
+        var modal = $('#pageModal');
+
         $('.modal').on('shown.bs.modal', function (e) {
             var modal = this;
             $('.modal-footer .action-save', modal).on('click', function (data) {
@@ -148,6 +149,12 @@
         $('.bs-checkbox').on('click', function (e) {
             e.preventDefault();
             $('input', this).prop('checked', true);
+        });
+
+        $('#profileLink').on('click', function (e) {
+            modal.load('{{ path('fos_user_profile_edit', {'userId': app.user.id}) }}', function (data) {
+                modal.modal();
+            });
         });
 
         initDatepicker();

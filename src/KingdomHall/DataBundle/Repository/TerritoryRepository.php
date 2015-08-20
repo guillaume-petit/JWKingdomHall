@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gpetit
- * Date: 7/14/15
- * Time: 9:37 AM
- */
 
 namespace KingdomHall\DataBundle\Repository;
-
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;

@@ -31,7 +31,13 @@ jwkh:
             list: Liste
             campaigns: Campagnes
         publishers: Proclamateurs
-        settings: Paramètres
+        admin:
+            title: Administration
+            settings: Paramètres
+            users: Utilisateurs
+        user:
+            profile: Mon profil
+            logout: Déconnexion
 
     home:
         welcome: JW Kingdom Hall
@@ -43,6 +49,16 @@ jwkh:
             <p>Le menu en haut à gauche te permet de naviguer entre les différentes sections du site. La seule section
             actuellement ouverte concerne la gestion des territoires.</p>
             <h3>Derniers changements</h3>
+            <h4>20 août 2015</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Gestion des utilisateurs.</li>
+                        <li>Ajout d'un menu d'administration</li>
+                        <li>Ajout d'une page "profil" accessible depuis le bouton "utilisateur" en haut à droite</li>
+                    </ul>
+                </li>
+            </ul>
             <h4>10 août 2015</h4>
             <ul>
                 <li>Nouveautés
@@ -132,8 +148,16 @@ jwkh:
             header: Confirmation
             message: Veux-tu vraiment supprimer cette campagne ?
 
-    settings:
-        content_header: Paramètres
+    admin:
+        settings:
+            content_header: Paramètres
+        users:
+            list:
+                content_header: Utilisateurs
+                remove_confirmation:
+                    message: Veux-tu vraiment supprimer cet utilisateur ?
+            edit:
+                content_header: Modification
 
     publishers:
         list:
@@ -201,3 +225,4 @@ jwkh:
         user:
             username: Nom d'utilisateur
             password: Mot de passe
+            roles: Rôles

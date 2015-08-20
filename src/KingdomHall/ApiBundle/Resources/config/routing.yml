@@ -13,3 +13,8 @@ kingdom_hall_api_publishers:
     type: rest
     resource: KingdomHall\ApiBundle\Controller\PublisherController
 
+kingdom_hall_api_users:
+    prefix: /api
+    type: rest
+    resource: KingdomHall\ApiBundle\Controller\UserController
+

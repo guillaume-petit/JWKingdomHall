@@ -109,7 +109,9 @@
 
 {% block content_right %}
     <button type="button" class="btn btn-primary btn-back"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.back{% endtrans %}</span></span></button>
-    <button type="button" class="btn btn-default" id="editTerritoryButton"><span class="glyphicon glyphicon-edit" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.edit{% endtrans %}</span></span></button>
+    {% if is_granted('ROLE_TERRITORY') %}
+        <button type="button" class="btn btn-default" id="editTerritoryButton"><span class="glyphicon glyphicon-edit" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.edit{% endtrans %}</span></span></button>
+    {% endif %}
     {% if territory.publisher %}
         <button type="button" class="btn btn-default" id="returnTerritoryButton"><span class="glyphicon glyphicon-open-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.return{% endtrans %}</span></span></button>
     {% else %}

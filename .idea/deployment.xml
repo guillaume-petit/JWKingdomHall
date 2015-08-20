@@ -18,6 +18,22 @@
           </excludedPaths>
         </serverdata>
       </paths>
+      <paths name="OVH">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/app/cache" />
+            <excludedPath local="true" path="$PROJECT_DIR$/app/logs" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bin" />
+            <excludedPath local="true" path="$PROJECT_DIR$/components" />
+            <excludedPath local="true" path="$PROJECT_DIR$/data" />
+            <excludedPath local="true" path="$PROJECT_DIR$/composer.json" />
+            <excludedPath local="true" path="$PROJECT_DIR$/composer.lock" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
     </serverData>
   </component>
 </project>

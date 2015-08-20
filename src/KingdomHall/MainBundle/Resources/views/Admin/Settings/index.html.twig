@@ -1,0 +1,41 @@
+{% extends 'KingdomHallMainBundle:Layout:layout-page.html.twig' %}
+
+{% block content_header %}
+    {% trans %}jwkh.admin.settings.content_header{% endtrans %}
+{% endblock content_header %}
+
+{% block content_body %}
+    {{ form_start(form) }}
+    <table class="table">
+        <thead>
+            <tr><th>Code</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+            {% for setting in form.settings %}
+                <div class="form-group">
+                    <tr>
+                        {% for child  in setting.children %}
+                            <td>
+                                {{ form_label(child) }}
+                            </td>
+                            <td>
+                                {{ form_widget(child, {'attr': {'class': 'form-control'}}) }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </div>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ form_end(form) }}
+{% endblock content_body %}
+
+{% block content_right %}
+    <button type="button" class="btn btn-primary btn-block action-confirm"><span class="glyphicon glyphicon-save"><span class="btn-text"> {% trans %}jwkh.common.save{% endtrans %}</span></span></button>
+
+    <script type="application/javascript">
+        $('.action-confirm').on('click', function () {
+            $('form').submit();
+        });
+    </script>
+{% endblock content_right %}

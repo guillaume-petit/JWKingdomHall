@@ -62,11 +62,21 @@ kingdom_hall_campaigns_edit:
     path:     /{_locale}/{congregationCode}/campaigns/{campaignId}/edit
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/Campaign:edit }
 
-# Settings
+# Admin
 
+# Settings
 kingdom_hall_settings:
     path:     /{_locale}/{congregationCode}/settings
-    defaults: { _locale: en, _controller: KingdomHallMainBundle:Settings:index }
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Admin/Settings:index }
+
+# Users
+kingdom_hall_users_list:
+    path:     /{_locale}/{congregationCode}/users
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Admin/User:list }
+
+kingdom_hall_users_edit:
+    path:     /{_locale}/{congregationCode}/users/{userId}/edit
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Admin/User:edit, userId: 0 }
 
 # Publishers
 

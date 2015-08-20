@@ -81,7 +81,7 @@ vich_uploader:
     mappings:
         territory_map:
             uri_prefix: /images/territory/map
-            upload_destination: %kernel.root_dir%/../public_html/images/territory/map
+            upload_destination: %kernel.root_dir%/../www/images/territory/map
             namer: vich_uploader.namer_uniqid
 
 # FOS User Configuration
@@ -89,6 +89,10 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: KingdomHall\UserBundle\Entity\User
-    registration:
+
+    service:
+        user_manager: kingdomhall.user_manager
+
+    profile:
         form:
-            handler: kingdomhall.registration.form.handler
+            type: kingdomhall_user_profile

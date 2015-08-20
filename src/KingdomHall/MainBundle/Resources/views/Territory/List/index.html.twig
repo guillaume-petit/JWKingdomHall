@@ -10,12 +10,14 @@
         <li role="presentation" class="{% if type == 'campaign' %}active{% endif %}"><a href="{{ path('kingdom_hall_territories_list', {'congregationCode': congregation.code, 'type': 'campaign'}) }}">{% trans %}jwkh.entity.territory.campaign{% endtrans %}</a></li>
     </ul>
     <div id="territoryListToolbar" class="btn-group ">
-        <button id="newTerritoryButton" type="button" class="btn btn-default">
-            <i class="glyphicon glyphicon-plus"></i>
-        </button>
-        <button id="removeTerritoryButton" type="button" class="btn btn-default">
-            <i class="glyphicon glyphicon-trash"></i>
-        </button>
+        {% if is_granted('ROLE_TERRITORY') %}
+            <button id="newTerritoryButton" type="button" class="btn btn-default">
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
+            <button id="removeTerritoryButton" type="button" class="btn btn-default">
+                <i class="glyphicon glyphicon-trash"></i>
+            </button>
+        {% endif %}
     </div>
     <table id="territoryListTable"
            data-toggle="table"
@@ -113,6 +115,8 @@
 {% endblock content_body %}
 
 {% block content_right %}
-    <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code }) }}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.territories.list.s13{% endtrans %}</span></span></a>
+    {% if is_granted('ROLE_TERRITORY') %}
+        <a href="{{ path('kingdom_hall_territories_s13', {'congregationCode': congregation.code }) }}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.territories.list.s13{% endtrans %}</span></span></a>
+    {% endif %}
 {% endblock content_right %}
 

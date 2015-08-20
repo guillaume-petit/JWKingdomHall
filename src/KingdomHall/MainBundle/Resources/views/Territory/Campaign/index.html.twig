@@ -6,15 +6,17 @@
 
 {% block content_body %}
     <div id="campaignListToolbar" class="btn-group ">
-        <button id="newCampaignButton" type="button" class="btn btn-default">
-            <i class="glyphicon glyphicon-plus"></i>
-        </button>
-        <button id="editCampaignButton" type="button" class="btn btn-default">
-            <i class="glyphicon glyphicon-edit"></i>
-        </button>
-        <button id="removeCampaignButton" type="button" class="btn btn-default">
-            <i class="glyphicon glyphicon-trash"></i>
-        </button>
+        {% if is_granted('ROLE_TERRITORY') %}
+            <button id="newCampaignButton" type="button" class="btn btn-default">
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
+            <button id="editCampaignButton" type="button" class="btn btn-default">
+                <i class="glyphicon glyphicon-edit"></i>
+            </button>
+            <button id="removeCampaignButton" type="button" class="btn btn-default">
+                <i class="glyphicon glyphicon-trash"></i>
+            </button>
+        {% endif %}
     </div>
     <table id="campaignListTable"
            data-toggle="table"

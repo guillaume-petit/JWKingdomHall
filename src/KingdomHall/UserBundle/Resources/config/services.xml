@@ -14,17 +14,18 @@
         </service>
 
         <!-- Form types -->
-        <service id="kingdomhall.form.type.user_light" class="KingdomHall\UserBundle\Form\Type\UserProfileLightType">
-            <tag name="form.type" alias="user_profile_light" />
+        <service id="kingdomhall.form.type.profile" class="KingdomHall\UserBundle\Form\Type\ProfileFormType">
+            <tag name="form.type" alias="kingdomhall_user_profile" />
+            <argument type="service" id="security.authorization_checker" />
         </service>
 
-        <!-- Form handlers -->
-        <service id="kingdomhall.registration.form.handler" class="KingdomHall\UserBundle\Form\Handler\RegistrationFormHandler" scope="request" public="false">
-            <argument type="service" id="fos_user.registration.form" />
-            <argument type="service" id="request" />
-            <argument type="service" id="fos_user.user_manager" />
-            <argument type="service" id="fos_user.mailer" />
-            <argument type="service" id="fos_user.util.token_generator" />
+        <!-- Repository -->
+        <service id="kingdomhall.user_manager" class="KingdomHall\UserBundle\Repository\UserManager">
+            <argument type="service" id="security.encoder_factory" />
+            <argument type="service" id="fos_user.util.username_canonicalizer" />
+            <argument type="service" id="fos_user.util.email_canonicalizer" />
+            <argument type="service" id="fos_user.entity_manager" />
+            <argument>%fos_user.model.user.class%</argument>
         </service>
 
     </services>
