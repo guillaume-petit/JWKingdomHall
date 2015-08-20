@@ -31,6 +31,7 @@
             <excludedPath local="true" path="$PROJECT_DIR$/data" />
             <excludedPath local="true" path="$PROJECT_DIR$/composer.json" />
             <excludedPath local="true" path="$PROJECT_DIR$/composer.lock" />
+            <excludedPath local="true" path="$PROJECT_DIR$/app/config/parameters.yml" />
           </excludedPaths>
         </serverdata>
       </paths>

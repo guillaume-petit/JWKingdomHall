@@ -17,6 +17,7 @@ class ProfileController extends FOSProfileController
             $user = $this->container->get('doctrine.orm.entity_manager')->getRepository('KingdomHallUserBundle:User')->find($userId);
         } else {
             $user = $this->container->get('kingdomhall.user_manager')->createUser();
+            $user->setEnabled(true);
         }
 
         $form = $this->container->get('fos_user.profile.form');

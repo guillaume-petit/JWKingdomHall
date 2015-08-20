@@ -11,9 +11,19 @@ namespace KingdomHall\UserBundle\Repository;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use FOS\UserBundle\Model\UserInterface;
+use KingdomHall\UserBundle\Entity\User;
 
 class UserManager extends \FOS\UserBundle\Doctrine\UserManager
 {
+    public function updateCanonicalFields(UserInterface $user)
+    {
+        parent::updateCanonicalFields($user);
+        if ($user instanceof User) {
+            $user->getPublisher()->setEmail($user->getEmailCanonical());
+        }
+    }
+
 
     public function searchUser($pagination, $sort, $search)
     {

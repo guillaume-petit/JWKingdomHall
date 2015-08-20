@@ -67,6 +67,10 @@ class PublisherController extends Controller {
 
         if ($form->isValid()) {
             $manager = $this->getDoctrine()->getEntityManager();
+            if ($publisher->getUser()) {
+                $publisher->getUser()->setEmail($publisher->getEmail());
+                $this->get('kingdomhall.user_manager')->updateUser($publisher->getUser());
+            }
             $manager->persist($publisher);
             $manager->flush();
         }
