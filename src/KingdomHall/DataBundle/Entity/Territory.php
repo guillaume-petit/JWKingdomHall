@@ -29,6 +29,7 @@ use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
  * @ORM\Table(name="territory", uniqueConstraints={@UniqueConstraint(name="territory_idx", columns={"congregation_id", "type", "number"})})
  * @UniqueEntity(fields={"congregation", "type", "number"}, errorPath="number")
  * @Uploadable()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Territory {
 
@@ -174,7 +175,13 @@ class Territory {
      * @var string
      * @ORM\Column(type="string", length=15)
      */
-    protected $notified;
+    protected $notified = false;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    protected $workload = 0;
 
     /**
      * @return UploadedFile
@@ -631,5 +638,42 @@ class Territory {
     public function getNotified()
     {
         return $this->notified;
+    }
+
+    /**
+     * Update the update date on every save
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     *
+     * @return void
+     */
+    public function updateUpdateDate()
+    {
+        $this->setUpdatedAt(new \DateTime());
+    }
+
+
+    /**
+     * Set workload
+     *
+     * @param integer $workload
+     * @return Territory
+     */
+    public function setWorkload($workload)
+    {
+        $this->workload = $workload;
+
+        return $this;
+    }
+
+    /**
+     * Get workload
+     *
+     * @return integer 
+     */
+    public function getWorkload()
+    {
+        return $this->workload;
     }
 }

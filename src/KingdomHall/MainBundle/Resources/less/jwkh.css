@@ -6782,6 +6782,9 @@ body {
 .btn-block {
   text-align: left;
 }
+.icon {
+  height: 14px;
+}
 @media (max-width: 767px) {
   .page-actions {
     z-index: 3;

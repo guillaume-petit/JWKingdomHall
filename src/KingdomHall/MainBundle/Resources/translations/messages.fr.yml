@@ -111,6 +111,7 @@ jwkh:
             novisit: Personnes à ne pas visiter
             history: Historique
             languages: Faire toutes les langues SAUF
+            workload: "{0} Charge de travail inconnue|{1} %number% proclamateur pour 2 heures|]1,Inf[ %number% proclamateurs pour 2 heures"
         remove_confirmation:
             header: Confirmation
             message: Veux-tu vraiment supprimer les territoires sélectionnés ?
@@ -194,6 +195,7 @@ jwkh:
             phone: Téléphone
             excluded_languages: Langues à ne pas visiter
             notified: Notifié
+            workload: Charge de travail
 
         territory_history:
             borrow_date: Emprunté le

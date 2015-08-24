@@ -27,7 +27,7 @@ class BorrowTerritoryType extends AbstractType {
             'property' => 'fullName',
             'query_builder' =>
                 function(EntityRepository $er) {
-                    return $er->createQueryBuilder('p')->where('p.deleted = false');
+                    return $er->createQueryBuilder('p')->where('p.deleted = false')->orderBy('p.lastName');
                 },
         ));
         $builder->add(

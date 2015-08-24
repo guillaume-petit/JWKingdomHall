@@ -3,6 +3,8 @@
 namespace KingdomHall\ServiceBundle\Service;
 
 
+use KingdomHall\TaskBundle\Exception\TaskException;
+
 class MailService
 {
 
@@ -22,6 +24,7 @@ class MailService
      * @param string $from
      * @param string $to
      * @param string $body
+     * @throws TaskException
      */
     public function sendMail($subject, $from, $to, $body)
     {
@@ -31,6 +34,10 @@ class MailService
             ->setTo($to)
             ->setBody($body);
 
-        $this->mailer->send($message);
+        $sent = $this->mailer->send($message, $failedRecipients);
+        if ($failedRecipients) {
+            throw new TaskException('Failed to send message to the following recipients: ' . print_r($failedRecipients));
+        }
+        error_log('Message sent to ' . $sent . ' recipients');
     }
 }
