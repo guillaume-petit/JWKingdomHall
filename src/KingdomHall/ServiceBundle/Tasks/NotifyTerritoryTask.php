@@ -52,13 +52,15 @@ class NotifyTerritoryTask extends TaskService
             if ($territory->getPublisher()->getEmail() && $territory->getNotified() != $territory->getStatus()) {
 
                 $settings = $territory->getCongregation()->getSettings();
-                $alertDate = new \DateTime();
-                $alertDate->add(\DateInterval::createFromDateString('-'.$settings->get('territory_max_borrow_time')->getValue()));
+                $alertDate = clone $territory->getBorrowDate();
+                $alertDate->add(\DateInterval::createFromDateString('+'.$settings->get('territory_max_borrow_time')->getValue()));
 
                 $this->mailer->sendMail(
                     $this->translator->trans(
                         'jwkh.territories.email.'.$territory->getStatus().'.subject',
-                        array (),
+                        array (
+                            '%number%'    => $territory->getNumber() . ' - ' . $territory->getName(),
+                        ),
                         null,
                         $territory->getCongregation()->getDefaultLocale()
                     ),

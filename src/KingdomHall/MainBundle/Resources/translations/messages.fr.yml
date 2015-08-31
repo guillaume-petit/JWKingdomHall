@@ -48,7 +48,23 @@ jwkh:
             <p>Le menu en haut à droite te permet de te déconnecter de l'application ou de changer de congrégation.</p>
             <p>Le menu en haut à gauche te permet de naviguer entre les différentes sections du site. La seule section
             actuellement ouverte concerne la gestion des territoires.</p>
+        territory:
+            stats: |
+                Il y a actuellement<br />
+                <ul>
+                    <li>%borrowed% territoires empruntés</li>
+                    <li class="text-danger">%late% territoires en retard</li>
+                </ul>
+        changelog: |
             <h3>Derniers changements</h3>
+            <h4>24 août 2015</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Ajout de la charge de travail sur un territoire</li>
+                    </ul>
+                </li>
+            </ul>
             <h4>20 août 2015</h4>
             <ul>
                 <li>Nouveautés
@@ -119,28 +135,28 @@ jwkh:
             header: Relevé des attributions du territoire
         email:
             warning:
-                subject: Territoire à rendre bientôt
+                subject: Territoire %number% à rendre bientôt
                 body: |
-                    Chèr(e) %firstName%,
+                    Cher/Chère %firstName%,
 
-                    Tu t'es engagé(e) à travailler le territoire %number%. La période d'emprunt arrivera à terme le %date%.
+                    La période d'emprunt du territoire %number% arrivera à échéance le %date% prochain. Il te reste donc encore un mois pour pouvoir le travailler avant de le rendre au service des territoires.
 
-                    En te remerciant pour ton travail,
+                    Fraternellement,
                     Le services des territoires.
 
             danger:
-                subject: Territoire à rendre
+                subject: Territoire %number% à rendre
                 body: |
-                    Chèr(e) %firstName%,
+                    Cher/Chère %firstName%,
 
-                    Tu t'es engagé(e) à travailler le territoire numéro %number%. La période d'emprunt est arrivée à terme le %date%.
+                    La période d'emprunt du territoire %number% est arrivée à échéance le %date%. Nous te remercions de bien vouloir le rendre dès que possible au service des territoires.
 
-                    En te remerciant pour ton travail,
+                    Fraternellement,
                     Le services des territoires.
 
     campaigns:
         list:
-            content_header: Liste des campagnes
+            content_header: Liste des campagnesm
         new:
             content_header: Nouvelle campagne
         edit:

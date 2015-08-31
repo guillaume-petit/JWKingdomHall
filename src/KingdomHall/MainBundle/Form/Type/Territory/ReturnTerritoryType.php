@@ -60,6 +60,8 @@ class ReturnTerritoryType extends AbstractType {
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
                 'attr' => array (
+                    'data-provide' => 'datepicker',
+                    'data-date-format' => 'dd-mm-yyyy',
                     'class' => 'input-inline datepicker',
                 ),
                 'constraints' => $constraints,

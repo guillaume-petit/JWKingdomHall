@@ -562,39 +562,6 @@ class Territory {
     }
 
     /**
-     * Checks if the territory is available for borrow
-     *
-     * @return bool
-     */
-    public function isAvailable()
-    {
-        $currentCampaigns = $this->congregation->getUnexpiredCampaigns();
-        return  $this->type == self::TERRITORY_TYPE_STANDARD ||
-                ($this->type == self::TERRITORY_TYPE_CAMPAIGN &&                    // Check if this is a campaign territory
-                !$currentCampaigns->isEmpty() &&                                   // Check if a campaign is currently ongoing or planned in the future
-                $this->returnDate < $currentCampaigns->first()->getStartDate());    // Check if the territory has already been worked during the campaign
-    }
-
-    public function getStatus()
-    {
-        $status = '';
-        if ($this->publisher) {
-            $warningDate = new \DateTime();
-            $warningDate->add(\DateInterval::createFromDateString('-'.$this->congregation->getSettings()->get('territory_warning_borrow_time')->getValue()));
-            $alertDate = new \DateTime();
-            $alertDate->add(\DateInterval::createFromDateString('-'.$this->congregation->getSettings()->get('territory_max_borrow_time')->getValue()));
-            if ($this->borrowDate) {
-                if ($this->borrowDate < $alertDate) {
-                    $status = self::TERRITORY_STATUS_ALERT;
-                } elseif ($this->borrowDate < $warningDate) {
-                    $status = self::TERRITORY_STATUS_WARNING;
-                }
-            }
-        }
-        return $status;
-    }
-
-    /**
      * Set excludedLanguages
      *
      * @param string $excludedLanguages
@@ -675,5 +642,46 @@ class Territory {
     public function getWorkload()
     {
         return $this->workload;
+    }
+
+    // Utility methods
+    /**
+     * Checks if the territory is available for borrow
+     *
+     * @return bool
+     */
+    public function isAvailable()
+    {
+        $currentCampaigns = $this->congregation->getUnexpiredCampaigns();
+        return  $this->type == self::TERRITORY_TYPE_STANDARD ||
+        ($this->type == self::TERRITORY_TYPE_CAMPAIGN &&                    // Check if this is a campaign territory
+            !$currentCampaigns->isEmpty() &&                                   // Check if a campaign is currently ongoing or planned in the future
+            $this->returnDate < $currentCampaigns->first()->getStartDate());    // Check if the territory has already been worked during the campaign
+    }
+
+    /**
+     * Get the status of a territory
+     * - Warning means the territory should be returned soon
+     * - Alert means the territory is late and should be returned now
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        $status = '';
+        if ($this->publisher) {
+            $warningDate = new \DateTime();
+            $warningDate->add(\DateInterval::createFromDateString('-'.$this->congregation->getSettings()->get('territory_warning_borrow_time')->getValue()));
+            $alertDate = new \DateTime();
+            $alertDate->add(\DateInterval::createFromDateString('-'.$this->congregation->getSettings()->get('territory_max_borrow_time')->getValue()));
+            if ($this->borrowDate) {
+                if ($this->borrowDate < $alertDate) {
+                    $status = self::TERRITORY_STATUS_ALERT;
+                } elseif ($this->borrowDate < $warningDate) {
+                    $status = self::TERRITORY_STATUS_WARNING;
+                }
+            }
+        }
+        return $status;
     }
 }

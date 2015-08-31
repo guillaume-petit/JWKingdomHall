@@ -339,4 +339,28 @@ class Congregation {
             return $now < $campaign->getEndDate();
         });
     }
+
+    /**
+     * Get all territories currently borrowed
+     *
+     * @return Territory[]
+     */
+    public function getBorrowedTerritories()
+    {
+        return $this->territories->filter(function (Territory $t) {
+            return $t->getPublisher() != null;
+        });
+    }
+
+    /**
+     * Get all late territories
+     *
+     * @return Territory[]
+     */
+    public function getLateTerritories()
+    {
+        return $this->territories->filter(function (Territory $t) {
+            return $t->getStatus() == Territory::TERRITORY_STATUS_ALERT;
+        });
+    }
 }

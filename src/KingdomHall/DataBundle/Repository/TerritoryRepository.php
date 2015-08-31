@@ -4,6 +4,7 @@ namespace KingdomHall\DataBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use KingdomHall\DataBundle\Entity\Territory;
 
 class TerritoryRepository extends EntityRepository {
 

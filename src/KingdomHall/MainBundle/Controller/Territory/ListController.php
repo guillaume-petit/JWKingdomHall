@@ -167,6 +167,7 @@ class ListController extends Controller
                 ->setPublisher($territory->getPublisher())
                 ->setBorrowDate($territory->getBorrowDate());
             $territory->addHistory($history);
+            $territory->setReturnDate(null);
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($territory);
             $manager->flush();
@@ -208,7 +209,7 @@ class ListController extends Controller
 
         if ($form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
-            $history = $territory->getHistories()->first();
+            $history = $territory->getHistories()->last();
             $worked = $form->get('worked')->getData();
             if ($worked == 'no') {
                 $territory->removeHistory($history);

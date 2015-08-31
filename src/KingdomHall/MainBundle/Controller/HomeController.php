@@ -3,8 +3,8 @@
 namespace KingdomHall\MainBundle\Controller;
 
 use KingdomHall\DataBundle\Entity\Congregation;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class HomeController extends Controller
 {
@@ -17,6 +17,8 @@ class HomeController extends Controller
      */
     public function indexAction(Congregation $congregation)
     {
-        return array();
+        return array(
+            'congregation' => $congregation,
+        );
     }
 }

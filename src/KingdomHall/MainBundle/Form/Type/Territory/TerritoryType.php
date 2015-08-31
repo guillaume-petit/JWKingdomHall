@@ -32,7 +32,7 @@ class TerritoryType extends AbstractType
             ),
             'label' => 'jwkh.entity.territory.type',
         ));
-        $builder->add('number', 'integer', array('label' => 'jwkh.entity.territory.number',));
+        $builder->add('number', 'text', array('label' => 'jwkh.entity.territory.number',));
         $builder->add('name', 'text', array('label' => 'jwkh.entity.territory.name',));
         $builder->add('area', 'text', array('label' => 'jwkh.entity.territory.area',));
         $builder->add('mapFile', 'file', array('label' => 'jwkh.entity.territory.map',));

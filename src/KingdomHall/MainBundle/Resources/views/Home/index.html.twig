@@ -5,6 +5,9 @@
         <div class="well well-lg" style="margin-top: 20px;">
             <h2>{% trans %}jwkh.home.header{% endtrans %}</h2>
             {% trans %}jwkh.home.content{% endtrans %}
+            <h3>{% trans %}jwkh.navbar.territories.title {% endtrans %}</h3>
+            {% trans with {'%borrowed%': congregation.borrowedTerritories.count(), '%late%': congregation.lateTerritories.count()} %}jwkh.home.territory.stats{% endtrans %}
+            {% trans %}jwkh.home.changelog{% endtrans %}
         </div>
     </div>
 {% endblock main_content %}

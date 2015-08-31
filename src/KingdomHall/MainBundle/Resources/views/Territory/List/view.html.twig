@@ -22,7 +22,7 @@
             {% trans %}jwkh.territories.view.languages{% endtrans %}
         </div>
         <div class="panel-body">
-            {% for language in territory.excludedLanguages|split(',') %}
+            {% for language in territory.excludedLanguages|split(',')|sort %}
                 <h4 style="display: inline-block;"><span class="label label-info">{{ language }}</span></h4>
             {% endfor %}
         </div>
