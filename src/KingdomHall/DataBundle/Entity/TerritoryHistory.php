@@ -141,7 +141,7 @@ class TerritoryHistory {
      * @param \KingdomHall\DataBundle\Entity\Publisher $publisher
      * @return TerritoryHistory
      */
-    public function setPublisher(\KingdomHall\DataBundle\Entity\Publisher $publisher = null)
+    public function setPublisher(Publisher $publisher = null)
     {
         $this->publisher = $publisher;
 

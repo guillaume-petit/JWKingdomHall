@@ -18,10 +18,18 @@ use KingdomHall\DataBundle\Entity\Congregation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @package KingdomHall\ApiBundle\Controller
+ *
+ * API for publishers
+ */
 class PublisherController extends FOSRestController {
 
     /**
-     * @param Congregation          $congregation
+     *
+     * Get publishers in a congregation
+     *
+     * @param Congregation $congregation
      *
      * @View()
      * @ParamConverter(name="congregation", class="KingdomHallDataBundle:Congregation")

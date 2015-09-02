@@ -149,7 +149,7 @@ class CongregationSetting {
      * @param \KingdomHall\DataBundle\Entity\Congregation $congregation
      * @return CongregationSetting
      */
-    public function setCongregation(\KingdomHall\DataBundle\Entity\Congregation $congregation = null)
+    public function setCongregation(Congregation $congregation = null)
     {
         $this->congregation = $congregation;
 

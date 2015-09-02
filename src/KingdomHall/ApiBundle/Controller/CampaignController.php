@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gpetit
- * Date: 7/7/15
- * Time: 9:43 AM
- */
-
 namespace KingdomHall\ApiBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -16,13 +9,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class CampaignController
  * @package KingdomHall\ApiBundle\Controller
+ *
+ * API for campaigns
+ *
  */
 class CampaignController extends FOSRestController {
 
     /**
-     * @param Congregation          $congregation
+     * Get all the campaigns associated to a congregation.
+     *
+     * @param Congregation $congregation a congregation
      *
      * @View()
      * @ParamConverter(name="congregation", class="KingdomHallDataBundle:Congregation")
@@ -35,16 +32,18 @@ class CampaignController extends FOSRestController {
     }
 
     /**
+     * Delete a campaign from a congregation
+     *
      * @Delete()
      *
-     * @param Congregation $congregation
-     * @param Campaign     $campaign
+     * @param Congregation $congregation a congregation
+     * @param Campaign     $campaign     a campaign
      *
      * @View()
      * @ParamConverter(name="congregation", class="KingdomHallDataBundle:Congregation")
      * @ParamConverter(name="campaign", class="KingdomHallDataBundle:Campaign")
      *
-     * @return array
+     * @return Response
      */
     public function deleteCongregationCampaignAction(Congregation $congregation, Campaign $campaign)
     {

@@ -128,7 +128,7 @@ class TerritoryNoVisit {
      * @param \KingdomHall\DataBundle\Entity\Territory $territory
      * @return TerritoryNoVisit
      */
-    public function setTerritory(\KingdomHall\DataBundle\Entity\Territory $territory = null)
+    public function setTerritory(Territory $territory = null)
     {
         $this->territory = $territory;
 
@@ -174,7 +174,7 @@ class TerritoryNoVisit {
      * @param \KingdomHall\DataBundle\Entity\Publisher $publisher
      * @return TerritoryNoVisit
      */
-    public function setPublisher(\KingdomHall\DataBundle\Entity\Publisher $publisher = null)
+    public function setPublisher(Publisher $publisher = null)
     {
         $this->publisher = $publisher;
 

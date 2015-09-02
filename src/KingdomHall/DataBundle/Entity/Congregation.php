@@ -279,7 +279,7 @@ class Congregation {
      * @param \KingdomHall\DataBundle\Entity\CongregationSetting $settings
      * @return Congregation
      */
-    public function addSetting(\KingdomHall\DataBundle\Entity\CongregationSetting $settings)
+    public function addSetting(CongregationSetting $settings)
     {
         $this->settings[] = $settings;
 
@@ -291,7 +291,7 @@ class Congregation {
      *
      * @param \KingdomHall\DataBundle\Entity\CongregationSetting $settings
      */
-    public function removeSetting(\KingdomHall\DataBundle\Entity\CongregationSetting $settings)
+    public function removeSetting(CongregationSetting $settings)
     {
         $this->settings->removeElement($settings);
     }

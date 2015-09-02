@@ -118,10 +118,17 @@
     {% else %}
         <button type="button" class="btn btn-default {% if not territory.available %}disabled{% endif %}" id="borrowTerritoryButton"><span class="glyphicon glyphicon-save-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.borrow{% endtrans %}</span></span></button>
     {% endif %}
+    <button type="button" class="btn btn-default btn-print"><span class="glyphicon glyphicon-print" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.print{% endtrans %}</span></span></button>
+
 
     <script>
         $(document).ready(function () {
             var modal = $('#pageModal');
+
+            $('.btn-print').on('click', function () {
+                var url = '{{ path('kingdom_hall_territories_print', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}';
+                window.location = url;
+            });
 
             $('.btn-back').on('click', function () {
                 var url = '{{ path('kingdom_hall_territories_list', {'congregationCode': territory.congregation.code, 'type': territory.type}) }}';

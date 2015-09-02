@@ -2,10 +2,13 @@
 <?php
 // CronRun.php
 
-require '../../../../vendor/autoload.php';
+require __DIR__.'/../../../../vendor/autoload.php';
+require_once __DIR__.'/../../../../app/AppKernel.php';
 
-use Symfony\Component\Console\Application;
+$kernel = new AppKernel('prod', false);
+$kernel->loadClassCache();
 
-$application = new Application();
+$application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
 $application->add(new \KingdomHall\TaskBundle\Command\CronCommand());
-$application->run();
+$input = new \Symfony\Component\Console\Input\StringInput('k:c:r');
+$application->run($input);

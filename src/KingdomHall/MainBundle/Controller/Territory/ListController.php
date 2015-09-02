@@ -133,6 +133,25 @@ class ListController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Congregation $congregation
+     * @param Territory $territory
+     * @return array
+     *
+     * @ParamConverter(name="territory", class="KingdomHallDataBundle:Territory", options={"id" = "territoryId"})
+     *
+     * @Template()
+     *
+     * @return array
+     */
+    public function printAction(Request $request, Congregation $congregation, Territory $territory)
+    {
+        return array(
+            'territory' => $territory,
+        );
+    }
+
+    /**
      * @param Request      $request
      * @param Congregation $congregation
      * @param Territory    $territory

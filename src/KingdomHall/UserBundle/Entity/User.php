@@ -58,7 +58,7 @@ class User extends FOSUser
      * @param \KingdomHall\DataBundle\Entity\Publisher $publisher
      * @return User
      */
-    public function setPublisher(\KingdomHall\DataBundle\Entity\Publisher $publisher = null)
+    public function setPublisher(Publisher $publisher = null)
     {
         $this->publisher = $publisher;
         $publisher->setUser($this);

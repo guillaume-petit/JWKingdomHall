@@ -163,7 +163,7 @@ class Publisher {
      * @param \KingdomHall\DataBundle\Entity\Congregation $congregation
      * @return Publisher
      */
-    public function setCongregation(\KingdomHall\DataBundle\Entity\Congregation $congregation = null)
+    public function setCongregation(Congregation $congregation = null)
     {
         $this->congregation = $congregation;
 
@@ -184,7 +184,7 @@ class Publisher {
      */
     public function __construct()
     {
-        $this->territories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->territories = new ArrayCollection();
     }
 
     /**
@@ -193,7 +193,7 @@ class Publisher {
      * @param \KingdomHall\DataBundle\Entity\Territory $territories
      * @return Publisher
      */
-    public function addTerritory(\KingdomHall\DataBundle\Entity\Territory $territories)
+    public function addTerritory(Territory $territories)
     {
         $this->territories[] = $territories;
 
@@ -205,7 +205,7 @@ class Publisher {
      *
      * @param \KingdomHall\DataBundle\Entity\Territory $territories
      */
-    public function removeTerritory(\KingdomHall\DataBundle\Entity\Territory $territories)
+    public function removeTerritory(Territory $territories)
     {
         $this->territories->removeElement($territories);
     }
@@ -273,7 +273,7 @@ class Publisher {
      * @param \KingdomHall\UserBundle\Entity\User $user
      * @return Publisher
      */
-    public function setUser(\KingdomHall\UserBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
