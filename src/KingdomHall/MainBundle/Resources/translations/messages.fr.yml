@@ -57,6 +57,16 @@ jwkh:
                 </ul>
         changelog: |
             <h3>Derniers changements</h3>
+            <h4>14 septembre 2015</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Sauvegarde de la page en cours dans la liste des territoires</li>
+                        <li>Ajout du joker * dans la recherche de territoires (exemple '3*')</li>
+                        <li>Ajout de la date du jour comme date par défaut dans le sélecteur de date.</li>
+                    </ul>
+                </li>
+            </ul>
             <h4>24 août 2015</h4>
             <ul>
                 <li>Nouveautés

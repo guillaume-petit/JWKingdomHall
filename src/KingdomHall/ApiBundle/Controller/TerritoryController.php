@@ -47,6 +47,9 @@ class TerritoryController extends FOSRestController
         );
         $search = $paramFetcher->get('search');
 
+        $this->get('session')->set('territory.page_number', ($pagination['offset'] / $pagination['limit']) + 1);
+        $this->get('session')->set('territory.page_size', $pagination['limit']);
+
         return $this->getDoctrine()->getRepository('KingdomHallDataBundle:Territory')->searchTerritories($congregation, $type, $pagination, $sort, $search);
     }
 

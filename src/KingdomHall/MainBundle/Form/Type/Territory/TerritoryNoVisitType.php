@@ -35,6 +35,7 @@ class TerritoryNoVisitType extends AbstractType {
                     'data-provide' => 'datepicker',
                     'data-date-format' => 'dd-mm-yyyy',
                 ),
+                'data' => new \DateTime(),
             )
         );
     }

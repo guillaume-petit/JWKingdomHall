@@ -42,6 +42,7 @@ class BorrowTerritoryType extends AbstractType {
                     'data-provide' => 'datepicker',
                     'data-date-format' => 'dd-mm-yyyy',
                 ),
+                'data' => new \DateTime(),
                 'constraints' => array (
                     new NotBlank(),
                 ),

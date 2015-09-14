@@ -65,7 +65,7 @@ class ReturnTerritoryType extends AbstractType {
                     'class' => 'input-inline datepicker',
                 ),
                 'constraints' => $constraints,
-                'data' => null,
+                'data' => new \DateTime(),
             )
         );
     }

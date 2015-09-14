@@ -31,6 +31,8 @@
            data-row-style="rowStyle"
            data-pagination="true"
            data-side-pagination="server"
+           data-page-number="{{ app.session.get('territory.page_number')|default(1) }}"
+           data-page-size="{{ app.session.get('territory.page_size')|default(10) }}"
            data-page-list="[10, 20, 40, 60]"
             >
         <thead>

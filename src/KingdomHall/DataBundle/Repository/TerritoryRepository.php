@@ -40,12 +40,17 @@ class TerritoryRepository extends EntityRepository {
 
         // Set search
         if ($search) {
+            if (strpos($search, '*') !== false) {
+                $search = str_replace('*', '%', $search);
+            } else {
+                $search = '%'.$search.'%';
+            }
             $where = $builder->expr()->orX();
-            $where->add($builder->expr()->like('t.number', $builder->expr()->literal('%' . $search . '%')));
-            $where->add($builder->expr()->like('t.name', $builder->expr()->literal('%' . $search . '%')));
-            $where->add($builder->expr()->like('t.area', $builder->expr()->literal('%' . $search . '%')));
-            $where->add($builder->expr()->like('p.firstName', $builder->expr()->literal('%' . $search . '%')));
-            $where->add($builder->expr()->like('p.lastName', $builder->expr()->literal('%' . $search . '%')));
+            $where->add($builder->expr()->like('t.number', $builder->expr()->literal($search)));
+            $where->add($builder->expr()->like('t.name', $builder->expr()->literal($search)));
+            $where->add($builder->expr()->like('t.area', $builder->expr()->literal($search)));
+            $where->add($builder->expr()->like('p.firstName', $builder->expr()->literal($search)));
+            $where->add($builder->expr()->like('p.lastName', $builder->expr()->literal($search)));
 
             $builder->andWhere($where);
         }
