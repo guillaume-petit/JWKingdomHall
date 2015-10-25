@@ -119,6 +119,7 @@
             var modal = this;
             $('.modal-footer .action-save', modal).on('click', function (data) {
                 data.preventDefault();
+                this.disabled = true;
                 var formData = new FormData($('form')[0]);
                 var url = $('form', modal).attr('action');
                 var uploadFields = $('form input[type="file"]');
