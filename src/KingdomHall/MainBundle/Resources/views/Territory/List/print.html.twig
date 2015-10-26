@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,90 +8,83 @@
     <title>{% block title %}JW Kingdom Hall{% endblock title %}</title>
 
     {% block stylesheets %}
-        {% stylesheets
-        '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/bootstrap-table.min.css'
-        '@KingdomHallMainBundle/Resources/public/css/jwkh.css'
-        %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}  
+        {#{% stylesheets#}
+        {#'@KingdomHallMainBundle/Resources/public/css/jwkh-print.css'#}
+        {#%}#}
+        {#<link rel="stylesheet" href="{{ asset_url }}" />#}
+        {#{% endstylesheets %}  #}
     {% endblock %}
+    <style type="text/css">
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            width: 148mm;
+        }
 
-    {% block javascript %}
-        {% javascripts
-        '%kernel.root_dir%/../vendor/jquery/jquery/jquery-1.11.1.js'
-        '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js'
-        '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/bootstrap-table.min.js'
-        '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/extensions/flat-json/bootstrap-table-flat-json.min.js'
-        '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/extensions/mobile/bootstrap-table-mobile.min.js'
-        '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/locale/bootstrap-table-en-US.min.js'
-        '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/locale/bootstrap-table-pt-PT.min.js'
-        '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/locale/bootstrap-table-fr-FR.min.js'
-        %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endblock javascript %}
+        h3 {
+            color: gray;
+        }
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        .map {
+            max-height: 100mm;
+            max-width: 148mm;
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+        }
+
+        .language {
+            color: red;
+            font-weight: bold;
+        }
+
+        .novisit {
+            width: 100%;
+        }
+
+        .novisit thead tr {
+            color: gray;
+            text-align: left;
+        }
+
+        .novisit thead tr th {
+            border-bottom: solid 2px lightgray;
+        }
+
+    </style>
 </head>
-<body style="overflow: auto">
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                {{ territory.number }} - {{ territory.name }} ({{ territory.area }})
-            </div>
-            <div class="panel-body">
-                <img class="img-responsive" src="{{ vich_uploader_asset(territory, 'mapFile') }}" alt="{{ territory.name }}" />
-            </div>
-        </div>
+<body>
+    <div>
+        <img class="map" src="{{ vich_uploader_asset(territory, 'mapFile') }}" alt="{{ territory.name }}" />
     </div>
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                {% trans %}jwkh.territories.view.languages{% endtrans %}
-            </div>
-            <div class="panel-body">
-                {% for language in territory.excludedLanguages|split(',')|sort %}
-                    <h4 style="display: inline-block;"><span class="label label-info">{{ language }}</span></h4>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                {% trans %}jwkh.territories.view.novisit{% endtrans %}
-            </div>
-            <div class="panel-body">
-                <table id="territoryNoVisitTable"
-                       data-toggle="table"
-                       data-classes="table table-hover table-no-bordered"
-                       data-striped="true"
-                       data-mobile-responsive="true"
-                        >
-                    <thead>
-                    <tr>
-                        <th>{% trans %}jwkh.entity.territory_no_visit.name{% endtrans %}</th>
-                        <th>{% trans %}jwkh.entity.territory_no_visit.address{% endtrans %}</th>
-                        <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
-                        <th>{% trans %}jwkh.entity.territory_no_visit.date{% endtrans %}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for novisit in territory.noVisits %}
-                        <tr>
-                            <td>{{ novisit.name }}</td>
-                            <td>{{ novisit.address }}</td>
-                            <td>{{ novisit.publisher.fullName }}</td>
-                            <td>{{ novisit.date|date(congregation_setting('date_format_twig')) }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div>
+        <h3>{% trans %}jwkh.territories.view.languages{% endtrans %}</h3>
+        <p class="language">
+            {{ territory.excludedLanguages|split(',')|sort|join(', ') }}
+        </p>
+    </div>
+    <div>
+        <h3>{% trans %}jwkh.territories.view.novisit{% endtrans %}</h3>
+        <table class="novisit">
+            <thead>
+            <tr>
+                <th>{% trans %}jwkh.entity.territory_no_visit.name{% endtrans %}</th>
+                <th>{% trans %}jwkh.entity.territory_no_visit.address{% endtrans %}</th>
+                <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
+                <th>{% trans %}jwkh.entity.territory_no_visit.date{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for novisit in territory.noVisits %}
+                <tr>
+                    <td>{{ novisit.name }}</td>
+                    <td>{{ novisit.address }}</td>
+                    <td>{{ novisit.publisher.fullName }}</td>
+                    <td>{{ novisit.date|date(congregation_setting('date_format_twig')) }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

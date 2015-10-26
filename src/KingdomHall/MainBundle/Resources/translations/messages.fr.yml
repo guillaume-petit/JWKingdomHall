@@ -185,6 +185,10 @@ jwkh:
 
                     Fraternellement,
                     Le services des territoires.
+        print:
+            language_instructions: De maison en maison, c'est le premier nom de famille qui est déterminant.
+            phone: Ce territoire contient des immeubles contactés par <b>téléphone</b>.
+            commercial: Ce territoire contient des <b>commerces</b> parcourus séparément.
 
     campaigns:
         list:
