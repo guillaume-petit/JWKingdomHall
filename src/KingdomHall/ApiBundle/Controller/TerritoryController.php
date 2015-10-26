@@ -128,4 +128,35 @@ class TerritoryController extends FOSRestController
         return new Response('', 204);
     }
 
+    /**
+     * @Delete("/api/congregations/{congregation}/territories/{territory}/histories")
+     *
+     * @param Congregation $congregation
+     * @ParamConverter(name="congregation", class="KingdomHallDataBundle:Congregation")
+     *
+     * @param Territory $territory
+     * @ParamConverter(name="territory", class="KingdomHallDataBundle:Territory")
+     *
+     * @param ParamFetcher $fetcher
+     * @QueryParam("ids")
+     *
+     * @return string
+     */
+    public function deleteCongregationTerritoryHistoriesAction(Congregation $congregation, Territory $territory, ParamFetcher $fetcher)
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        $histories = $territory->getHistories();
+        foreach (explode(',', $fetcher->get('ids')) as $id) {
+            $history = $histories->get($id);
+            if ($history) {
+                $manager->remove($history);
+            }
+        }
+
+        $manager->flush();
+
+        return new Response('', 204);
+    }
+
 }

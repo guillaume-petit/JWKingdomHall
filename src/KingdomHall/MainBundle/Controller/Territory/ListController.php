@@ -303,6 +303,57 @@ class ListController extends Controller
     }
 
     /**
+     * @param Request          $request
+     * @param Congregation     $congregation
+     * @param Territory        $territory
+     * @param TerritoryHistory $history
+     *
+     * @ParamConverter(name="territory", class="KingdomHallDataBundle:Territory", options={"id" = "territoryId"})
+     * @ParamConverter(name="history", isOptional=true, class="KingdomHallDataBundle:TerritoryHistory", options={"id" = "historyId"})
+     *
+     * @return array
+     *
+     * @Template()
+     */
+    public function editHistoryAction(Request $request, Congregation $congregation, Territory $territory, TerritoryHistory $history = null)
+    {
+        if (!$history) {
+            $history = new TerritoryHistory();
+            $history->setTerritory($territory);
+        }
+
+        $id = $history->getId();
+
+        $form = $this->createForm(
+            'kingdomhall_form_territory_history',
+            $history,
+            array(
+                'action' => $this->generateUrl(
+                    'kingdom_hall_territories_history_edit',
+                    array (
+                        'congregationCode' => $congregation->getCode(),
+                        'territoryId' => $territory->getId(),
+                        'historyId' => $id ? $id : 0,
+                    )
+                )
+            )
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $territory->addHistory($history);
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($territory);
+            $manager->flush();
+        }
+
+        return array(
+            'form' => $form->createView()
+        );
+    }
+
+    /**
      * @param Request      $request
      * @param Congregation $congregation
      *

@@ -20,6 +20,9 @@
         <service id="kingdomhall.form.type.territory_no_visit" class="KingdomHall\MainBundle\Form\Type\Territory\TerritoryNoVisitType">
             <tag name="form.type" alias="kingdomhall_form_territory_no_visit" />
         </service>
+        <service id="kingdomhall.form.type.territory_history" class="KingdomHall\MainBundle\Form\Type\Territory\TerritoryHistoryType">
+            <tag name="form.type" alias="kingdomhall_form_territory_history" />
+        </service>
 
         <!-- Campaigns -->
         <service id="kingdomhall.form.type.campaign" class="KingdomHall\MainBundle\Form\Type\Campaign\CampaignType">

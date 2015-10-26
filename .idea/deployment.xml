@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="OVH" compareModeInSync="SIZE">
+  <component name="PublishConfigData" serverName="OVH" uploadOnCheckin="a1923a05-a449-49c7-8cdf-0b1991baaefc" compareModeInSync="SIZE">
     <serverData>
       <paths name="Hostinger">
         <serverdata>
@@ -36,5 +36,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myUploadOnCheckinName" value="OVH" />
   </component>
 </project>

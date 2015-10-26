@@ -36,6 +36,10 @@ kingdom_hall_territories_novisit_edit:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/novisit/{noVisitId}/edit
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:editNoVisit, noVisitId: 0 }
 
+kingdom_hall_territories_history_edit:
+    path:     /{_locale}/{congregationCode}/territories/{territoryId}/history/{historyId}/edit
+    defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:editHistory, historyId: 0 }
+
 kingdom_hall_territories_view:
     path:     /{_locale}/{congregationCode}/territories/{territoryId}/view
     defaults: { _locale: en, _controller: KingdomHallMainBundle:Territory/List:view }

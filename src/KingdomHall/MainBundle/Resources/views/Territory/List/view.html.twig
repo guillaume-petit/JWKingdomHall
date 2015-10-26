@@ -82,13 +82,25 @@
             {% trans %}jwkh.territories.view.history{% endtrans %}
         </div>
         <div class="panel-body">
+            <div id="territoryHistoryToolbar" class="btn-group ">
+                <button id="editHistoryButton" type="button" class="btn btn-default">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </button>
+                <button type="button" class="btn btn-default" id="removeHistoryButton">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </div>
             <table id="territoryHistoryTable"
                    data-toggle="table"
                    data-classes="table table-hover table-no-bordered"
                    data-striped="true"
+                   data-select-item-name="selectedHistory"
+                   data-click-to-select="true"
                    data-mobile-responsive="true">
                 <thead>
                     <tr>
+                        <th data-radio="true"></th>
+                        <th data-field="id" data-visible="false"></th>
                         <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
                         <th>{% trans %}jwkh.entity.territory_history.borrow_date{% endtrans %}</th>
                         <th>{% trans %}jwkh.entity.territory_history.return_date{% endtrans %}</th>
@@ -97,6 +109,8 @@
                 <tbody>
                     {% for history in territory.histories %}
                         <tr>
+                            <td></td>
+                            <td>{{ history.id }}</td>
                             <td>{{ history.publisher.firstName }}&nbsp;{{ history.publisher.lastName }}</td>
                             <td>{% if history.borrowDate %}{{ history.borrowDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
                             <td>{% if history.returnDate %}{{ history.returnDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
@@ -185,6 +199,38 @@
                     });
                     var url = '{{ path('delete_congregation_territory_no_visits', {'congregation': congregation.id, 'territory': territory.id, 'ids': '{ids}'}) }}'.replace('%7Bids%7D', ids.join(','));
                     modal.load('{{ path('kingdom_hall_modal_confirmation', { 'message': 'jwkh.territories.novisit.remove_confirmation.message' }) }}'.replace('&amp;', '&'), function () {
+                        modal.modal();
+                        $('button.action-confirm', modal).on('click', function () {
+                            $.ajax({
+                                url: url,
+                                type: 'DELETE',
+                                success: function () {
+                                    modal.modal('hide');
+                                }
+                            });
+                        });
+                    });
+                }
+            });
+
+            $('#editHistoryButton').on('click', function(e) {
+                var rows = $('#territoryHistoryTable').bootstrapTable('getSelections');
+                if (rows.length > 0) {
+                    var id = rows[0].id;
+                    modal.load('{{ path('kingdom_hall_territories_history_edit', {'congregationCode': congregation.code, 'territoryId': territory.id, 'historyId': '{id}'}) }}'.replace('%7Bid%7D', id), function (data) {
+                        modal.modal();
+                    });
+                }
+            });
+
+            $('#removeHistoryButton').on('click', function (e) {
+                var rows = $('#territoryHistoryTable').bootstrapTable('getSelections');
+                if (rows.length > 0) {
+                    var ids = rows.map(function (row) {
+                        return row.id;
+                    });
+                    var url = '{{ path('delete_congregation_territory_histories', {'congregation': congregation.id, 'territory': territory.id, 'ids': '{ids}'}) }}'.replace('%7Bids%7D', ids.join(','));
+                    modal.load('{{ path('kingdom_hall_modal_confirmation', { 'message': 'jwkh.territories.history.remove_confirmation.message' }) }}'.replace('&amp;', '&'), function () {
                         modal.modal();
                         $('button.action-confirm', modal).on('click', function () {
                             $.ajax({
