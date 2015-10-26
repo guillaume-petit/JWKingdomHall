@@ -149,6 +149,7 @@ jwkh:
                 message: Veux-tu vraiment supprimer cette entrée d'historique ?
         view:
             phone: Territoire par téléphone
+            commercial: Territoire de commerces
             map: Carte du territoire
             novisit: Personnes à ne pas visiter
             history: Historique
@@ -235,6 +236,7 @@ jwkh:
             return_date: Rendu le
             map: Carte
             phone: Téléphone
+            commercial: Commerces
             excluded_languages: Langues à ne pas visiter
             notified: Notifié
             workload: Charge de travail

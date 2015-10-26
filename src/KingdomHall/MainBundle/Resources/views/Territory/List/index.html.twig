@@ -42,6 +42,7 @@
                 <th data-sortable="true" data-field="number">{% trans %}jwkh.entity.territory.number{% endtrans %}</th>
                 <th data-sortable="true" data-field="workload" data-align="center"><img src="{{ asset('bundles/kingdomhallmain/images/icons/glyphicons-44-group.png') }}" class="icon" /></th>
                 <th data-sortable="true" data-formatter="phoneStyle" data-field="phone" data-align="center"><span class="glyphicon glyphicon-phone-alt"></span></th>
+                <th data-sortable="true" data-formatter="commercialStyle" data-field="commercial" data-align="center"><img src="{{ asset('bundles/kingdomhallmain/images/icons/glyphicons-90-building.png') }}" class="icon" /></th>
                 <th data-sortable="true" data-field="name">{% trans %}jwkh.entity.territory.name{% endtrans %}</th>
                 <th data-sortable="true" data-field="area">{% trans %}jwkh.entity.territory.area{% endtrans %}</th>
                 <th data-sortable="true" data-field="formattedBorrowDate">{% trans %}jwkh.entity.territory.borrow_date{% endtrans %}</th>
@@ -112,6 +113,10 @@
 
         function phoneStyle(value, row, index) {
             return value ? "<span class=\"glyphicon glyphicon-phone-alt\"></span>" : "-";
+        }
+
+        function commercialStyle(value, row, index) {
+            return value ? "<img src=\"{{ asset('bundles/kingdomhallmain/images/icons/glyphicons-90-building.png') }}\" class=\"icon\" />" : "-";
         }
 
     </script>

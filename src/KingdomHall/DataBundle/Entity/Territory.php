@@ -159,6 +159,12 @@ class Territory {
     protected $phone;
 
     /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    protected $commercial;
+
+    /**
      * @var string
      * @Accessor(getter="getStatus")
      * @Type(name="string")
@@ -683,5 +689,21 @@ class Territory {
             }
         }
         return $status;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isCommercial()
+    {
+        return $this->commercial;
+    }
+
+    /**
+     * @param boolean $commercial
+     */
+    public function setCommercial($commercial)
+    {
+        $this->commercial = $commercial;
     }
 }

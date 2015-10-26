@@ -8,6 +8,9 @@
     {% if territory.phone %}
         <p><span class="glyphicon glyphicon-phone-alt"> {% trans %}jwkh.territories.view.phone{% endtrans %}</span> </p>
     {% endif %}
+    {% if territory.commercial %}
+        <p><span class="glyphicon"><img src="{{ asset('bundles/kingdomhallmain/images/icons/glyphicons-90-building.png') }}" class="icon" style="margin-bottom: 5px"/> {% trans %}jwkh.territories.view.commercial{% endtrans %}</span></p>
+    {% endif %}
     <p><img class="icon" src="{{ asset('bundles/kingdomhallmain/images/icons/glyphicons-44-group.png') }}"/> {% transchoice territory.workload with {'%number%': territory.workload} %}jwkh.territories.view.workload{% endtranschoice %}</p>
     <div class="panel panel-default">
         <div class="panel-heading">
