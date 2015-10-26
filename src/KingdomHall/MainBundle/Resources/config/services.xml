@@ -17,6 +17,9 @@
         <service id="kingdomhall.form.type.return_territory" class="KingdomHall\MainBundle\Form\Type\Territory\ReturnTerritoryType">
             <tag name="form.type" alias="kingdomhall_form_return_territory" />
         </service>
+        <service id="kingdomhall.form.type.forward_territory" class="KingdomHall\MainBundle\Form\Type\Territory\ForwardTerritoryType">
+            <tag name="form.type" alias="kingdomhall_form_forward_territory" />
+        </service>
         <service id="kingdomhall.form.type.territory_no_visit" class="KingdomHall\MainBundle\Form\Type\Territory\TerritoryNoVisitType">
             <tag name="form.type" alias="kingdomhall_form_territory_no_visit" />
         </service>

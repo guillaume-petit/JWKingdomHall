@@ -16,6 +16,7 @@ jwkh:
         no: Non
         print: Imprimer
         download: Télécharger
+        forward: Transférer
 
     modal:
         confirmation:
@@ -61,6 +62,8 @@ jwkh:
             <ul>
                 <li>Nouveautés
                     <ul>
+                        <li>Transférer un territoire d'un proclamateur à un autre</li>
+                        <li>Ajout des territoires de commerce</li>
                         <li>Possibilité de modifier et supprimer des entrées d'historique</li>
                     </ul>
                 </li>
@@ -139,6 +142,8 @@ jwkh:
             worked: Le territoire a-t-il été parcouru ?
             error:
                 return_date: La date de retour ne doit pas précéder la date d'emprunt
+        forward:
+            content_header: Transférer
         novisit:
             remove_confirmation:
                 message: Veux-tu vraiment supprimer ces personnes à ne pas visiter ?

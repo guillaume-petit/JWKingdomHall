@@ -252,6 +252,51 @@ class ListController extends Controller
     }
 
     /**
+     * @param Request      $request
+     * @param Congregation $congregation
+     * @param Territory    $territory
+     *
+     * @ParamConverter(name="territory", class="KingdomHallDataBundle:Territory", options={"id" = "territoryId"})
+     *
+     * @return array
+     *
+     * @Template()
+     */
+    public function forwardAction(Request $request, Congregation $congregation, Territory $territory)
+    {
+        $form = $this->createForm(
+            'kingdomhall_form_forward_territory',
+            $territory,
+            array(
+                'action' => $this->generateUrl(
+                    'kingdom_hall_territories_forward',
+                    array (
+                        'congregationCode' => $congregation->getCode(),
+                        'territoryId' => $territory->getId(),
+                    )
+                )
+            )
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $history = $territory->getHistories()->last();
+            $history->setPublisher($territory->getPublisher());
+
+            $manager->persist($history);
+            $manager->persist($territory);
+
+            $manager->flush();
+        }
+
+        return array(
+            'form' => $form->createView()
+        );
+    }
+
+    /**
      * @param Request          $request
      * @param Congregation     $congregation
      * @param Territory        $territory

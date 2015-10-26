@@ -132,6 +132,7 @@
     {% endif %}
     {% if territory.publisher %}
         <button type="button" class="btn btn-default" id="returnTerritoryButton"><span class="glyphicon glyphicon-open-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.return{% endtrans %}</span></span></button>
+        <button type="button" class="btn btn-default" id="forwardTerritoryButton"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.forward{% endtrans %}</span></span></button>
     {% else %}
         <button type="button" class="btn btn-default {% if not territory.available %}disabled{% endif %}" id="borrowTerritoryButton"><span class="glyphicon glyphicon-save-file" aria-hidden="true"><span class="btn-text"> {% trans %}jwkh.common.borrow{% endtrans %}</span></span></button>
     {% endif %}
@@ -174,6 +175,12 @@
 
             $('#returnTerritoryButton').on('click', function (e) {
                 modal.load('{{ path('kingdom_hall_territories_return', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    modal.modal();
+                });
+            });
+
+            $('#forwardTerritoryButton').on('click', function (e) {
+                modal.load('{{ path('kingdom_hall_territories_forward', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
                     modal.modal();
                 });
             });

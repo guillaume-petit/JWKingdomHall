@@ -1,0 +1,15 @@
+{% extends app.request.isXmlHttpRequest() ? "@KingdomHallMain/Layout/layout-modal.html.twig" : "@KingdomHallMain/Layout/layout-page.html.twig" %}
+{% form_theme form '@KingdomHallMain/Form/fields.html.twig' %}
+
+{% block content_header %}
+    {% trans %}jwkh.territories.forward.content_header{% endtrans %}
+{% endblock content_header %}
+
+{% block content_body %}
+    {{ form(form) }}
+{% endblock content_body %}
+
+{% block content_footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}jwkh.common.cancel{% endtrans %}</button>
+    <button type="button" class="btn btn-primary action-save" data-loading-text="{% trans %}jwkh.common.sending{% endtrans %}...">{% trans %}jwkh.common.save{% endtrans %}</button>
+{% endblock content_footer %}
