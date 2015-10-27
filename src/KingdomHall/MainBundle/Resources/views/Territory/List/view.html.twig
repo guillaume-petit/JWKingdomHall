@@ -85,14 +85,16 @@
             {% trans %}jwkh.territories.view.history{% endtrans %}
         </div>
         <div class="panel-body">
-            <div id="territoryHistoryToolbar" class="btn-group ">
-                <button id="editHistoryButton" type="button" class="btn btn-default">
-                    <i class="glyphicon glyphicon-edit"></i>
-                </button>
-                <button type="button" class="btn btn-default" id="removeHistoryButton">
-                    <i class="glyphicon glyphicon-trash"></i>
-                </button>
-            </div>
+            {% if is_granted('ROLE_TERRITORY') %}
+                <div id="territoryHistoryToolbar" class="btn-group ">
+                    <button id="editHistoryButton" type="button" class="btn btn-default">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" id="removeHistoryButton">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </div>
+            {% endif %}
             <table id="territoryHistoryTable"
                    data-toggle="table"
                    data-classes="table table-hover table-no-bordered"
@@ -102,8 +104,10 @@
                    data-mobile-responsive="true">
                 <thead>
                     <tr>
-                        <th data-radio="true"></th>
-                        <th data-field="id" data-visible="false"></th>
+                        {% if is_granted('ROLE_TERRITORY') %}
+                            <th data-radio="true"></th>
+                            <th data-field="id" data-visible="false"></th>
+                        {% endif %}
                         <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
                         <th>{% trans %}jwkh.entity.territory_history.borrow_date{% endtrans %}</th>
                         <th>{% trans %}jwkh.entity.territory_history.return_date{% endtrans %}</th>
@@ -112,8 +116,10 @@
                 <tbody>
                     {% for history in territory.histories %}
                         <tr>
-                            <td></td>
-                            <td>{{ history.id }}</td>
+                            {% if is_granted('ROLE_TERRITORY') %}
+                                <td></td>
+                                <td>{{ history.id }}</td>
+                            {% endif %}
                             <td>{{ history.publisher.firstName }}&nbsp;{{ history.publisher.lastName }}</td>
                             <td>{% if history.borrowDate %}{{ history.borrowDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
                             <td>{% if history.returnDate %}{{ history.returnDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
