@@ -158,7 +158,7 @@ jwkh:
             map: Carte du territoire
             novisit: Personnes à ne pas visiter
             history: Historique
-            languages: Faire toutes les langues SAUF
+            languages: Parcourir tout le territoire SAUF:
             workload: "{0} Charge de travail inconnue|{1} %number% proclamateur pour 2 heures|]1,Inf[ %number% proclamateurs pour 2 heures"
         remove_confirmation:
             header: Confirmation
@@ -186,7 +186,7 @@ jwkh:
                     Fraternellement,
                     Le services des territoires.
         print:
-            language_instructions: De maison en maison, c'est le premier nom de famille qui est déterminant.
+            language_instructions: Le premier nom de famille sur la boîte aux lettres est déterminant pour définir à qui tu dois prêcher. Si tu rencontres une personne parlant une autre langue, tu es encouragé à contacter personellement un proclamateur actif dans un groupe ou dans une congrégation de la langue de la personne intéressée. Merci de ta collaboration.
             phone: Ce territoire contient des immeubles contactés par <b>téléphone</b>.
             commercial: Ce territoire contient des <b>commerces</b> parcourus séparément.
 

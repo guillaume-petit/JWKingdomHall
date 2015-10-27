@@ -7,26 +7,21 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>{% block title %}JW Kingdom Hall{% endblock title %}</title>
 
-    {% block stylesheets %}
-        {#{% stylesheets#}
-        {#'@KingdomHallMainBundle/Resources/public/css/jwkh-print.css'#}
-        {#%}#}
-        {#<link rel="stylesheet" href="{{ asset_url }}" />#}
-        {#{% endstylesheets %}  #}
-    {% endblock %}
     <style type="text/css">
         body {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            width: 148mm;
+            width: 135mm;
+            font-size: small;
         }
 
         h3 {
             color: gray;
+            text-decoration: underline;
         }
 
         .map {
             max-height: 100mm;
-            max-width: 148mm;
+            max-width: 135mm;
             -webkit-transform: rotate(180deg);
             -moz-transform: rotate(180deg);
             -o-transform: rotate(180deg);
@@ -51,6 +46,10 @@
             border-bottom: solid 2px lightgray;
         }
 
+        .novisit tbody tr td {
+            border-bottom: solid 1px lightgray;;
+        }
+
     </style>
 </head>
 <body>
@@ -62,6 +61,7 @@
         <p class="language">
             {{ territory.excludedLanguages|split(',')|sort|join(', ') }}
         </p>
+        <p><i>{% trans %}jwkh.territories.print.language_instructions{% endtrans %}</i></p>
     </div>
     <div>
         <h3>{% trans %}jwkh.territories.view.novisit{% endtrans %}</h3>
@@ -75,13 +75,18 @@
             </tr>
             </thead>
             <tbody>
-            {% for novisit in territory.noVisits %}
-                <tr>
-                    <td>{{ novisit.name }}</td>
-                    <td>{{ novisit.address }}</td>
-                    <td>{{ novisit.publisher.fullName }}</td>
-                    <td>{{ novisit.date|date(congregation_setting('date_format_twig')) }}</td>
-                </tr>
+            {% set rows = territory.noVisits.values %}
+            {% for i in 0..6 %}
+                {% if rows[i] is defined %}
+                    <tr>
+                        <td>{{ rows[i].name }}</td>
+                        <td>{{ rows[i].address }}</td>
+                        <td>{{ rows[i].publisher.fullName }}</td>
+                        <td>{{ rows[i].date|date(congregation_setting('date_format_twig')) }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td>&nbsp;</td><td></td><td></td><td></td></tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
