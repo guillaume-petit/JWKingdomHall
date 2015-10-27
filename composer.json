@@ -28,7 +28,8 @@
         "vich/uploader-bundle": "^0.14.0",
         "eternicode/bootstrap-datepicker": "^1.4",
         "friendsofsymfony/user-bundle": "^1.3",
-        "mpdf/mpdf": "^6.0"
+        "mpdf/mpdf": "^6.0",
+        "bootstrap-select/bootstrap-select": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

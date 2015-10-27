@@ -52,7 +52,7 @@
     {% if expanded %}
         {{ block('choice_widget_expanded') }}
     {% else %}
-        {% set attr = attr|merge({'class': 'form-control'}) %}
+        {% set attr = attr|merge({ 'data-live-search': 'true', 'class': 'form-control selectpicker'}) %}
         {{ block('choice_widget_collapsed') }}
     {% endif %}
 {% endblock choice_widget %}

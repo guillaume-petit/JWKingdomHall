@@ -11,6 +11,7 @@
         {% stylesheets
         '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/bootstrap-table.min.css'
         '%kernel.root_dir%/../vendor/eternicode/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
+        '%kernel.root_dir%/../vendor/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css'
         '@KingdomHallMainBundle/Resources/public/css/jwkh.css'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
@@ -23,6 +24,7 @@
         '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js'
         '%kernel.root_dir%/../vendor/eternicode/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
         '%kernel.root_dir%/../vendor/eternicode/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js'
+        '%kernel.root_dir%/../vendor/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js'
         '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/bootstrap-table.min.js'
         '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/extensions/flat-json/bootstrap-table-flat-json.min.js'
         '%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/extensions/mobile/bootstrap-table-mobile.min.js'
@@ -145,6 +147,7 @@
                 xhr.send(formData);
             });
             initDatepicker();
+            initSelectpicker();
         });
 
         $('.bs-checkbox').on('click', function (e) {
@@ -159,6 +162,7 @@
         });
 
         initDatepicker();
+        initSelectpicker();
     });
 
     function initDatepicker() {
@@ -169,6 +173,10 @@
                 'autoclose': true
             }
         );
+    }
+
+    function initSelectpicker() {
+        $('.selectpicker').selectpicker();
     }
 </script>
 </body>
