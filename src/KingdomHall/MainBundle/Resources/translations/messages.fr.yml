@@ -65,11 +65,12 @@ jwkh:
                         <li>Transférer un territoire d'un proclamateur à un autre</li>
                         <li>Ajout des territoires de commerce</li>
                         <li>Possibilité de modifier et supprimer des entrées d'historique</li>
+                        <li>Amélioration du sélecteur de proclamateurs</li>
                     </ul>
                 </li>
                 <li>Corrections
                     <ul>
-                        <li>Correction de validation multiple des formulaires.</li>
+                        <li>Correction de validation multiple des formulaires</li>
                     </ul>
                 </li>
             </ul>
