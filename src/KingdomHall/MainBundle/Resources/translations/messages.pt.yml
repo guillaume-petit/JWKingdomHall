@@ -5,25 +5,280 @@ jwkh:
         export: Exporter
         save: Sauver
         cancel: Annuler
+        borrow: Emprunter
+        return: Rendre
+        edit: Modifier
+        back: Retour
+        sending: Envoi
+        confirm: Confirmer
+        ok: OK
+        yes: Oui
+        no: Non
+        print: Imprimer
+        download: Télécharger
+        forward: Transférer
+
+    modal:
+        confirmation:
+            content_header: Confirmation
+            content_body: Es-tu sûr de vouloir réaliser cette action ?
+        info:
+            content_header: Information
+            content_body: Information.
+
     navbar:
-        territories: Territoires
-        administration: Administration
+        territories:
+            title: Territoires
+            list: Liste
+            campaigns: Campagnes
+        publishers: Proclamateurs
+        admin:
+            title: Administration
+            settings: Paramètres
+            users: Utilisateurs
+        user:
+            profile: Mon profil
+            logout: Déconnexion
+
+    home:
+        welcome: JW Kingdom Hall
+        header: Bienvenue sur l'application JW Kingdom Hall !
+        content: |
+            <p>Le but de cette application est de fournir quelques outils administratifs pour faciliter la gestion des
+            services au sein d'une congrégation.</p>
+            <p>Le menu en haut à droite te permet de te déconnecter de l'application ou de changer de congrégation.</p>
+            <p>Le menu en haut à gauche te permet de naviguer entre les différentes sections du site. La seule section
+            actuellement ouverte concerne la gestion des territoires.</p>
+        territory:
+            stats: |
+                Il y a actuellement<br />
+                <ul>
+                    <li>%borrowed% territoires empruntés</li>
+                    <li class="text-danger">%late% territoires en retard</li>
+                </ul>
+        changelog: |
+            <h3>Derniers changements</h3>
+            <h4>26 octobre 2015</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Transférer un territoire d'un proclamateur à un autre</li>
+                        <li>Ajout des territoires de commerce</li>
+                        <li>Possibilité de modifier et supprimer des entrées d'historique</li>
+                        <li>Amélioration du sélecteur de proclamateurs</li>
+                    </ul>
+                </li>
+                <li>Corrections
+                    <ul>
+                        <li>Correction de validation multiple des formulaires</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4>14 septembre 2015</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Sauvegarde de la page en cours dans la liste des territoires</li>
+                        <li>Ajout du joker * dans la recherche de territoires (exemple '3*')</li>
+                        <li>Ajout de la date du jour comme date par défaut dans le sélecteur de date.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4>24 août 2015</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Ajout de la charge de travail sur un territoire</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4>20 août 2015</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Gestion des utilisateurs.</li>
+                        <li>Ajout d'un menu d'administration</li>
+                        <li>Ajout d'une page "profil" accessible depuis le bouton "utilisateur" en haut à droite</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4>10 août 2015</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Ajout d'une colonne "téléphone" dans la liste des territoires.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4>5 août 2015</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Notifications automatiques par email</li>
+                    </ul>
+                </li>
+                <li>Corrections
+                    <ul>
+                        <li>Correction de la génération des fichiers pdf</li>
+                        <li>Correction des tris dans la liste des territoires</li>
+                    </ul>
+                </li>
+            </ul>
 
     territories:
-        menu:
-            territories: Territoires
         list:
-            page_header: Liste des territoires
-            tab:
-                standard: Standard
-                campaign: Campagne
-            table:
-                header:
-                    number: Numéro
-                    name: Nom
-                    area: Région
-                    publisher: Proclamateur
-                    borrow_date: Emprunté le
-                    return_date: Rendu le
+            content_header: Liste des territoires
+            s13: S-13
         new:
-            modal_title: Nouveau territoire
+            content_header: Nouveau territoire
+        edit:
+            content_header: Modification
+        borrow:
+            content_header: Emprunt
+            unavailable: >
+                Ce territoire n'est pas disponible pour le moment. Soit aucune campagne n'est prévue soit le territoire
+                a déjà été travaillé.
+        return:
+            content_header: Retour
+            worked: Le territoire a-t-il été parcouru ?
+            error:
+                return_date: La date de retour ne doit pas précéder la date d'emprunt
+        forward:
+            content_header: Transférer
+        novisit:
+            remove_confirmation:
+                message: Veux-tu vraiment supprimer ces personnes à ne pas visiter ?
+            new:
+                content_header: Nouvelle personne à ne pas visiter
+        history:
+            remove_confirmation:
+                message: Veux-tu vraiment supprimer cette entrée d'historique ?
+        view:
+            phone: Territoire par téléphone
+            commercial: Territoire de commerces
+            map: Carte du territoire
+            novisit: Personnes à ne pas visiter
+            history: Historique
+            languages: Parcourir tout le territoire SAUF:
+            workload: "{0} Charge de travail inconnue|{1} %number% proclamateur pour 2 heures|]1,Inf[ %number% proclamateurs pour 2 heures"
+        remove_confirmation:
+            header: Confirmation
+            message: Veux-tu vraiment supprimer les territoires sélectionnés ?
+        s13:
+            header: Relevé des attributions du territoire
+        email:
+            warning:
+                subject: Territoire %number% à rendre bientôt
+                body: |
+                    Cher/Chère %firstName%,
+
+                    La période d'emprunt du territoire %number% arrivera à échéance le %date% prochain. Il te reste donc encore un mois pour pouvoir le travailler avant de le rendre au service des territoires.
+
+                    Fraternellement,
+                    Le services des territoires.
+
+            danger:
+                subject: Territoire %number% à rendre
+                body: |
+                    Cher/Chère %firstName%,
+
+                    La période d'emprunt du territoire %number% est arrivée à échéance le %date%. Nous te remercions de bien vouloir le rendre dès que possible au service des territoires.
+
+                    Fraternellement,
+                    Le services des territoires.
+        print:
+            language_instructions: Le premier nom de famille sur la boîte aux lettres est déterminant pour définir à qui tu dois prêcher. Si tu rencontres une personne parlant une autre langue, tu es encouragé à contacter personellement un proclamateur actif dans un groupe ou dans une congrégation de la langue de la personne intéressée. Merci de ta collaboration.
+            phone: Ce territoire contient des immeubles contactés par <b>téléphone</b>.
+            commercial: Ce territoire contient des <b>commerces</b> parcourus séparément.
+
+    campaigns:
+        list:
+            content_header: Liste des campagnes
+        new:
+            content_header: Nouvelle campagne
+        edit:
+            content_header: Modification
+        remove_confirmation:
+            header: Confirmation
+            message: Veux-tu vraiment supprimer cette campagne ?
+
+    admin:
+        settings:
+            content_header: Paramètres
+        users:
+            list:
+                content_header: Utilisateurs
+                remove_confirmation:
+                    message: Veux-tu vraiment supprimer cet utilisateur ?
+            edit:
+                content_header: Modification
+
+    publishers:
+        list:
+            content_header: Liste des proclamateurs
+        edit:
+            content_header: Modification
+            create_user_button: Créer utilisateur
+            delete_user_button: Supprimer utilisateur
+            remove_confirmation:
+                message: Veux-tu vraiment supprimer les proclamateurs sélectionnés?
+        email:
+            welcome:
+                subject: Bienvenue sur le site JW Kingdom Hall
+                body: |
+                    Cher frère,
+
+                    Tu as été invité à t'inscrire sur le site JW Kingdom Hall. Cliques sur le lien suivant pour choisir un nom d'utilisateur et un mot de passe: %link%.
+
+                    Fraternellement,
+                    JW Kingdom Hall
+
+    entity:
+        territory:
+            entity: Territoire
+            standard: Standard
+            campaign: Campagne
+            type: Type
+            number: Numéro
+            name: Nom
+            area: Région
+            borrow_date: Emprunté le
+            return_date: Rendu le
+            map: Carte
+            phone: Téléphone
+            commercial: Commerces
+            excluded_languages: Langues à ne pas visiter
+            notified: Notifié
+            workload: Charge de travail
+
+        territory_history:
+            borrow_date: Emprunté le
+            return_date: Rendu le
+
+        territory_no_visit:
+            name: Nom
+            address: Adresse
+            date: Date
+
+        publisher:
+            entity: Proclamateur
+            first_name: Prénom
+            last_name: Nom
+            email: Email
+            is_user: Utilisateur du site
+
+        campaign:
+            name: Nom
+            start_date: Début
+            end_date: Fin
+
+        setting:
+            date_format_twig: Format de date
+            territory_max_borrow_time: Période maximale pour l'emprunt d'un territoire
+            territory_warning_borrow_time: Période avant notification de retour de territoire
+            excluded_languages: Liste des langues à ne pas faire
+
+        user:
+            username: Nom d'utilisateur
+            password: Mot de passe
+            roles: Rôles
