@@ -10,6 +10,7 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use KingdomHall\DataBundle\Entity\Congregation;
 use KingdomHall\DataBundle\Entity\Territory;
+use KingdomHall\DataBundle\Entity\TerritoryHistory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -49,6 +50,9 @@ class TerritoryController extends FOSRestController
 
         $this->get('session')->set('territory.page_number', ($pagination['offset'] / $pagination['limit']) + 1);
         $this->get('session')->set('territory.page_size', $pagination['limit']);
+        $this->get('session')->set('territory.search', $search);
+        $this->get('session')->set('territory.sort', $sort['sort']);
+        $this->get('session')->set('territory.order', $sort['order']);
 
         return $this->getDoctrine()->getRepository('KingdomHallDataBundle:Territory')->searchTerritories($congregation, $type, $pagination, $sort, $search);
     }
@@ -148,8 +152,12 @@ class TerritoryController extends FOSRestController
 
         $histories = $territory->getHistories();
         foreach (explode(',', $fetcher->get('ids')) as $id) {
+            /** @var TerritoryHistory $history */
             $history = $histories->get($id);
             if ($history) {
+                if (!$history->getReturnDate()) {
+                    return new Response('Forbidden to remove an open history entry', 400);
+                }
                 $manager->remove($history);
             }
         }

@@ -232,6 +232,8 @@ class ListController extends Controller
             $worked = $form->get('worked')->getData();
             if ($worked == 'no') {
                 $territory->removeHistory($history);
+                $territory->removeHistory($history);
+                $territory->setReturnDate($territory->getHistories()->last()->getReturnDate());
                 $manager->remove($history);
             } else {
                 $history->setReturnDate($territory->getReturnDate());
@@ -387,6 +389,14 @@ class ListController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            if ($history->getId() == $territory->getHistories()->last()->getId()) {
+                if (!$history->getReturnDate()) {
+                    $territory->setBorrowDate($history->getBorrowDate());
+                    $territory->setPublisher($history->getPublisher());
+                } else {
+                    $territory->setReturnDate($history->getReturnDate());
+                }
+            }
             $territory->addHistory($history);
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($territory);

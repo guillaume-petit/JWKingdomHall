@@ -24,6 +24,7 @@ class ForwardTerritoryType extends AbstractType {
             'expanded' => false,
             'multiple' => false,
             'property' => 'fullName',
+            'placeholder' => 'jwkh.entity.publisher.placeholder',
             'query_builder' =>
                 function(EntityRepository $er) {
                     return $er->createQueryBuilder('p')->where('p.deleted = false')->orderBy('p.lastName');

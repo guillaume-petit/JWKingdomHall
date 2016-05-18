@@ -24,6 +24,7 @@
            data-url="{{ path('get_congregation_territories', {'congregation': congregation.id, 'type': type}) }}"
            data-flat="true"
            data-search="true"
+           data-search-text="{{ app.session.get('territory.search')|default('') }}"
            data-classes="table table-hover table-no-bordered"
            data-striped="true"
            data-mobile-responsive="true"
@@ -34,22 +35,24 @@
            data-page-number="{{ app.session.get('territory.page_number')|default(1) }}"
            data-page-size="{{ app.session.get('territory.page_size')|default(10) }}"
            data-page-list="[10, 20, 40, 60]"
-            >
+           {% if app.session.get('territory.sort') %}data-sort-name="{{ app.session.get('territory.sort') }}"{% endif %}
+            {% if app.session.get('territory.order') %}data-sort-order="{{ app.session.get('territory.order') }}"{% endif %}
+    >
         <thead>
-            <tr>
-                <th data-field="state" data-checkbox="true"></th>
-                <th data-field="id" data-visible="false"></th>
-                <th data-sortable="true" data-field="number">{% trans %}jwkh.entity.territory.number{% endtrans %}</th>
-                <th data-sortable="true" data-field="workload" data-align="center"><img src="{{ asset('bundles/kingdomhallmain/images/icons/glyphicons-44-group.png') }}" class="icon" /></th>
-                <th data-sortable="true" data-formatter="phoneStyle" data-field="phone" data-align="center"><span class="glyphicon glyphicon-phone-alt"></span></th>
-                <th data-sortable="true" data-formatter="commercialStyle" data-field="commercial" data-align="center"><img src="{{ asset('bundles/kingdomhallmain/images/icons/glyphicons-90-building.png') }}" class="icon" /></th>
-                <th data-sortable="true" data-field="name">{% trans %}jwkh.entity.territory.name{% endtrans %}</th>
-                <th data-sortable="true" data-field="area">{% trans %}jwkh.entity.territory.area{% endtrans %}</th>
-                <th data-sortable="true" data-field="formattedBorrowDate">{% trans %}jwkh.entity.territory.borrow_date{% endtrans %}</th>
-                <th data-sortable="true" data-field="publisher.fullName">{% trans %}jwkh.entity.publisher.last_name{% endtrans %}</th>
-                <th data-sortable="true" data-field="formattedReturnDate">{% trans %}jwkh.entity.territory.return_date{% endtrans %}</th>
-                <th data-sortable="true" data-formatter="boolStyle" data-field="notified" data-align="center">{% trans %}jwkh.entity.territory.notified{% endtrans %}</th>
-            </tr>
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="id" data-visible="false"></th>
+            <th data-sortable="true" data-field="number">{% trans %}jwkh.entity.territory.number{% endtrans %}</th>
+            <th data-sortable="true" data-field="workload" data-align="center"><img src="{{ asset('bundles/kingdomhallmain/images/icons/glyphicons-44-group.png') }}" class="icon" /></th>
+            <th data-sortable="true" data-formatter="phoneStyle" data-field="phone" data-align="center"><span class="glyphicon glyphicon-phone-alt"></span></th>
+            <th data-sortable="true" data-formatter="commercialStyle" data-field="commercial" data-align="center"><img src="{{ asset('bundles/kingdomhallmain/images/icons/glyphicons-90-building.png') }}" class="icon" /></th>
+            <th data-sortable="true" data-field="name">{% trans %}jwkh.entity.territory.name{% endtrans %}</th>
+            <th data-sortable="true" data-field="area">{% trans %}jwkh.entity.territory.area{% endtrans %}</th>
+            <th data-sortable="true" data-field="formattedBorrowDate">{% trans %}jwkh.entity.territory.borrow_date{% endtrans %}</th>
+            <th data-sortable="true" data-field="publisher.fullName">{% trans %}jwkh.entity.publisher.last_name{% endtrans %}</th>
+            <th data-sortable="true" data-field="formattedReturnDate">{% trans %}jwkh.entity.territory.return_date{% endtrans %}</th>
+            <th data-sortable="true" data-formatter="boolStyle" data-field="notified" data-align="center">{% trans %}jwkh.entity.territory.notified{% endtrans %}</th>
+        </tr>
         </thead>
     </table>
     <script>
@@ -57,10 +60,10 @@
             var modal = $('#pageModal');
 
             $('#territoryListTable')
-                .on('click-row.bs.table', function (e, row, $element) {
-                    var url = '{{ path('kingdom_hall_territories_view', {'congregationCode': congregation.code, 'territoryId': '{territoryId}'}) }}'.replace('%7BterritoryId%7D', row.id);
-                    window.location = url;
-                });
+                    .on('click-row.bs.table', function (e, row, $element) {
+                        var url = '{{ path('kingdom_hall_territories_view', {'congregationCode': congregation.code, 'territoryId': '{territoryId}'}) }}'.replace('%7BterritoryId%7D', row.id);
+                        window.location = url;
+                    });
 
             $('#newTerritoryButton').on('click', function(e) {
                 modal.load('{{ path('kingdom_hall_territories_new', {'congregationCode': congregation.code}) }}', function(data) {

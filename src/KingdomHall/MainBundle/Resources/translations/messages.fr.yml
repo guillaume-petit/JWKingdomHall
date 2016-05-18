@@ -58,6 +58,22 @@ jwkh:
                 </ul>
         changelog: |
             <h3>Derniers changements</h3>
+            <h4>18 mai 2016</h4>
+            <ul>
+                <li>Nouveautés
+                    <ul>
+                        <li>Mémorisation de la recherche et du tri dans la liste des territoires</li>
+                    </ul>
+                </li>
+                <li>Corrections
+                    <ul>
+                        <li>Il n'est plus possible de supprimer une entrée d'historique en cours</li>
+                        <li>Rendre un territoire non travaillé remet la date de retour à l'ancienne valeur d'historique</li>
+                        <li>Modifier une entrée d'historique pour un territoire en cours modifie aussi la date liée au territoire</li>
+                        <li>Ajout d'un placeholder pour le choix d'un proclamateur</li>
+                    </ul>
+                </li>
+            </ul>
             <h4>26 octobre 2015</h4>
             <ul>
                 <li>Nouveautés
@@ -153,6 +169,9 @@ jwkh:
         history:
             remove_confirmation:
                 message: Veux-tu vraiment supprimer cette entrée d'historique ?
+            remove_error:
+                title: Oups !
+                message: Impossible de supprimer une entrée d'historique pour un territoire emprunté. Utiliser plutôt l'action "Rendre" et indiquer que le territoire n'a pas été parcouru.
         view:
             phone: Territoire par téléphone
             commercial: Territoire de commerces
@@ -193,7 +212,7 @@ jwkh:
 
     campaigns:
         list:
-            content_header: Liste des campagnesm
+            content_header: Liste des campagnes
         new:
             content_header: Nouvelle campagne
         edit:
@@ -266,6 +285,7 @@ jwkh:
             last_name: Nom
             email: Email
             is_user: Utilisateur du site
+            placeholder: Sélectionner un proclamateur
 
         campaign:
             name: Nom

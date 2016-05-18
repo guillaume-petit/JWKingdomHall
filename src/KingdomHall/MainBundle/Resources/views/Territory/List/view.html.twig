@@ -54,7 +54,7 @@
                    data-mobile-responsive="true"
                    data-select-item-name="selectedNoVisit"
                    data-click-to-select="true"
-                    >
+            >
                 <thead>
                 <tr>
                     <th data-radio="true"></th>
@@ -103,28 +103,28 @@
                    data-click-to-select="true"
                    data-mobile-responsive="true">
                 <thead>
-                    <tr>
-                        {% if is_granted('ROLE_TERRITORY') %}
-                            <th data-radio="true"></th>
-                            <th data-field="id" data-visible="false"></th>
-                        {% endif %}
-                        <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
-                        <th>{% trans %}jwkh.entity.territory_history.borrow_date{% endtrans %}</th>
-                        <th>{% trans %}jwkh.entity.territory_history.return_date{% endtrans %}</th>
-                    </tr>
+                <tr>
+                    {% if is_granted('ROLE_TERRITORY') %}
+                        <th data-radio="true"></th>
+                        <th data-field="id" data-visible="false"></th>
+                    {% endif %}
+                    <th>{% trans %}jwkh.entity.publisher.entity{% endtrans %}</th>
+                    <th>{% trans %}jwkh.entity.territory_history.borrow_date{% endtrans %}</th>
+                    <th>{% trans %}jwkh.entity.territory_history.return_date{% endtrans %}</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {% for history in territory.histories %}
-                        <tr>
-                            {% if is_granted('ROLE_TERRITORY') %}
-                                <td></td>
-                                <td>{{ history.id }}</td>
-                            {% endif %}
-                            <td>{{ history.publisher.firstName }}&nbsp;{{ history.publisher.lastName }}</td>
-                            <td>{% if history.borrowDate %}{{ history.borrowDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
-                            <td>{% if history.returnDate %}{{ history.returnDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
-                        </tr>
-                    {% endfor %}
+                {% for history in territory.histories %}
+                    <tr>
+                        {% if is_granted('ROLE_TERRITORY') %}
+                            <td></td>
+                            <td>{{ history.id }}</td>
+                        {% endif %}
+                        <td>{{ history.publisher.firstName }}&nbsp;{{ history.publisher.lastName }}</td>
+                        <td>{% if history.borrowDate %}{{ history.borrowDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
+                        <td class="returnDate">{% if history.returnDate %}{{ history.returnDate|date(congregation_setting('date_format_twig')) }}{% else %}-{% endif %}</td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -168,13 +168,13 @@
             $('#borrowTerritoryButton').on('click', function (e) {
 
                 {% if not territory.available %}
-                    modal.load('{{ path('kingdom_hall_modal_info', { 'message': 'jwkh.territories.borrow.unavailable' }) }}'.replace('&amp;', '&'), function () {
-                        modal.modal();
-                    });
+                modal.load('{{ path('kingdom_hall_modal_info', { 'message': 'jwkh.territories.borrow.unavailable' }) }}'.replace('&amp;', '&'), function () {
+                    modal.modal();
+                });
                 {% else %}
-                    modal.load('{{ path('kingdom_hall_territories_borrow', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
-                        modal.modal();
-                    });
+                modal.load('{{ path('kingdom_hall_territories_borrow', {'congregationCode': territory.congregation.code, 'territoryId': territory.id}) }}', function (data) {
+                    modal.modal();
+                });
                 {% endif %}
 
             });
@@ -241,12 +241,8 @@
 
             $('#removeHistoryButton').on('click', function (e) {
                 var rows = $('#territoryHistoryTable').bootstrapTable('getSelections');
-                if (rows.length > 0) {
-                    var ids = rows.map(function (row) {
-                        return row.id;
-                    });
-                    var url = '{{ path('delete_congregation_territory_histories', {'congregation': congregation.id, 'territory': territory.id, 'ids': '{ids}'}) }}'.replace('%7Bids%7D', ids.join(','));
-                    modal.load('{{ path('kingdom_hall_modal_confirmation', { 'message': 'jwkh.territories.history.remove_confirmation.message' }) }}'.replace('&amp;', '&'), function () {
+                if (rows[0][4] == '-') {
+                    modal.load('{{ path('kingdom_hall_modal_info', { 'header': 'jwkh.territories.history.remove_error.title', 'message': 'jwkh.territories.history.remove_error.message' }) }}'.replace('&amp;', '&'), function () {
                         modal.modal();
                         $('button.action-confirm', modal).on('click', function () {
                             $.ajax({
@@ -258,6 +254,25 @@
                             });
                         });
                     });
+                } else {
+                    if (rows.length > 0) {
+                        var ids = rows.map(function (row) {
+                            return row.id;
+                        });
+                        var url = '{{ path('delete_congregation_territory_histories', {'congregation': congregation.id, 'territory': territory.id, 'ids': '{ids}'}) }}'.replace('%7Bids%7D', ids.join(','));
+                        modal.load('{{ path('kingdom_hall_modal_confirmation', { 'message': 'jwkh.territories.history.remove_confirmation.message' }) }}'.replace('&amp;', '&'), function () {
+                            modal.modal();
+                            $('button.action-confirm', modal).on('click', function () {
+                                $.ajax({
+                                    url: url,
+                                    type: 'DELETE',
+                                    success: function () {
+                                        modal.modal('hide');
+                                    }
+                                });
+                            });
+                        });
+                    }
                 }
             });
 

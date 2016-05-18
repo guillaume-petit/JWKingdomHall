@@ -23,6 +23,7 @@ class TerritoryNoVisitType extends AbstractType {
             'class' => 'KingdomHall\DataBundle\Entity\Publisher',
             'label' => 'jwkh.entity.publisher.entity',
             'choice_label' => 'fullName',
+            'placeholder' => 'jwkh.entity.publisher.placeholder',
         ));
         $builder->add(
             'date',
