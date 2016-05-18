@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>JWKH DB</name><driver>com.mysql.jdbc.Driver</driver><username>root</username><password>root</password><savePassword>true</savePassword><url>jdbc:mysql://localhost/jwkh</url><database></database><serverAddress></serverAddress><classpath>D:\Projets\BizDock\Softwares\mysql-connector-java-5.1.38-bin.jar</classpath></jdbcDataAdapter>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
+<!-- 2016-05-18T11:46:50 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="s13_history" pageWidth="111" pageHeight="842" columnWidth="111" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b98780e9-9bfb-4a7e-8c9a-c4ad253bf37c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="jwkh_da.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="t_number" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+    p_name, borrow_date, return_date
+FROM
+    (SELECT 
+        *
+    FROM
+        (SELECT 
+            CONCAT(p.first_name, ' ', p.last_name) AS p_name,
+            th.borrow_date,
+            th.return_date
+    FROM
+        territory t
+    LEFT JOIN territory_history th ON t.id = th.territory_id
+    LEFT JOIN publisher p ON p.id = th.publisher_id
+    WHERE
+        type = 'standard' AND number LIKE CONCAT($P{t_number},'%')
+    ) s UNION (SELECT 
+            CONCAT(p.first_name, ' ', p.last_name) AS p_name,
+            th.borrow_date,
+            th.return_date
+    FROM
+        territory t2
+    LEFT JOIN territory_history th ON t2.id = th.territory_id
+    LEFT JOIN publisher p ON p.id = th.publisher_id
+    WHERE
+        type = 'campaign' AND number LIKE CONCAT($P{t_number},'%')
+    )) a
+ ORDER BY borrow_date]]>
+	</queryString>
+	<field name="p_name" class="java.lang.String"/>
+	<field name="borrow_date" class="java.sql.Date"/>
+	<field name="return_date" class="java.sql.Date"/>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="111" height="30" isRemoveLineWhenBlank="true" uuid="03b62baf-477d-41bd-9944-bebcd8ccb91c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{p_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="30" width="56" height="30" isRemoveLineWhenBlank="true" uuid="3731d11e-7eba-4869-8280-23456cf07aac">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[DATEFORMAT($F{borrow_date},"dd/MM/yyyy")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="56" y="30" width="55" height="30" isRemoveLineWhenBlank="true" uuid="f64ed8d2-77d1-4e85-b44d-bfebc8ed58ee">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box padding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[DATEFORMAT($F{return_date},"dd/MM/yyyy")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

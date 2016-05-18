@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
+<!-- 2016-05-17T17:35:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="territory_no_visit" pageWidth="410" pageHeight="135" whenNoDataType="AllSectionsNoDetail" columnWidth="410" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8590a4eb-f293-4dd5-8c36-975a663e77ca">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="jwkh_da.xml"/>
+	<parameter name="territory_id" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[53]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	tnv.name as tnv_name,
+    tnv.date as tnv_date,
+    tnv.address as tnv_address,
+    CONCAT(p.first_name, ' ', p.last_name) as p_name
+FROM
+	territory_no_visit tnv
+    JOIN publisher p on p.id = tnv.publisher_id
+WHERE
+	tnv.territory_id = $P{territory_id};]]>
+	</queryString>
+	<field name="tnv_name" class="java.lang.String"/>
+	<field name="tnv_address" class="java.lang.String"/>
+	<field name="p_name" class="java.lang.String"/>
+	<field name="tnv_date" class="java.sql.Date"/>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="0" y="0" width="95" height="20" forecolor="#80808F" uuid="532989a0-ca4f-4072-aac6-bb5f81a8a8f6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="2.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Nom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="125" height="20" forecolor="#80808F" uuid="aecbe27a-d78b-4188-8a80-03b0a7b017ef"/>
+				<box>
+					<bottomPen lineWidth="2.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Adresse]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="0" width="95" height="20" forecolor="#80808F" uuid="c34b2493-bf75-4113-88df-95adb5e6475c"/>
+				<box>
+					<bottomPen lineWidth="2.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Proclamateur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="75" height="20" forecolor="#80808F" uuid="2676379f-eda7-4a2d-921f-346c5e5a46ef"/>
+				<box>
+					<bottomPen lineWidth="2.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="95" height="20" uuid="35e81170-750b-46f2-916a-038c53242cdb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="2">
+					<bottomPen lineWidth="1.0" lineColor="#80808F"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10"/>
+					<paragraph leftIndent="0" spacingAfter="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tnv_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="100" y="0" width="125" height="20" uuid="e5de0126-6e54-4dba-b754-73f179963a50">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="2">
+					<bottomPen lineWidth="1.0" lineColor="#80808F"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10"/>
+					<paragraph leftIndent="0" spacingAfter="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tnv_address}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="230" y="0" width="95" height="20" uuid="83464c60-b617-4442-8692-f616742b21c5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="2">
+					<bottomPen lineWidth="1.0" lineColor="#80808F"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10"/>
+					<paragraph leftIndent="0" spacingAfter="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="330" y="0" width="80" height="20" uuid="a77b799a-2467-4d85-a883-758a29198ade"/>
+				<box padding="2">
+					<bottomPen lineWidth="1.0" lineColor="#80808F"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10"/>
+					<paragraph leftIndent="0" spacingAfter="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DATEFORMAT($F{tnv_date},"dd/MM/yyyy")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

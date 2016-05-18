@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
+<!-- 2016-05-18T08:10:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="one_map" pageWidth="421" pageHeight="595" columnWidth="411" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="515bfcea-f9dc-456e-917f-3689b63e6028">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="jwkh_da.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[SELECT 
+	t.id,
+	t.number as t_number,
+	t.name as t_name,
+	t.excluded_languages as t_languages,
+	t.map_name as image
+FROM 
+	territory t
+WHERE 
+	 t.type = 'standard'
+ ORDER BY t.number]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="t_number" class="java.lang.String"/>
+	<field name="t_name" class="java.lang.String"/>
+	<field name="t_languages" class="java.lang.String"/>
+	<field name="image" class="java.lang.String"/>
+	<variable name="v_languages" class="java.lang.String[]">
+		<variableExpression><![CDATA[$F{t_languages}.split(",")]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="585" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+			<image onErrorType="Blank">
+				<reportElement x="0" y="0" width="410" height="300" uuid="4abb8c81-feee-45b5-b237-95b1dc8e2720"/>
+				<imageExpression><![CDATA["http://jwkh.ch/images/territory/map/" + $F{image}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="300" width="410" height="30" forecolor="#80808F" uuid="97952def-24e9-4c66-ae50-a932a2cf02af"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Parcourir tout le territoire SAUF:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="330" width="410" height="30" forecolor="#FF0000" uuid="7732272b-9ff4-4a5e-9adb-81cccaf8fd9a"/>
+				<textElement>
+					<font fontName="Calib" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[java.lang.String.join(", ",$V{v_languages})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="360" width="410" height="60" uuid="f52896af-dde2-4d76-a871-15d1a62b0c7d"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Le premier nom de famille sur la boîte aux lettres est déterminant pour définir à qui tu dois prêcher. Si tu rencontres une personne parlant une autre langue, tu es encouragé à contacter personellement un proclamateur actif dans un groupe ou dans une congrégation de la langue de la personne intéressée. Merci de ta collaboration.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="420" width="410" height="30" forecolor="#80808F" uuid="7a3cf451-c142-4191-aed5-d8cd62d65460"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Personnes à ne pas visiter]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="450" width="410" height="135" uuid="c4d9d635-7587-474e-bc8d-2f9001ae35b0"/>
+				<subreportParameter name="territory_id">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["territory_no_visit.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
