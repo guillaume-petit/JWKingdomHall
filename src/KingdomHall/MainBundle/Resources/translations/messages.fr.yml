@@ -58,6 +58,14 @@ jwkh:
                 </ul>
         changelog: |
             <h3>Derniers changements</h3>
+            <h4>7 juillet 2016</h4>
+            <ul>
+                <li>Corrections
+                    <ul>
+                        <li>La fonction de retour d'un territoire non travaillé à été réparée</li>
+                    </ul>
+                </li>
+            </ul>
             <h4>18 mai 2016</h4>
             <ul>
                 <li>Nouveautés
