@@ -231,9 +231,8 @@ class ListController extends Controller
             $history = $territory->getHistories()->last();
             $worked = $form->get('worked')->getData();
             if ($worked == 'no') {
-                $territory->removeHistory($history);
-                $territory->removeHistory($history);
                 $territory->setReturnDate($territory->getHistories()->last()->getReturnDate());
+                $territory->removeHistory($history);
                 $manager->remove($history);
             } else {
                 $history->setReturnDate($territory->getReturnDate());
